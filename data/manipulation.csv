@@ -1,0 +1,436 @@
+Manipulation,Manipulation_group
+,None
++120 gC/m2 POM,Fertilization
++240 gC/m2 POM,Fertilization
++60 gC/m2 POM,Fertilization
+Acid rain,Pollution
+Alfalfa intercrop,Agriculture cultivation
+Altered rainfall timing,Changes in precipitation
+Annual fire,Disturbance in substrate supply
+"Annual fire, irrigation",Multiple manipulation
+Ant mound,Other
+Ash,Other
+Bare soil,Other
+Barley straw residue,Agriculture cultivation
+Biochar,Fertilization
+Biomass removal,Disturbance in substrate supply
+Black carbon,Fertilization
+Bluegrass residue,Agriculture cultivation
+Broiler litter,Fertilization
+"Bruned, thinned",Multiple manipulation
+Buried,Other
+Burned,Disturbance in substrate supply
+"Burned, charcoal removed",Disturbance in substrate supply
+"Burned, cleared",Disturbance in substrate supply
+"Burned, Drained",Multiple manipulation
+"Burned, understory thinned",Multiple manipulation
+Burning,Disturbance in substrate supply
+"Burning, thinning",Multiple manipulation
+Burnt,Disturbance in substrate supply
+C. alata addition,Fertilization
+CaCl2 added,Fertilization
+CaHPO4 added,Fertilization
+Cearcut harvest,Disturbance in substrate supply
+Chamber,Other
+Chisel plow tillage,Agriculture cultivation
+Clear-cut,Disturbance in substrate supply
+Clear-cut harvest,Disturbance in substrate supply
+"Clear-cut, Humus and mineral soil mixed thoroughly to a depth of 30 cm",Multiple manipulation
+"Clear-cut, Humus layer removed",Multiple manipulation
+"Clear-cut, Layer of humus and mineral soil removed from an independent site and inverted on top of undisturbed soil",Multiple manipulation
+Clearcut,Disturbance in substrate supply
+Clearcut no slash,Disturbance in substrate supply
+Clearcut with slash,Disturbance in substrate supply
+"Clearcut, burning",Multiple manipulation
+"Clearcut, fertilized",Multiple manipulation
+"Clearcut, logging residue",Disturbance in substrate supply
+"Clearcut, no residue",Disturbance in substrate supply
+"Clearcut, OM",Disturbance in substrate supply
+"Clearcut, screefing",Disturbance in substrate supply
+"Clearcut, slash burnt",Disturbance in substrate supply
+"Clearcut, soil mixing",Disturbance in substrate supply
+Clip,Potential problem
+Cliped,Potential problem
+Clipped,Potential problem
+"Clipped, shaded",Potential problem
+"Clipped, warmed",Potential problem
+"Clipped, Warming",Potential problem
+Clipping,Potential problem
+CO2,Elevated CO2
+"CO2, fertilized",Elevated CO2
+"CO2, heated",Elevated CO2
+"CO2, irrigated",Elevated CO2
+"CO2, nitrogen",Elevated CO2
+"CO2, O3",Elevated CO2
+Cold season grazing,Agriculture cultivation
+Compost,Fertilization
+Concrete,Other
+Conservation till,Agriculture cultivation
+Continuous Flooding,Changes in precipitation
+Continuous grazing,Agriculture cultivation
+Conventional till,Agriculture cultivation
+"Conventional till, fallow",Agriculture cultivation
+"Conventional till, fertilized",Agriculture cultivation
+"Conventional till, straw",Agriculture cultivation
+Conventional till; fertilized,Agriculture cultivation
+Conventional tillage,Agriculture cultivation
+Conventional Tillage,Agriculture cultivation
+"Conventional Tillage, Fertilized",Agriculture cultivation
+Corn residue mulch,Agriculture cultivation
+Corn straw mulching,Agriculture cultivation
+Crop harvest,Agriculture cultivation
+Crust removed,Other
+Cut,Disturbance in substrate supply
+Cut plus lopping,Disturbance in substrate supply
+"Cut, fertilized",Multiple manipulation
+"Cut, fertilized, grazed",Multiple manipulation
+"Cut, grazed",Agriculture cultivation
+Cutting,Disturbance in substrate supply
+Dead stem removal,Disturbance in substrate supply
+Deep soil frost,Other
+Defoliation,Disturbance in substrate supply
+Direct drilling,Other
+Disaggregated,Other
+Disc tilling,Agriculture cultivation
+Disk harrowing,Agriculture cultivation
+Disturbed,Other
+Diversity,Other
+Double litter,Disturbance in substrate supply
+Double precipitation,Changes in precipitation
+Double slash,Disturbance in substrate supply
+Double wood,Disturbance in substrate supply
+Drained,Agriculture cultivation
+"Drained, burned",Multiple manipulation
+"Drained, cleared",Multiple manipulation
+"Drained, cleared, fertilized",Multiple manipulation
+"Drained, cleared, fertlized",Multiple manipulation
+"Drained, drought",Multiple manipulation
+"Drained, fertilized",Multiple manipulation
+"Drained, planted",Multiple manipulation
+"Drained, re-dammed",Multiple manipulation
+"Drained, warmed",Multiple manipulation
+Drought,Changes in precipitation
+"Drought, altered rainfall timing",Changes in precipitation
+"Drought, CO2",Changes in precipitation
+"Drought, irrigation",Changes in precipitation
+"Drought, warming",Multiple manipulation
+"Drought, warming, CO2",Multiple manipulation
+Early fire,Disturbance in substrate supply
+Ecological farming,Agriculture cultivation
+Elevated atmospheric humidity,Other
+Extra litter,Disturbance in substrate supply
+Fertilization,Fertilization
+Fertilized,Fertilization
+Fertilized (coated NPK),Fertilization
+"Fertilized, Biochar",Fertilization
+"Fertilized, burned",Fertilization
+"Fertilized, clipped",Fertilization
+"Fertilized, CO2",Fertilization
+"Fertilized, conventional till",Fertilization
+"Fertilized, conventional till, no straw return",Fertilization
+"Fertilized, cover crop",Fertilization
+"Fertilized, drained",Fertilization
+"Fertilized, filtered air",Fertilization
+"Fertilized, filtered air, CO2",Fertilization
+"Fertilized, grazing",Fertilization
+"Fertilized, irrigated",Fertilization
+"Fertilized, irrigation",Fertilization
+"Fertilized, Leaf Litter",Fertilization
+"Fertilized, lime",Fertilization
+"Fertilized, manure",Fertilization
+"Fertilized, modern cultivation",Fertilization
+"Fertilized, mulch",Fertilization
+"Fertilized, no till, no straw return",Fertilization
+"Fertilized, no-till",Fertilization
+"Fertilized, nonfiltered air",Fertilization
+"Fertilized, nonfiltered air, CO2",Fertilization
+"Fertilized, Plant Residue",Fertilization
+"Fertilized, Plowed",Fertilization
+"Fertilized, reduced tillage",Fertilization
+"Fertilized, rice straw application",Fertilization
+"Fertilized, rice straw removal",Fertilization
+"Fertilized, straw",Fertilization
+"Fertilized, straw return",Fertilization
+"Fertilized, straw return, Organic fertilizer",Fertilization
+"Fertilized, thinned",Fertilization
+"Fertilized, Tillage",Fertilization
+"Fertilized, traditional cultivation",Fertilization
+Flooded and Dry intermittent Irrigation,Changes in precipitation
+Flooded and Wet intermittent Irrigation,Changes in precipitation
+"Flooded seasonally, Fertilized, Weeded inconsistently",Changes in precipitation
+Flooding,Changes in precipitation
+Foliar scorching,Disturbance in substrate supply
+Forest floor removed,Disturbance in substrate supply
+"Free-air CO2 enrichment, Plowed, Fertilized, Insecticide and Herbicide applied,",Elevated CO2
+Frenched,Agriculture cultivation
+Gap,Potential problem
+Gaps,Potential problem
+"Gaps, woody debris",Potential problem
+Girdled,Potential problem
+"Girdled, fertilized",Potential problem
+"Girdled, litter removed",Potential problem
+Girdling,Potential problem
+"Girdling, litter removal",Potential problem
+"Girdling, litter removal, trenching",Potential problem
+"Girdling, trenching",Potential problem
+"Girdling, understory removal",Potential problem
+Glyphosate,Agriculture cultivation
+Grass contour strips,Agriculture cultivation
+Grazed,Agriculture cultivation
+Grazing,Agriculture cultivation
+"Grazing, Nitrogen fertilization",N deposition
+"Grazing, warming",Climatic warming
+Green-tree clump,Other
+Harvest,Agriculture cultivation
+Hay feeding,Agriculture cultivation
+Heated,Climatic warming
+"Heated (air, soil)",Climatic warming
+Heated (air),Climatic warming
+Heated (soil),Climatic warming
+"Heated, CO2",Climatic warming
+Heating,Climatic warming
+"Heating, CO2",Climatic warming
+Herbicide,Agriculture cultivation
+Herbicide + ground roots,Agriculture cultivation
+"Herbicide, disk till",Agriculture cultivation
+"Herbicide, fertilization",Agriculture cultivation
+"Herbicide, mulching",Agriculture cultivation
+"Herbicide, zero till",Agriculture cultivation
+Herbivore exclusion,Agriculture cultivation
+High N,N deposition
+High soil N,N deposition
+"High soil N, CO2",N deposition
+Humus on humus,Fertilization
+Increased CO2 concentration,Elevated CO2
+Increased precipitation,Changes in precipitation
+"Increased precipitation, Fertilized",Changes in precipitation
+Infrequent fire,Disturbance in substrate supply
+Inorganic fertilizer with cover crop,Agriculture cultivation
+Insecticide,Agriculture cultivation
+Intensive management,Agriculture cultivation
+Intercropping,Agriculture cultivation
+Irrigated,Agriculture cultivation
+"Irrigated, Fertilized",Agriculture cultivation
+"Irrigated, Fertilized, Herbicide applied",Agriculture cultivation
+Irrigated; +120 gC/m2 POM,Agriculture cultivation
+Irrigated; +240 gC/m2 POM,Agriculture cultivation
+Irrigated; +60 gC/m2 POM,Agriculture cultivation
+Irrigated+fertilized,Agriculture cultivation
+Irrigation,Agriculture cultivation
+Irrigation and trim,Agriculture cultivation
+"Irrigation water, Crop harvest",Agriculture cultivation
+"Irrigation, acidification",Agriculture cultivation
+"Irrigation, chamber",Agriculture cultivation
+"Irrigation, CO2",Agriculture cultivation
+"Irrigation, CO2, high N",Agriculture cultivation
+"Irrigation, fertilized",Agriculture cultivation
+"Irrigation, high N",Agriculture cultivation
+"Irrigation, organic matter",Agriculture cultivation
+"Irrigation, warming",Agriculture cultivation
+L-layer removal,Disturbance in substrate supply
+Liming,Fertilization
+"Liming, double litter",Fertilization
+"Liming, litter removal",Fertilization
+Litter add,Disturbance in substrate supply
+Litter addition,Disturbance in substrate supply
+Litter excluded,Disturbance in substrate supply
+Litter exclusion,Disturbance in substrate supply
+Litter harvesting,Disturbance in substrate supply
+"Litter harvesting, fertilized",Disturbance in substrate supply
+Litter removal,Disturbance in substrate supply
+"Litter removal, root trenching",Disturbance in substrate supply
+"Litter removal, trenching",Disturbance in substrate supply
+Litter removed,Disturbance in substrate supply
+"Litter, roots excluded",Disturbance in substrate supply
+Log removal,Disturbance in substrate supply
+"Log removal, clear-cut harvest",Disturbance in substrate supply
+Logged,Disturbance in substrate supply
+Logging residue,Disturbance in substrate supply
+Low N,N deposition
+Low snow,N deposition
+Low soil N,N deposition
+"Low soil N, CO2",N deposition
+Maize residue,Agriculture cultivation
+Manure,Fertilization
+Manure with cover crop,Fertilization
+Manure without cover crop,Fertilization
+"Manure, Urea, Irrigation water, Crop harvest",Fertilization
+"Manure, Urea, NPK, Irrigation water, Crop harvest",Fertilization
+"Mastication, burning",Disturbance in substrate supply
+Mine spoil,Fertilization
+Mine waste,Fertilization
+Mineral,Fertilization
+Minimal tillage,Agriculture cultivation
+Misting,Other
+Moderate N,N deposition
+Moderately degraded,Other
+Mold board plow tillage,Agriculture cultivation
+Moldboard ploughing,Agriculture cultivation
+Moldboard till,Agriculture cultivation
+Moose trampling,Other
+Mounded,Other
+Mow,Agriculture cultivation
+"Mow, till",Agriculture cultivation
+Mowed,Agriculture cultivation
+Mowing,Agriculture cultivation
+NaNO3 added,N deposition
+Nitrogen,N deposition
+"Nitrogen, CO2",N deposition
+"Nitrogen, phosphorous",N deposition
+No grazing,Agriculture cultivation
+No inputs,Agriculture cultivation
+No litter,Agriculture cultivation
+"No litter, no roots",Agriculture cultivation
+No mulch,Agriculture cultivation
+No roots,Agriculture cultivation
+"No roots, no mycorrhizae",Agriculture cultivation
+No till,Agriculture cultivation
+"No till, straw",Agriculture cultivation
+"No till, straw return",Agriculture cultivation
+No tillage,Agriculture cultivation
+No-till,Agriculture cultivation
+No-till CRP,Agriculture cultivation
+"No-till, fallow",Agriculture cultivation
+"No-till, fertilized",Agriculture cultivation
+No-till; fertilized,Agriculture cultivation
+None,None
+O-horizon removed,Disturbance in substrate supply
+O3,Other
+OA-less,Disturbance in substrate supply
+Organic cropping,Agriculture cultivation
+Organic management,Agriculture cultivation
+Organic matter,Agriculture cultivation
+Organic residues removed,Agriculture cultivation
+Partial cut,Disturbance in substrate supply
+Partial harvest,Disturbance in substrate supply
+Plant mix,Agriculture cultivation
+Plant Residue,Agriculture cultivation
+Plantation; Litter excluded,Agriculture cultivation
+"Plantation; Litter, roots excluded",Agriculture cultivation
+Plantation; Roots excluded,Agriculture cultivation
+Planted,Agriculture cultivation
+Plastic film mulching,Agriculture cultivation
+Plough till,Agriculture cultivation
+"Plough till, straw return",Agriculture cultivation
+Ploughed,Agriculture cultivation
+"Ploughed, Harrowed",Agriculture cultivation
+"Plowed, Fertilized, Insecticide and Herbicide applied,",Agriculture cultivation
+Post-flush burn,Agriculture cultivation
+Post-flush cut,Agriculture cultivation
+Pre-flush burn,Agriculture cultivation
+Pre-flush cut,Agriculture cultivation
+Pruned,Disturbance in substrate supply
+Rainfall exclusion,Changes in precipitation
+Reclaimed mine soil,Other
+Reduced till,Agriculture cultivation
+Reduced tillage,Agriculture cultivation
+Ridge till,Agriculture cultivation
+Ridge Tillage,Agriculture cultivation
+"Ridge Tillage, Straw Mulching",Agriculture cultivation
+"Ridge Tillage, Straw Mulching, Decomposing Inoculants",Agriculture cultivation
+Ridge-furrow cultivation,Agriculture cultivation
+"Ridge-furrow cultivation, Full plastic film mulching",Agriculture cultivation
+Ridged,Agriculture cultivation
+"Ridged, Irrigated, Fertilized, Herbicide applied",Agriculture cultivation
+Root trenching,Potential problem
+Roots excluded,Potential problem
+Rotary till,Agriculture cultivation
+"Rotary till, straw return",Agriculture cultivation
+Rotary tillage,Agriculture cultivation
+Rotational grazing,Agriculture cultivation
+Rotovated and ploughed,Agriculture cultivation
+Salvage logging,Disturbance in substrate supply
+Scalped,Other
+Sediment removal,Disturbance in substrate supply
+Selection cutting,Disturbance in substrate supply
+Sesbania,Agriculture cultivation
+Sesbania + wheat straw,Agriculture cultivation
+Shaded,Other
+Shading,Other
+"Shading, Fertilized",Agriculture cultivation
+"Shading, irrigation",Agriculture cultivation
+Shallow soil frost,Other
+Slash-and-burn,Agriculture cultivation
+Sludge,Agriculture cultivation
+Snow addition,Other
+Snow fence,Other
+Snow reducation,Other
+Snow removal,Other
+Soil compaction,Other
+"Soil frost prevented by underground heating wires, Weeding",Climatic warming
+Soil warming,Climatic warming
+Spaded,Other
+Species added,Agriculture cultivation
+Species added; insecticide,Agriculture cultivation
+Stem wood harvest,Disturbance in substrate supply
+Straw,Agriculture cultivation
+Straw checkboard,Agriculture cultivation
+Strip tillage; cover crop,Agriculture cultivation
+Stump Harvesting,Agriculture cultivation
+Sweet clover intercrop,Agriculture cultivation
+"Tear-out, Herbicide",Agriculture cultivation
+Termite mound,Agriculture cultivation
+Thinned,Disturbance in substrate supply
+"Thinned, bedded, fertilized",Disturbance in substrate supply
+"Thinned, burned",Disturbance in substrate supply
+"Thinned, double litter",Disturbance in substrate supply
+"Thinned, forest floor removed",Disturbance in substrate supply
+"Thinned, irrigation, fertilized",Disturbance in substrate supply
+"Thinned, litter removal",Disturbance in substrate supply
+Thinning,Disturbance in substrate supply
+"Thinning, Stumps extrated from soil",Disturbance in substrate supply
+Throughfall exclusion,Disturbance in substrate supply
+Tillage,Agriculture cultivation
+Tilled,Agriculture cultivation
+"Tilled, Fertilized",Agriculture cultivation
+"Tilled, Grazed",Agriculture cultivation
+Traditional Tillage,Agriculture cultivation
+"Traditional Tillage, Straw Mulching",Agriculture cultivation
+"Traditional Tillage, Straw Mulching, Decomposing Inoculants",Agriculture cultivation
+Tree Girdling,Disturbance in substrate supply
+Tree-grass contour strips,Agriculture cultivation
+Trenching,Potential problem
+Ultraviolet radiation,Other
+"Ultraviolet radiation, straw",Other
+Understory harvesting,Disturbance in substrate supply
+Understory harvesting + litter raking,Disturbance in substrate supply
+Understory removal,Disturbance in substrate supply
+Understory Removal,Disturbance in substrate supply
+"Understory removal, C. alata addition",Disturbance in substrate supply
+Understory removed,Disturbance in substrate supply
+Understory thinned,Disturbance in substrate supply
+"Undrained, planted",Agriculture cultivation
+"Undrained, unplanted",Agriculture cultivation
+UV-B radiation,Other
+"UV-B, straw",Other
+Vegetation control,Agriculture cultivation
+Warm season grazing,Agriculture cultivation
+Warmed,Climatic warming
+Warmed and water added,Climatic warming
+Warmed with International Tundra Experiment style Open-Top Passive Warming Chamber,Climatic warming
+"Warmed, clipped",Climatic warming
+"Warmed, fertilized",Climatic warming
+"Warmed, irrigation",Climatic warming
+Warming,Climatic warming
+Warming and rainfall exclusion,Climatic warming
+"Warming, clipped",Climatic warming
+"Warming, CO2",Climatic warming
+"Warming, drought",Climatic warming
+"Warming, drought, CO2",Climatic warming
+"Warming, fertilization",Climatic warming
+Water added,Changes in precipitation
+Weed control,Agriculture cultivation
+"Weed control, irrigation",Agriculture cultivation
+"Weed control, irrigation, fertilized",Agriculture cultivation
+"Weed control, irrigation, fertilized, pest control",Agriculture cultivation
+Weeded,Agriculture cultivation
+Weeding,Agriculture cultivation
+"Weeding, fertilization",Agriculture cultivation
+Weekly weeding,Agriculture cultivation
+Wheat straw,Agriculture cultivation
+Wheat straw added,Agriculture cultivation
+Wheel ruts,Agriculture cultivation
+Wood ash,Agriculture cultivation
+Woody adelgid infestation,Agriculture cultivation
+Woody debris,Agriculture cultivation
+Zero tillage,Agriculture cultivation

@@ -1,0 +1,253 @@
+---
+title: "SRDBV5-ESSD"
+output: html_document
+---
+
+```{r preliminaries, message=FALSE, echo=FALSE}
+package_list <- c("cowplot","data.table","dplyr","ggplot2", "lubridate", "leaflet"
+                  ,"kableExtra","knitr","ggmap","maps","mapdata","tidyr","sp","ggpubr")
+package_new <- package_list[!(package_list %in% installed.packages()[,"Package"])]
+if(length(package_new)) install.packages(package_new)
+# loading necessary packages
+# install.packages("xlsx")
+# library("xlsx")
+# install.packages("readxl")
+library(readxl)
+library(ggplot2)
+theme_set(theme_bw())
+library(cowplot)
+library(tidyr)
+library(dplyr)
+library(cowplot)
+library(data.table)
+library(lubridate)
+library(kableExtra)
+library(knitr)
+library(ggpubr)
+library(ggmap)
+library(maps)
+library(mapdata)
+library(leaflet)
+library(sp)
+# Source all needed functions
+source('functions.R')
+
+# set data and outputs file direction
+DATA_DIR <- 'data'
+OUT_DIR <- 'outputs'
+
+# Set chunks defaults; these options will be applied to all subsequent chunks
+knitr::opts_chunk$set(results = 'hide', message = TRUE, include = TRUE, 
+                      echo = FALSE, warning = FALSE,
+                      fig.height = 4, fig.width = 8, cache = FALSE)
+```
+
+# functions
+```{r functions}
+# input csv data
+read_file <- function(x) read.csv(file.path(DATA_DIR, x), comment.char = "#", stringsAsFactors = FALSE)
+# input xlsx data
+# don't know why this function not work
+# read_xlsx <- function(x) read.xlsx2(file.path(DATA_DIR, x), sheetIndex = 1, colIndex = c(1:4)) 
+read_xlsx <- function(x) read_excel(file.path(DATA_DIR, x), sheet = 1)
+# write csv 
+writ_file <- function(input, output) write.csv(input, file.path(OUT_DIR, output), row.names = FALSE)
+```
+
+# load data
+```{r load data}
+# load all data necessary for this analysis
+srdbv4 <- read_file('srdbv4.csv') 
+srdbv5 <- read_file('srdb-data-v5.csv')
+srdbv5$Site_ID <- as.factor(srdbv5$Site_ID)
+IGBP <- read_file('IGBP.txt') %>% 
+  left_join(read_file("igbp_mapping.csv"), by = "IGBP2001Pr")
+# load global climate data (University of Delaware)
+GlobalMATMAP <- read_file('summarized_climate.csv')
+srdb_citation <- read_xlsx('SRDB_cited.xlsx')
+MGRsD <- read_file('MGRsD.csv')
+
+```
+
+
+## Check the duplicate Site_ID in srdb
+```{r}
+# Idealy, every row in srdbv5 should have a unique ID (which is the combine of study_number, measure_year, and site_ID)
+srdbv5 %>% select(Study_number, Study_midyear, Site_ID) %>% 
+  count(Study_number, Study_midyear, Site_ID, sort = TRUE) %>% 
+  filter (n >= 2) %>% 
+  arrange(Study_number)
+```
+
+
+# analysis
+## srdb citation analysis
+```{r}
+srdb_citation %>% select(PubYear, Num_citation, Database) %>%  
+  ggplot(aes(PubYear, fill = Database)) +
+  geom_bar(stat = "count") +
+  scale_x_continuous(breaks = seq(2010, 2020, 2)) +
+  labs(x=expression(Year), y=expression(Count))
+
+ggsave('outputs/srdb_citation.jpg', width = 8, height = 5)
+```
+
+
+## representative analysis
+```{r, fig.height=4, fig.width=8}
+representative(srdbv4, IGBP, GlobalMATMAP) %>% filter(!is.na(Ecosystem) & !is.na(MAT)) %>% 
+  ggplot(aes(x = Ecosystem, y = MAT, col = factor(Source))) +
+  geom_violin(draw_quantiles = c(0.5))
+
+```
+
+
+# Data check 
+## Check Site_ID
+```{r check Site_ID}
+# check there are no lower case character in Site_ID column for bother srdb and MGRsD
+MGRsD %>% select (Study_number, Site_ID) %>% filter (Site_ID %in% letters )
+srdbv5 %>% select (Study_number, Site_ID) %>% filter (Site_ID %in% letters )
+```
+
+
+## Find out those studies in MGRsD but not in SRDB
+```{r}
+# 14 studies not in srdb, need to add the information
+mgrsd_notin_srdb(srdbv5, MGRsD) 
+```
+
+## Find out those studies in SRDB but not in MGRsD
+```{r, results = 'hide' }
+srdb_notin_mgrsd(srdbv5, MGRsD) %>% arrange(Study_number) %>% unique()
+```
+
+
+
+## Check all countries and whether they have currect acronym
+```{r}
+srdbv5 %>% mutate(Country_acronym = substr(Site_ID, 1,2)) %>% 
+  select (Country) %>% unique() %>% count(Country, sort = TRUE)
+```
+
+## check country code
+```{r}
+MGRsD %>% mutate(Country_acronym = substr(Site_ID, 1, 2)) %>% 
+  select (Country, Country_acronym) %>% unique() %>% count(Country, Country_acronym, sort = TRUE)
+```
+
+
+## Find out those Site_ID in MGRsD but not in SRDB 
+```{r}
+site_ID_check(srdbv5) %>% filter(is.na(srdb_ID)) %>% filter(Study_number %!in% mgrsd_notin_srdb(srdbv5, MGRsD)[,1]) 
+
+```
+
+## For those have more than 11 months Rs from MGRsD, comparing that with SRDB
+```{r}
+# Select sites with more than 10 months' Rs measurement, and get the mean
+srdb_vs_mgrsd <- function () {
+  MGRsD %>% select(Study_number, Site_ID, Measure_Month, RS_Norm) %>% 
+  group_by(Study_number, Site_ID, Measure_Month) %>% 
+  summarise(RS_mean = mean(RS_Norm)) %>% 
+  mutate(n_Month = n()) %>% 
+  filter(n_Month >= 10) %>% 
+  group_by(Study_number, Site_ID) %>% 
+  summarise(RS_annual_mgrsd = mean(RS_mean)) -> mgrsd_sum
+
+# Select sites and get the mean Rs value from srdb data
+  srdbv5 %>% select(Study_number, Site_ID, Rs_annual) %>% na.omit() %>% 
+  group_by(Study_number, Site_ID) %>% 
+  summarise(RS_annual_srdb = mean(Rs_annual)/365) -> srdb_sum
+
+# use inner join to combine Rs from srdb and mgrsd  
+  results <- inner_join(mgrsd_sum, srdb_sum, by=c("Study_number", "Site_ID"))
+  return(results)
+}
+
+srdb_vs_mgrsd <- srdb_vs_mgrsd()
+```
+
+
+
+## Regression between Rs_annual from SRDB and Rs_annual from MGRsD
+```{r}
+srdb_vs_mgrsd %>% 
+  ggplot(aes(RS_annual_mgrsd, RS_annual_srdb)) + 
+  geom_point() + 
+  geom_smooth(method = "lm") +
+  geom_abline(slope = 1, intercept = 0, col = "red", linetype = "dashed", size = 1.5) +
+  labs(x=expression(Annual~R[S]~"(MGRsD)"), y=expression(Annual~R[S]~"(SRDB)"))
+
+lm(RS_annual_srdb ~ RS_annual_mgrsd, data = srdb_vs_mgrsd) %>% summary()
+```
+
+
+## Find out sites with big Rs_annual difference between SRDB and MGRsD
+```{r}
+srdb_vs_mgrsd %>% mutate(ratio = RS_annual_mgrsd / RS_annual_srdb) %>% arrange(ratio)
+```
+
+
+## Check sites by contry (check latitude and longitude)
+```{r}
+srdbv5 %>% count(Country, sort = TRUE) 
+```
+
+
+## Check sites by country
+```{r}
+lot_long_check(srdbv5, "USA")
+# srdbv5 %>% filter(Longitude > 0) %>% select(Study_number) %>% unique()
+lot_long_check(srdbv5, "China")
+srdbv5 %>% filter(Latitude < 22 & Country == "China") %>% 
+  select(Study_number, Country, Region, Latitude, Longitude) %>% 
+  arrange(Latitude)
+
+lot_long_check(srdbv5, "Canada")
+lot_long_check(srdbv5, "Finland")
+lot_long_check(srdbv5, "Japan")
+lot_long_check(srdbv5, "Germany")
+```
+
+## Check latitude and longitude in MGRsD but not in srdb, then srdb's lat and long can use that from MGRsD
+```{r}
+srdbv5 %>% filter(is.na(Site_ID)) %>% nrow()
+lat_long_check2 <- function () {
+  srdbv5 %>% filter(is.na(Latitude) | is.na(Longitude)) %>% select(Study_number) %>% unique() %>% arrange(Study_number) -> srdb
+  MGRsD %>% select(Study_number, Latitude, Longitude) %>% unique() -> mgrsd
+  
+  results <- left_join(srdb, mgrsd, by = c("Study_number"))
+  return(results)
+}
+
+lat_long_check2() %>% na.omit()
+
+```
+
+
+## check manipulation etc.
+```{r}
+srdbv5 %>% count(Manipulation, sort = TRUE) 
+srdbv5 %>% select(Manipulation) %>% unique() %>% arrange(Manipulation) -> 
+  manipltion
+manipltion 
+
+writ_file(manipltion, 'manipulation.csv')
+
+srdbv5 %>% count(Meas_method, sort = TRUE) 
+srdbv5 %>% count(Partition_method, sort = TRUE) 
+
+# questions
+srdbv5 %>% count(Biome, sort = TRUE) 
+srdbv5 %>% count(Ecosystem_state, sort = TRUE) 
+srdbv5 %>% count(Leaf_habit, sort = TRUE) 
+srdbv5 %>% count(Stage, sort = TRUE) 
+
+```
+
+
+
+
+
+

@@ -1,0 +1,25 @@
+# file or dir in this file will be ignored
+.Rhistory
+
+data/other_data/MU_Global.csv
+data/MGRsD.xlsx
+
+# ignore all files 
+Manuscript/
+MGRsD_cache/
+MGRsD_files/
+Old/
+References/
+
+# ignore all .ini
+*.ini
+*.DS_Store
+*.Drat
+*.html
+
+# project path
+# /G/My\ Drive/MyResearch/MGRsD
+
+# R cash files
+*.Rhistory
+.Rproj.user
