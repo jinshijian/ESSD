@@ -73,10 +73,7 @@ MGRsD <- read_file('MGRsD.csv')
 ## Check the duplicate Site_ID in srdb
 ```{r}
 # Idealy, every row in srdbv5 should have a unique ID (which is the combine of study_number, measure_year, and site_ID)
-srdbv5 %>% select(Study_number, Study_midyear, Site_ID) %>% 
-  count(Study_number, Study_midyear, Site_ID, sort = TRUE) %>% 
-  filter (n >= 2) %>% 
-  arrange(Study_number)
+
 ```
 
 
@@ -147,9 +144,9 @@ site_ID_check(srdbv5) %>% filter(is.na(srdb_ID)) %>% filter(Study_number %!in% m
 ```{r}
 # Select sites with more than 10 months' Rs measurement, and get the mean
 srdb_vs_mgrsd <- function () {
-  MGRsD %>% select(Study_number, Site_ID, Measure_Month, RS_Norm) %>% 
-  group_by(Study_number, Site_ID, Measure_Month) %>% 
-  summarise(RS_mean = mean(RS_Norm)) %>% 
+  MGRsD %>% select(Study_number, Site_ID, Meas_Month, Rs_Norm) %>% 
+  group_by(Study_number, Site_ID, Meas_Month) %>% 
+  summarise(RS_mean = mean(Rs_Norm)) %>% 
   mutate(n_Month = n()) %>% 
   filter(n_Month >= 10) %>% 
   group_by(Study_number, Site_ID) %>% 
@@ -212,16 +209,16 @@ lot_long_check(srdbv5, "Germany")
 
 ## Check latitude and longitude in MGRsD but not in srdb, then srdb's lat and long can use that from MGRsD
 ```{r}
-srdbv5 %>% filter(is.na(Site_ID)) %>% nrow()
-lat_long_check2 <- function () {
-  srdbv5 %>% filter(is.na(Latitude) | is.na(Longitude)) %>% select(Study_number) %>% unique() %>% arrange(Study_number) -> srdb
-  MGRsD %>% select(Study_number, Latitude, Longitude) %>% unique() -> mgrsd
-  
-  results <- left_join(srdb, mgrsd, by = c("Study_number"))
-  return(results)
-}
-
-lat_long_check2() %>% na.omit()
+# srdbv5 %>% filter(is.na(Site_ID)) %>% nrow()
+# lat_long_check2 <- function () {
+#   srdbv5 %>% filter(is.na(Latitude) | is.na(Longitude)) %>% select(Study_number) %>% unique() %>% arrange(Study_number) -> srdb
+#   MGRsD %>% select(Study_number, Latitude, Longitude) %>% unique() -> mgrsd
+#   
+#   results <- left_join(srdb, mgrsd, by = c("Study_number"))
+#   return(results)
+# }
+# 
+# lat_long_check2() %>% na.omit()
 
 ```
 
@@ -251,3 +248,7 @@ srdbv5 %>% count(Stage, sort = TRUE)
 
 
 
+srdbv5 %>% select(Study_number, Study_midyear, Site_ID) %>% 
+  count(Study_number, Study_midyear, Site_ID, sort = TRUE) %>% 
+  filter (n >= 2) %>% 
+  arrange(Study_number)
