@@ -73,7 +73,10 @@ MGRsD <- read_file('MGRsD.csv')
 ## Check the duplicate Site_ID in srdb
 ```{r}
 # Idealy, every row in srdbv5 should have a unique ID (which is the combine of study_number, measure_year, and site_ID)
-
+srdbv5 %>% select(Study_number, Study_midyear, Site_ID) %>% 
+  count(Study_number, Study_midyear, Site_ID, sort = TRUE) %>% 
+  filter (n >= 2) %>% 
+  arrange(Study_number)
 ```
 
 
@@ -94,7 +97,8 @@ ggsave('outputs/srdb_citation.jpg', width = 8, height = 5)
 ```{r, fig.height=4, fig.width=8}
 representative(srdbv4, IGBP, GlobalMATMAP) %>% filter(!is.na(Ecosystem) & !is.na(MAT)) %>% 
   ggplot(aes(x = Ecosystem, y = MAT, col = factor(Source))) +
-  geom_violin(draw_quantiles = c(0.5))
+  # geom_violin(draw_quantiles = c(0.5))
+  geom_boxplot()
 
 ```
 
@@ -248,7 +252,3 @@ srdbv5 %>% count(Stage, sort = TRUE)
 
 
 
-srdbv5 %>% select(Study_number, Study_midyear, Site_ID) %>% 
-  count(Study_number, Study_midyear, Site_ID, sort = TRUE) %>% 
-  filter (n >= 2) %>% 
-  arrange(Study_number)
