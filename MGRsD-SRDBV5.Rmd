@@ -93,12 +93,59 @@ ggsave('outputs/srdb_citation.jpg', width = 8, height = 5)
 ```
 
 
+```{r}
+# prepare data for legend
+# cc_legend <- tibble(x = rep(-170, 3), 
+#                     y = c(-25, -40, -55),
+#                     size = c(1.25, 1.25, 1.25))
+# Base map - word map
+worldMap <- map_data(map = "world")
+sitemap <- ggplot(data = worldMap) + 
+  # geom_polygon(aes(x = long, y = lat , fill = region , group = group, alpha = 0.1), color = "white") + 
+  geom_polygon(aes(x = long, y = lat, group = group, alpha = 0.1), color = "white", fill = "gray") + 
+  coord_fixed(1.3) +
+  theme(axis.text.y   = element_text(size = 12),
+        axis.text.x   = element_text(size = 12),
+        axis.title.y   = element_text(size = 13, margin = margin(t = 0, r = 12, b = 0, l = 0)),
+        axis.title.x   = element_text(size = 13, margin = margin(t = 12, r = 0, b = 0, l = 0)),
+        panel.background = element_blank(),
+        panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(),
+        axis.line = element_line(colour = "black"),
+        panel.border = element_rect(colour = "black", fill = NA, size = 1.25))+
+  theme(legend.position = "none")+
+  scale_x_continuous(name = "Longitude", breaks = seq(-180, 180, 30),
+                     labels = seq(-180, 180, 30)) +
+  scale_y_continuous(name = "Latitude", limits = c(-60, 90), breaks = seq(-90, 90, 15),
+                     labels = seq(-90,90,15))
+
+# add srdb-v4 sites
+# RC sites from SRDB_v4
+srdbv4 %>% 
+  select(Latitude, Longitude) %>% na.omit() %>% 
+  count(Latitude, Longitude) ->
+  srdbv4_count
+
+# srdbv4_count$n %>% sort(decreasing = T)
+# change count number > 10 to 10
+srdbv4_count %>% mutate(n2 = ifelse(n>=10, 10, n)) -> srdbv4_count
+
+sitemap <- sitemap +
+  geom_point(data = srdbv4_count, aes(x = srdbv4_count$Longitude, y = srdbv4_count$Latitude), 
+               color = "lightblue", shape = 1, size = srdbv4_count$n2, alpha = 0.25)
+
+sitemap
+```
+
+
+
 ## representative analysis
 ```{r, fig.height=4, fig.width=8}
 representative(srdbv4, IGBP, GlobalMATMAP) %>% filter(!is.na(Ecosystem) & !is.na(MAT)) %>% 
-  ggplot(aes(x = Ecosystem, y = MAT, col = factor(Source))) +
+  ggplot(aes(x = Ecosystem, y = MAT, fill = factor(Source))) +
   # geom_violin(draw_quantiles = c(0.5))
-  geom_boxplot()
+  geom_boxplot(outlier.shape = 1, outlier.color = "gray", outlier.size = 0.5) +
+  labs(x=expression(Ecosystem~types), y=expression(MAT~(degree~C)))
 
 ```
 
