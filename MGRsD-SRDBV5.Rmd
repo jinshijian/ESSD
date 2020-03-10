@@ -138,7 +138,7 @@ srdbv4_count %>%
 
 sitemap <- sitemap +
   geom_point(data = srdbv4_count, aes(x = srdbv4_count$Longitude, y = srdbv4_count$Latitude), 
-               color = "black", shape = 1, size = srdbv4_count$n2, alpha = 0.25)
+               color = "black", shape = 1, size = srdbv4_count$n2, alpha = 0.5)
 
 # Task 1: add new points
 srdbv4 %>% select(Contributor) %>% unique()
@@ -166,6 +166,8 @@ representative(srdbv4, IGBP, GlobalMATMAP) %>%
   # geom_violin(draw_quantiles = c(0.5))
   geom_boxplot(outlier.shape = 1, outlier.color = "gray", outlier.size = 0.5) +
   labs(x=expression(Ecosystem~types), y=expression(MAT~(degree~C)))
+
+# Task 2
 
 ```
 
