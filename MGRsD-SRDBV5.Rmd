@@ -159,15 +159,24 @@ sitemap
 
 
 ## representative analysis
-```{r, fig.height=4, fig.width=8}
+```{r, fig.height=8, fig.width=8}
 representative(srdbv4, IGBP, GlobalMATMAP) %>% 
   filter(!is.na(Ecosystem) & !is.na(MAT)) %>% 
   ggplot(aes(x = Ecosystem, y = MAT, fill = factor(Source))) +
   # geom_violin(draw_quantiles = c(0.5))
   geom_boxplot(outlier.shape = 1, outlier.color = "gray", outlier.size = 0.5) +
-  labs(x=expression(Ecosystem~types), y=expression(MAT~(degree~C)))
+  labs(x=expression(Ecosystem~types), y=expression(MAT~(degree~C))) -> v4_plot
 
 # Task 2
+representative(srdbv5, IGBP, GlobalMATMAP) %>% 
+  filter(!is.na(Ecosystem) & !is.na(MAT)) %>% 
+  ggplot(aes(x = Ecosystem, y = MAT, fill = factor(Source))) +
+  # geom_violin(draw_quantiles = c(0.5))
+  geom_boxplot(outlier.shape = 1, outlier.color = "gray", outlier.size = 0.5) +
+  labs(x=expression(Ecosystem~types), y=expression(MAT~(degree~C))) -> v5_plot
+
+# use cowplot put them together
+plot_grid(v4_plot, v5_plot, ncol = 1)
 
 ```
 
