@@ -167,15 +167,15 @@ cc_legend <- tibble(x = rep(-170, 4),
 
 sitemap <- sitemap +
   geom_point(data = srdbv5_add, aes(x = Longitude, y = Latitude), 
-             color = "blue", shape = 16, size = 3, alpha = 0.25) +
+             color = "blue", shape = 1, size = 3, alpha = 0.25) +
   geom_point(data = china_papers, aes(x = Longitude, y = Latitude), 
                color = "red", shape = 16, size = 3, alpha = 0.25) +
   # legend
   geom_point(data = cc_legend, aes(x, y, size = size)
-             , shape = c(1, 16, 16, 16)
-             , color = c("black", "blue", "red", "orange"), alpha = 1) +
+             , shape = c(1, 16, 16, 1)
+             , color = c("black", "red", "orange", "blue"), alpha = 1) +
   annotate("text", x = -160, y = c(-10, -25, -40, -55)
-           , label = c("SRDB-V4", "SRDB-V5 added", "In Chinses", "In Russian")
+           , label = c("SRDB-V4", "SRDB-V5 (Chinse)", "SRDB-V5 (Russian)", "SRDB-V5 (other)")
            , size = 3.5, hjust = 0) 
   
 
@@ -245,11 +245,11 @@ srdb_comb %>%
                cols = vars(vs),
                scales = "free") +
   theme(legend.position = "none"
-        , axis.title.x=element_blank()
+        # , axis.title.x=element_blank()
         , axis.text.x = element_text(angle = 25, hjust = 1)) +
   # geom_violin(draw_quantiles = c(0.5))
   geom_density(alpha = 0.5) +
-  labs(x=expression(Ecosystem~types), y=expression(MAT~(degree~C)))
+  labs(x=expression(MAT~"("~degree~C~")"), y=expression(Density))
 
 ggsave('outputs/Figure3.MAT.jpg', width = 8, height = 8)
 
@@ -262,11 +262,11 @@ srdb_comb %>%
                cols = vars(vs),
                scales = "free") +
   theme(legend.position = "none"
-        , axis.title.x=element_blank()
+        # , axis.title.x=element_blank()
         , axis.text.x = element_text(angle = 25, hjust = 1)) +
   # geom_violin(draw_quantiles = c(0.5))
   geom_density(alpha = 0.5) +
-  labs(x=expression(Ecosystem~types), y=expression(MAT~(degree~C)))
+  labs(x=expression(MAP~"(mm)"), y=expression(Density))
 
 ggsave('outputs/Figure4.MAP.jpg', width = 8, height = 8)
 
@@ -370,6 +370,8 @@ srdb_vs_mgrsd %>%
   geom_smooth(method = "lm") +
   geom_abline(slope = 1, intercept = 0, col = "red", linetype = "dashed", size = 1.5) +
   labs(x=expression(Annual~R[S]~"(MGRsD)"), y=expression(Annual~R[S]~"(SRDB)"))
+
+ggsave('outputs/Figure5.SRDB-MGRsD.jpg', width = 6, height = 4)
 
 lm(RS_annual_srdb ~ RS_annual_mgrsd, data = srdb_vs_mgrsd) %>% summary()
 ```
