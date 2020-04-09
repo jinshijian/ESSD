@@ -6,13 +6,13 @@ output: html_document
 ```{r preliminaries, message=FALSE, echo=FALSE}
 package_list <- c("cowplot","data.table","dplyr","ggplot2", "lubridate", "leaflet"
                   ,"kableExtra","knitr","ggmap","maps","mapdata","tidyr","sp","ggpubr")
-# install.packages("styler")
+install.packages("styler")
 package_new <- package_list[!(package_list %in% installed.packages()[,"Package"])]
 if(length(package_new)) install.packages(package_new)
 # loading necessary packages
 # install.packages("xlsx")
 # library("xlsx")
-# install.packages("readxl")
+install.packages("readxl")
 library(readxl)
 library(styler)
 library(ggplot2)
