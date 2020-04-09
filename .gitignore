@@ -1,5 +1,6 @@
 # file or dir in this file will be ignored
 .Rhistory
+.RData
 
 data/other_data/MU_Global.csv
 data/MGRsD.xlsx
