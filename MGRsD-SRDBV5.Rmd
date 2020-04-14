@@ -509,7 +509,10 @@ srdbv5_sub %>%
            MGRsD$Study_number) %>% 
   select(Study_number) %>% 
   unique() %>% 
-  arrange(Study_number)
+  arrange(Study_number) ->
+  rhchecked
+
+writ_file(rhchecked, 'rhchecked.csv')
 ```
 
 

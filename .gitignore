@@ -25,3 +25,6 @@ References/
 # R cash files
 *.Rhistory
 .Rproj.user
+
+# outputs
+outputs/rhchecked.csv
