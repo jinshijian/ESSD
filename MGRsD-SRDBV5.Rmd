@@ -51,7 +51,8 @@ srdbv1 <- read_file('srdb-data-v1.csv')
 srdbv2 <- read_file('srdb-data-v2.csv') 
 srdbv3 <- read_file('srdb-data-v3.csv') 
 srdbv4 <- read_file('srdb-data-v4.csv') 
-srdbv5 <- read_file('srdb-data-v5.csv')
+# srdbv5 <- read_file('srdb-data-v5.csv')
+srdbv5 <- read.csv('../srdb/srdb-data.csv')
 srdbv5$Site_ID <- as.factor(srdbv5$Site_ID)
 IGBP <- read_file('IGBP.txt') %>% 
   left_join(read_file("igbp_mapping.csv"), by = "IGBP2001Pr")
@@ -239,7 +240,7 @@ srdb_comb %>%
 ## Check the duplicate Site_ID in srdb
 ```{r check 1 - unique Site-ID}
 # Idealy, every row in srdbv5 should have a unique ID (which is the combine of study_number, measure_year, and site_ID)
-# srdbv5 <- read.csv('../srdb/srdb-data.csv')
+
 srdbv5 %>% 
   select(Study_number, Study_midyear, Site_ID) %>% 
   count(Study_number, Study_midyear, Site_ID, sort = TRUE) %>% 
