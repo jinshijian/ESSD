@@ -1,6 +1,21 @@
 
 #*****************************************************************************************************************
-# functions used in this study
+# load file functions 
+#*****************************************************************************************************************
+
+# input csv data
+read_file <- function(x) read.csv(file.path(DATA_DIR, x), comment.char = "#", stringsAsFactors = FALSE)
+# input xlsx data
+# don't know why this function not work
+# read_xlsx <- function(x) read.xlsx2(file.path(DATA_DIR, x), sheetIndex = 1, colIndex = c(1:4)) 
+read_xlsx <- function(x) read_excel(file.path(DATA_DIR, x), sheet = 1)
+# write csv 
+writ_file <- function(input, output) write.csv(input, file.path(OUT_DIR, output), row.names = FALSE)
+'%!in%' <- function(x,y)!('%in%'(x,y))
+
+
+#*****************************************************************************************************************
+# data processing functions
 #*****************************************************************************************************************
 
 # not in function
@@ -68,4 +83,44 @@ representative <- function (srdb_data, igbp_data, mat_map_data) {
   bind_rows(sub_srdb, mat_map_data) -> rep_data
   return(rep_data)
 }
+
+# functions for ESSD-SRDBV5 manuscript
+srdb_v_comp <- function(srdb_v_mamt){
+  srdb_v_mamt %>% 
+    filter(!is.na(Ecosystem) & !is.na(MAT)) %>% 
+    ggplot(aes(x = Ecosystem, y = MAT, fill = factor(Source))) +
+    theme(legend.position = "none"
+          , axis.title.x=element_blank()
+          , axis.text.x = element_text(angle = 25, hjust = 1)) +
+    # geom_violin(draw_quantiles = c(0.5))
+    geom_boxplot(outlier.shape = 1, outlier.color = "gray", outlier.size = 0.5) +
+    labs(x=expression(Ecosystem~types), y=expression(MAT~(degree~C)))
+}
+
+# functions for SRDB and MGRsD data quality check
+# Select sites with more than 10 months' Rs measurement, and get the mean
+srdb_vs_mgrsd <- function () {
+  MGRsD %>% select(Study_number, Site_ID, Meas_Month, Rs_Norm) %>% 
+    group_by(Study_number, Site_ID, Meas_Month) %>% 
+    summarise(RS_mean = mean(Rs_Norm)) %>% 
+    mutate(n_Month = n()) %>% 
+    filter(n_Month >= 10) %>% 
+    group_by(Study_number, Site_ID) %>% 
+    summarise(RS_annual_mgrsd = mean(RS_mean)) -> 
+    mgrsd_sum
+  
+  # Select sites and get the mean Rs value from srdb data
+  srdbv5 %>% 
+    select(Study_number, Site_ID, Rs_annual) %>% 
+    na.omit() %>% 
+    group_by(Study_number, Site_ID) %>% 
+    summarise(RS_annual_srdb = mean(Rs_annual)/365) -> 
+    srdb_sum
+  
+  # use inner join to combine Rs from srdb and mgrsd  
+  results <- inner_join(mgrsd_sum, srdb_sum, by=c("Study_number", "Site_ID"))
+  return(results)
+}
+
+
 
