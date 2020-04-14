@@ -78,6 +78,7 @@ srdb_study <- read_file('srdb-studies.csv')
 ## Check the duplicate Site_ID in srdb
 ```{r}
 # Idealy, every row in srdbv5 should have a unique ID (which is the combine of study_number, measure_year, and site_ID)
+# srdbv5 <- read.csv('../srdb/srdb-data.csv')
 srdbv5 %>% 
   select(Study_number, Study_midyear, Site_ID) %>% 
   count(Study_number, Study_midyear, Site_ID, sort = TRUE) %>% 
@@ -281,7 +282,7 @@ MGRsD %>%
   filter (Site_ID %in% letters )
 
 srdbv5 %>% 
-  select (Study_number, Site_ID) %>% 
+  select (Study_number, Site_ID) %>%
   filter (Site_ID %in% letters )
 ```
 
