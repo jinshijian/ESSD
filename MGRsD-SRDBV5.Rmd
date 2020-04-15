@@ -51,7 +51,8 @@ srdbv1 <- read_file('srdb-data-v1.csv')
 srdbv2 <- read_file('srdb-data-v2.csv') 
 srdbv3 <- read_file('srdb-data-v3.csv') 
 srdbv4 <- read_file('srdb-data-v4.csv') 
-srdbv5 <- read_file('srdb-data-v5.csv')
+# srdbv5 <- read_file('srdb-data-v5.csv')
+srdbv5 <- read.csv('../srdb/srdb-data.csv')
 srdbv5$Site_ID <- as.factor(srdbv5$Site_ID)
 IGBP <- read_file('IGBP.txt') %>% 
   left_join(read_file("igbp_mapping.csv"), by = "IGBP2001Pr")
@@ -80,24 +81,7 @@ srdb_citation %>%
 ```{r Figure 2 - Sites spatial distribution}
 # Base map - word map
 worldMap <- map_data(map = "world")
-basemap <- ggplot(data = worldMap) + 
-  # geom_polygon(aes(x = long, y = lat , fill = region , group = group, alpha = 0.1), color = "white") + 
-  geom_polygon(aes(x = long, y = lat, group = group, alpha = 0.1), color = "white", fill = "gray") + 
-  coord_fixed(1.3) +
-  theme(axis.text.y   = element_text(size = 12),
-        axis.text.x   = element_text(size = 12),
-        axis.title.y   = element_text(size = 13, margin = margin(t = 0, r = 12, b = 0, l = 0)),
-        axis.title.x   = element_text(size = 13, margin = margin(t = 12, r = 0, b = 0, l = 0)),
-        panel.background = element_blank(),
-        panel.grid.major = element_blank(), 
-        panel.grid.minor = element_blank(),
-        axis.line = element_line(colour = "black"),
-        panel.border = element_rect(colour = "black", fill = NA, size = 1.25))+
-  theme(legend.position = "none")+
-  scale_x_continuous(name = "Longitude", breaks = seq(-180, 180, 30),
-                     labels = seq(-180, 180, 30)) +
-  scale_y_continuous(name = "Latitude", limits = c(-60, 90), breaks = seq(-90, 90, 15),
-                     labels = seq(-90,90,15))
+basemap <- word_bkgd(worldMap)
 
 # add srdb-v4 sites
 # RC sites from SRDB_v4
@@ -239,7 +223,7 @@ srdb_comb %>%
 ## Check the duplicate Site_ID in srdb
 ```{r check 1 - unique Site-ID}
 # Idealy, every row in srdbv5 should have a unique ID (which is the combine of study_number, measure_year, and site_ID)
-# srdbv5 <- read.csv('../srdb/srdb-data.csv')
+
 srdbv5 %>% 
   select(Study_number, Study_midyear, Site_ID) %>% 
   count(Study_number, Study_midyear, Site_ID, sort = TRUE) %>% 
