@@ -15,7 +15,7 @@ writ_file <- function(input, output) write.csv(input, file.path(OUT_DIR, output)
 
 
 #*****************************************************************************************************************
-# data processing functions
+# data quality check functions
 #*****************************************************************************************************************
 
 # not in function
@@ -122,5 +122,61 @@ srdb_vs_mgrsd <- function () {
   return(results)
 }
 
+# function for plot word background
+word_bkgd <- function (sdata) {
+  ggplot(data = sdata) + 
+    # geom_polygon(aes(x = long, y = lat , fill = region , group = group, alpha = 0.1), color = "white") + 
+    geom_polygon(aes(x = long, y = lat, group = group, alpha = 0.1), color = "white", fill = "gray") + 
+    coord_fixed(1.3) +
+    theme(axis.text.y   = element_text(size = 12),
+          axis.text.x   = element_text(size = 12),
+          axis.title.y   = element_text(size = 13, margin = margin(t = 0, r = 12, b = 0, l = 0)),
+          axis.title.x   = element_text(size = 13, margin = margin(t = 12, r = 0, b = 0, l = 0)),
+          panel.background = element_blank(),
+          panel.grid.major = element_blank(), 
+          panel.grid.minor = element_blank(),
+          axis.line = element_line(colour = "black"),
+          panel.border = element_rect(colour = "black", fill = NA, size = 1.25))+
+    theme(legend.position = "none")+
+    scale_x_continuous(name = "Longitude", breaks = seq(-180, 180, 30),
+                       labels = seq(-180, 180, 30)) +
+    scale_y_continuous(name = "Latitude", limits = c(-60, 90), breaks = seq(-90, 90, 15),
+                       labels = seq(-90,90,15))
+}
+
+#*****************************************************************************************************************
+# data processing functions
+#*****************************************************************************************************************
+## Filter MGRsD and get MRGhD
+get_mgrhd <- function(sdata) {
+  sdata %>% 
+    select(1:22) %>% 
+    select(-Rs_Paper, -Rh_Paper, -Ra_Paper, -Rs_units, -Converter) %>% 
+    filter(!is.na(Rh_Norm) | !is.na(Ra_Norm)) ->
+    MGRhD
+  
+  MGRhD %>% filter(is.na(Rh_Norm)) %>% nrow()
+  MGRhD$Rh_Norm <- ifelse(is.na(MGRhD$Rh_Norm), MGRhD$Rs_Norm - MGRhD$Ra_Norm, MGRhD$Rh_Norm)
+  
+  MGRhD %>% filter(is.na(Ra_Norm)) %>% nrow()
+  MGRhD$Ra_Norm <- ifelse(is.na(MGRhD$Ra_Norm), MGRhD$Rs_Norm - MGRhD$Rh_Norm, MGRhD$Ra_Norm)
+  
+  MGRhD$Site_ID <- as.character(MGRhD$Site_ID)
+  return(MGRhD)
+}
+
+## Filter srdbv5 and get sub_srdbv5
+# colnames(srdbv5)
+get_subsrdbv5 <- function(sdata) {
+  sdata %>% 
+    select(Study_number, Site_ID, Study_midyear, Latitude, Longitude, Elevation, Manipulation, Biome, Ecosystem_type,Leaf_habit,
+           Soil_type, Soil_BD, Soil_CN, Soil_sand, Soil_silt, Soil_clay, MAT, MAP, PET, Study_temp, Study_precip, Meas_method,
+           Collar_height, Collar_depth, Chamber_area, Time_of_day, Meas_interval, Annual_coverage, Partition_method, Rs_annual, Ra_annual,
+           Rh_annual, RC_annual,C_soilmineral ) %>% 
+    mutate(Meas_Year = floor(Study_midyear)) -> sub_srdbv5
+  
+  sub_srdbv5$Site_ID <- as.character(sub_srdbv5$Site_ID)
+  return(sub_srdbv5)
+}
 
 
