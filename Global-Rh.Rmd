@@ -57,6 +57,7 @@ srdb_study <- read_file('srdb-studies.csv')
 # Find out those studies seperated Rh and Ra from Rs but not covered a whole year
 ```{r plot Rh sites}
 # plot word background map
+worldMap <- map_data(map = "world")
 basemap <- word_bkgd(worldMap)
 # find out Ra and Rh is not null but partition_method is null
 srdbv5 %>% select(Study_number, Latitude, Longitude, Partition_method, Rh_annual, Ra_annual) %>% 
@@ -159,14 +160,14 @@ MGRhD %>% select(Study_number, Site_ID, Meas_Year, Study_midyear, Latitude, Long
 
 ```{r}
 srdbv5 %>% select(Study_number, Site_ID, Study_midyear, Latitude, Longitude) %>% 
-  filter(Study_number == 1304)
+  filter(Study_number == 6168)
 
 MGRsD %>% select(Study_number, Site_ID, Meas_Year) %>% 
-  filter(Study_number == 1304) %>% 
+  filter(Study_number == 6168) %>% 
   unique()
 
-# MGRhD %>% select(Study_number, Site_ID, Meas_Year, Latitude, Longitude) %>% 
-#   filter(Study_number == 313)
+MGRhD %>% select(Study_number, Site_ID, Meas_Year, Latitude, Longitude) %>%
+  filter(Study_number == 6168)
 # 
 # sub_srdbv5 %>% select(Study_number, Site_ID, Study_midyear, Meas_Year, Latitude, Longitude) %>% 
 #   filter(Study_number == 313)
