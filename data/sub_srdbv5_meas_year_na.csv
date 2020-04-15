@@ -71,7 +71,7 @@ Study_number,Site_ID,Study_midyear,Latitude,Longitude,Elevation,Manipulation,Bio
 4629,CN-YAE,2005,31.27,105.47,500,None,Subtropical,Forest,Evergreen,Purple soil (Eutric Regosol),1.42,NA,40,42,18,17.3,826,NA,NA,NA,IRGA,5,3,78.5,,7,1,Exclusion,627,232,395,0.37,NA,2006
 5113,CN-AMN-CK,2004,24.53333333,101.0166667,2476,None,Subtropical,Forest,Evergreen,Loamy alfisols,NA,NA,NA,NA,NA,11.3,1840,NA,NA,NA,IRGA,30,2,490.8,,30,1,Comparison,992,327.36,664.64,0.33,NA,2007
 5125,JP-SHE-CK,2005,42.43333333,142.4833333,NA,None,Temperate,Grassland,Deciduous,Thaptic Melanudands Mollic Andisol,0.78,NA,74,19,4,7.9,1365,NA,NA,1152,IRGA,25,3,471,,15,1,Exclusion,1070,40,1030,0.037383178,7660,2007
-5310,PA-BCN-CK,2008,NA,9.15,-79.85,None,Tropical,Forest,Evergreen,,NA,NA,NA,NA,NA,27,2600,NA,NA,NA,IRGA,12,2,314,,NA,NA,Exclusion,NA,NA,NA,0.39,NA,2007
+5310,PA-BCN-CK,2008,9.15,-79.85,NA,None,Tropical,Forest,Evergreen,,NA,NA,NA,NA,NA,27,2600,NA,NA,NA,IRGA,12,2,314,,NA,NA,Exclusion,NA,NA,NA,0.39,NA,2007
 5317,CH-LGE-FAGUS1,2007,47.47833333,8.364388889,680,None,Temperate,Forest,Deciduous,Haplic cambisols,NA,NA,NA,NA,NA,8.4,930,NA,NA,NA,IRGA,10,1.5,301.57,,17.5,1,Exclusion,901,405,497,0.45,3900,2006
 5317,CH-LGE-FAGUS1,2007,47.47833333,8.364388889,680,None,Temperate,Forest,Deciduous,Haplic cambisols,NA,NA,NA,NA,NA,8.4,930,NA,NA,NA,IRGA,10,1.5,301.57,,17.5,1,Exclusion,901,405,497,0.45,3900,2008
 5524,KR-GWF-ABIES,2005,38.23333333,127.2666667,NA,None,Temperate,Forest,Deciduous,Inceptisols,NA,NA,NA,NA,NA,11.3,1365,NA,NA,NA,IRGA,5,1.5,88.2,,30,1,Exclusion,781,265.54,515.46,0.34,NA,2004
