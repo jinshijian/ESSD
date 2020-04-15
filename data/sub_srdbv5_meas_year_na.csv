@@ -1,0 +1,344 @@
+Study_number,Site_ID,Study_midyear,Latitude,Longitude,Elevation,Manipulation,Biome,Ecosystem_type,Leaf_habit,Soil_type,Soil_BD,Soil_CN,Soil_sand,Soil_silt,Soil_clay,MAT,MAP,PET,Study_temp,Study_precip,Meas_method,Collar_height,Collar_depth,Chamber_area,Time_of_day,Meas_interval,Annual_coverage,Partition_method,Rs_annual,Ra_annual,Rh_annual,RC_annual,C_soilmineral,Meas_Year
+17,GB-ROT,1962,51.81,-0.36,NA,None,Temperate,Agriculture,Deciduous,,NA,NA,NA,NA,NA,10,687,NA,NA,NA,Soda lime,NA,NA,400,,4.5,1,Comparison,400,194,206,0.49,15400,1961
+148,US-TOR,1977,35.99,-84.29,NA,None,Temperate,Forest,Deciduous,Emory cherty silt loam,NA,NA,NA,NA,NA,13.3,1265,NA,NA,NA,IRGA,NA,NA,NA,,14,1,Extraction,1065,373,692,0.35,12850,1974
+313,US-TOR-CK,1981,35.99,-84.29,NA,None,Temperate,Forest,Deciduous,Typic Paleudults,NA,NA,NA,NA,NA,14,1500,NA,NA,NA,Soda lime,12,NA,660,,30,1,Extraction,529,504,25,0.95,3300,1979
+313,US-TOR-CK,1981,35.99,-84.29,NA,None,Temperate,Forest,Deciduous,Typic Paleudults,NA,NA,NA,NA,NA,14,1500,NA,NA,NA,Soda lime,12,NA,660,,30,1,Extraction,529,504,25,0.95,3300,1980
+316,JP-FUC-CK,1980,34.38,132.45,NA,None,Temperate,Forest,Evergreen,Sandy loam,NA,NA,NA,NA,NA,15,1544,NA,NA,NA,KOH trap,NA,NA,NA,,15,1,Comparison,1299,525,774,0.4,NA,1981
+586,IN-SPU,1985,21.5,83.5,NA,None,Tropical,Forest,Evergreen,Sandy loam (red lateritic),1.75,NA,NA,NA,NA,NA,NA,NA,NA,NA,Alkali absorption,25,5,176.63,,NA,NA,Regression,NA,NA,NA,NA,NA,1988
+594,AU-SRT,1988,-36.43333333,145.23,114,None,Temperate,Agriculture,Deciduous,Sandy loam (Rhodoxeralf),NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,IRGA,5,3,314,,NA,NA,,NA,NA,NA,NA,NA,1986
+596,AU-LRS,1985,-18.97,146.17,NA,None,Temperate,Desert,Deciduous,Yellow earths or Palaeostalfs,NA,NA,NA,NA,NA,23.6,850,NA,NA,NA,Gas chromatography,15,2.5,452.16,,30,1,Comparison,380,150,230,0.39,NA,1986
+1017,AR-PES-CT,1992,-33.93,-60.57,NA,"Herbicide, disk till",Temperate,Agriculture,Deciduous,Silty clay (Typic Arguidoll),NA,NA,14,40,41,NA,NA,NA,NA,1240,Soda lime,15,5,50.24,,30,1,Exclusion,1040,265,775,0.25,NA,1993
+1271,US-HAF-CK,1994,42.5,-72.2,NA,None,Temperate,Forest,Deciduous,Sandy loam,NA,NA,NA,NA,NA,6,1100,NA,NA,NA,IRGA,NA,NA,NA,,10,0.67,,932,NA,NA,NA,NA,1995
+1297,US-OAR-REDCK,1995,36.1,-84.1,285,None,Temperate,Forest,Deciduous,Captina silt loam,NA,NA,NA,NA,NA,13.7,1367,NA,NA,NA,IRGA,8,NA,490.63,,30,0.67,,276,NA,NA,NA,NA,1997
+1343,RU-PUS-FOR1,1992,54.83,37.58,NA,None,Temperate,Forest,Deciduous,Humic luvisols,NA,NA,NA,NA,NA,5.4,670,NA,NA,NA,Soil profile,10,4,78.5,,10,1,Extraction,380,150,230,0.39,NA,1993
+1343,RU-PUS-GRA2,1992,54.83,37.58,NA,None,Temperate,Grassland,Deciduous,Humic luvisols,NA,NA,NA,NA,NA,5.4,670,NA,NA,NA,Gas chromatography,10,4,78.5,,10,1,Extraction,475,335,140,0.71,NA,1993
+1639,US-SET-CK,1995,34.63,-79.2,NA,None,Temperate,Forest,Evergreen,Psammentic Hapludult,NA,NA,NA,NA,NA,17,1210,NA,NA,NA,IRGA,4,2,176.63,,30,1,Extraction,1263,663,600,0.52,NA,1996
+1665,JP-KFR-CK,1997,32.82,130.73,NA,None,Temperate,Forest,Evergreen,Humid andosol (Kuroboku),NA,NA,NA,NA,NA,16.2,1970,NA,NA,NA,IRGA,NA,NA,122.66,,30,1,Comparison,618,352,266,0.57,NA,1998
+1716,US-CCF-FALLBROOK,1994,38.27,-119.57,455,None,Temperate,Grassland,Deciduous,Typic haploxevalf,NA,NA,NA,NA,NA,17.8,310,NA,NA,NA,IRGA,42,12,2532.6,,30,1,,1341.55,NA,NA,NA,NA,1995
+1716,US-CCF-MUSICK,1994,38.27,-119.57,1240,None,Temperate,Forest,Evergreen,Ultic haploxevalf,NA,NA,NA,NA,NA,11.7,940,NA,NA,NA,IRGA,42,12,2532.6,,30,1,,1089.89,NA,NA,NA,NA,1995
+1716,US-CCF-CHIQUITO,1994,38.27,-119.57,2890,None,Temperate,Forest,Deciduous,Entic cryumbrept,NA,NA,NA,NA,NA,3.3,1270,NA,NA,NA,IRGA,42,12,2532.6,,30,1,,1536.44,NA,NA,NA,NA,1995
+1716,US-CCF-OCD,1994,38.27,-119.57,420,Disturbed,Temperate,Agriculture,Deciduous,Typic haploxevalf,NA,NA,NA,NA,NA,17.8,310,NA,NA,NA,IRGA,42,12,2532.6,,30,1,,560.08,NA,NA,NA,NA,1995
+1831,RU-PSC-GRA1,1992,54.13,37.1,NA,None,Temperate,Grassland,Deciduous,,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Gas chromatography,NA,5,900,,14,1,Extraction,475,133,342,0.28,NA,1993
+2355,JP-MON,2000,37.33,137.43,1430,None,Temperate,Forest,Deciduous,Brown forest soil (Dystric Cambisols),NA,NA,NA,NA,NA,6.1,2175,NA,NA,NA,IRGA,NA,4,346,,NA,NA,Exclusion,NA,NA,NA,NA,NA,2001
+2396,CA-BSO-MID,1998,53.99,-105.12,NA,None,Boreal,Forest,Evergreen,Clay-sand,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,IRGA,NA,2,176.63,,40,1,Exclusion,564,124,440,0.22,39036,1999
+2396,CA-BSO-WET,1998,53.99,-105.12,NA,None,Boreal,Forest,Evergreen,Clay-sand,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,IRGA,NA,2,176.63,,40,1,Exclusion,319,54,265,0.17,39036,1999
+2446,SE-AHE,2000,64.23,19.77,175,None,Boreal,Forest,Evergreen,Sandy silt,NA,NA,NA,NA,NA,1,600,NA,NA,NA,Gas chromatography,13.5,0.2,463.53,,NA,NA,Girdling,NA,NA,NA,0.65,NA,2001
+2679,US-LEF-CKFOR,1996,18.25,-65.71,NA,None,Tropical,Forest,Evergreen,,NA,NA,NA,NA,NA,22.3,3500,NA,NA,NA,Alkali absorption,NA,NA,NA,,30,0.5,Exclusion,971,NA,296,0.7,NA,1997
+2679,US-LEF-CKPLA,1996,18.25,-65.71,NA,None,Tropical,Forest,Evergreen,,NA,NA,NA,NA,NA,22.3,3500,NA,NA,NA,Alkali absorption,NA,NA,NA,,30,0.5,Exclusion,850,NA,372,0.56,NA,1997
+3017,JP-TEF,2000,36.13,137.43,1430,None,Temperate,Forest,Deciduous,Brown forest soil (Dystric Cambisols),NA,NA,NA,NA,NA,6.1,2175,NA,NA,NA,IRGA,NA,2.5,346,,30,0.67,Exclusion,1060,480,580,0.45,NA,2001
+3066,NO-EBG-SITEIII,1995,78,15,NA,None,Arctic,Desert,Deciduous,Glacial till,NA,36,NA,NA,NA,-5.5,362,NA,NA,NA,,NA,NA,NA,,NA,NA,,NA,NA,NA,NA,NA,1996
+3066,NO-EBG-SITEIV,1995,78,15,NA,None,Arctic,Desert,Deciduous,Glacial till,NA,19,NA,NA,NA,-5.5,362,NA,NA,NA,,NA,NA,NA,,NA,NA,,NA,NA,NA,NA,2700,1996
+3157,US-SNM,2001,38.9,-120.63,177,None,Mediterranean,Savanna,Deciduous,Silt loam (Lithic haploxerepts),1.6,NA,38,45,18,16.3,559,NA,NA,NA,IRGA,4.4,2,94.99,,25,1,,488,NA,NA,NA,NA,2002
+3187,JP-TER,2004,36.1,140.1,27,None,Temperate,Grassland,Deciduous,,NA,NA,NA,NA,NA,14.1,1207,NA,NA,NA,IRGA,NA,3.5,NA,,30,0.5,Regression,NA,NA,NA,NA,NA,2005
+3323,CG-KON-CK,2001,-4.35,11.75,100,None,Tropical,Forest,Evergreen,Arenosol (sandy),NA,NA,NA,NA,NA,25,1400,NA,NA,1170,IRGA,NA,6,NA,,21,1,Comparison,1570,920,650,0.59,NA,2002
+3581,CR-LSF-RES,1998,10.43,-83.98,93,None,Tropical,Forest,Evergreen,Oxisols,NA,NA,NA,NA,NA,NA,4200,NA,NA,NA,IRGA,15,NA,314,,14,1,,1067,NA,NA,NA,NA,2003
+3592,JP-KYM-KYOTO,2002,35.02,135.79,100,None,Temperate,Forest,Deciduous,Typic Dystrudept,NA,NA,NA,NA,NA,NA,1419,NA,NA,NA,IRGA,15,5,314,,30,1,Exclusion,930,420,510,0.45,9200,2003
+3592,JP-KYM-OAK,2002,35.63,135.17,650,None,Temperate,Forest,Deciduous,Alic Hapludand,NA,NA,NA,NA,NA,NA,1739,NA,NA,NA,IRGA,15,5,314,,30,0.67,Exclusion,770,380,400,0.49,23100,2003
+3592,JP-KYM-CEDER,2002,35.62,135.18,610,None,Temperate,Forest,Deciduous,Dystrudept,NA,NA,NA,NA,NA,NA,1739,NA,NA,NA,IRGA,15,5,314,,30,0.67,Exclusion,920,400,520,0.44,13600,2003
+3592,JP-KYM-BEECH,2002,35.62,135.18,680,None,Temperate,Forest,Deciduous,Andic Haplohumod,NA,NA,NA,NA,NA,NA,1739,NA,NA,NA,IRGA,15,5,314,,30,0.67,Exclusion,820,280,550,0.34,19600,2003
+3592,JP-KYM-NOB,2002,35.96,138.47,1440,None,Temperate,Forest,Deciduous,Acrudoxic Malenudand,NA,NA,NA,NA,NA,NA,1555,NA,NA,NA,IRGA,15,5,314,,30,0.67,Exclusion,500,150,340,0.31,29400,2003
+3877,US-EYE-SITE607,2004,44.57,-121.54,NA,None,Temperate,Forest,Evergreen,,NA,NA,NA,NA,NA,5.5,2800,NA,NA,NA,IRGA,NA,2.5,89.87,,45,1,Comparison,495,194,301,0.39,6073,2005
+3893,BE-WPO-BEECH,2003,50.02,4.4,310,None,Temperate,Forest,Deciduous,,NA,NA,NA,NA,NA,8,1000,NA,9.8,756,IRGA,NA,2,NA,,60,1,Extraction,820,401.8,418,0.49,NA,2002
+3915,CN-JDFACE-CO2250N,2004,32.58,119.7,NA,"CO2, nitrogen",Temperate,Agriculture,Deciduous,Sandy loam,1.16,12.68965517,58,29,14,NA,NA,NA,NA,NA,Gas chromatography,NA,NA,NA,,7,0.55,Extraction,NA,NA,NA,NA,NA,2005
+3915,CN-JDFACE-AB250N,2004,32.58,119.7,NA,Nitrogen,Temperate,Agriculture,Deciduous,Sandy loam,1.16,12.68965517,58,29,14,NA,NA,NA,NA,NA,Gas chromatography,NA,NA,NA,,7,0.55,Extraction,NA,NA,NA,NA,NA,2005
+3915,CN-JDFACE-CO2150N,2004,32.58,119.7,NA,"CO2, nitrogen",Temperate,Agriculture,Deciduous,Sandy loam,1.16,12.68965517,58,29,14,NA,NA,NA,NA,NA,Gas chromatography,NA,NA,NA,,7,0.55,Extraction,NA,NA,NA,NA,NA,2005
+3915,CN-JDFACE-AB150N,2004,32.58,119.7,NA,Nitrogen,Temperate,Agriculture,Deciduous,Sandy loam,1.16,12.68965517,58,29,14,NA,NA,NA,NA,NA,Gas chromatography,NA,NA,NA,,7,0.55,Extraction,NA,NA,NA,NA,NA,2005
+3921,RU-PSC-5YR,2004,54.13,37.1,NA,None,Temperate,Grassland,Deciduous,Gray forest soil,NA,16.5,NA,NA,NA,5.5,670,NA,5.6,662,Gas chromatography,NA,NA,NA,,NA,NA,Extraction,580,299,281,0.52,NA,2003
+3927,CA-BCF,2004,49.85,-125.32,320,None,Temperate,Forest,Evergreen,Humoferric podzol,NA,NA,NA,NA,NA,8.6,1452,NA,NA,NA,IRGA,7,2,78.5,,21,1,Exclusion,1200,420,780,0.35,12000,2005
+3983,BR-CNF-SAND,2004,-1.72,-51.46,NA,None,Tropical,Forest,Evergreen,Sand (Oxisol),NA,NA,NA,NA,NA,NA,2500,NA,NA,NA,IRGA,NA,2,NA,,30,1,Extraction,1300,600,700,0.46,NA,2005
+3988,EE-VAO,2003,58.98,25.45,78,Drained,Boreal,Forest,Evergreen,Organic,NA,NA,NA,NA,NA,5,725,NA,NA,NA,IRGA,NA,NA,NA,,7,1,Exclusion,NA,NA,376,NA,NA,2002
+3988,FI-VES-MTKG,2003,61.37,25.12,115,Drained,Boreal,Forest,Evergreen,Organic,NA,NA,NA,NA,NA,3.8,601,NA,NA,NA,IRGA,NA,NA,NA,,7,1,Exclusion,NA,NA,352,NA,NA,2002
+3988,FI-VES-MTKG,2003,61.37,25.12,115,Drained,Boreal,Forest,Evergreen,Organic,NA,NA,NA,NA,NA,3.8,601,NA,NA,NA,IRGA,NA,NA,NA,,7,1,Exclusion,NA,NA,352,NA,NA,2004
+3988,FI-KIV,2003,66.35,26.62,180,Drained,Boreal,Forest,Evergreen,Organic,NA,NA,NA,NA,NA,1.4,538,NA,NA,NA,IRGA,NA,NA,NA,,7,1,Exclusion,NA,NA,515,NA,NA,2002
+3988,FI-KIV,2003,66.35,26.62,180,Drained,Boreal,Forest,Evergreen,Organic,NA,NA,NA,NA,NA,1.4,538,NA,NA,NA,IRGA,NA,NA,NA,,7,1,Exclusion,NA,NA,515,NA,NA,2004
+4003,FR-HFH-H1,2004,48.67,7.06,305,None,Temperate,Forest,Deciduous,Stagnic luvisol,1.18,NA,NA,NA,NA,9.7,913,NA,NA,NA,IRGA,NA,1.5,94.99,,14,1,Exclusion,528,364,164,0.69,NA,2005
+4003,FR-HFH-H2,2004,48.68,7.07,300,None,Temperate,Forest,Deciduous,Luvisol,1.15,NA,NA,NA,NA,9.7,913,NA,NA,NA,IRGA,NA,1.5,94.99,,14,1,Exclusion,527,285,242,0.54,NA,2005
+4062,JP-SAC,2001,36.32,140.15,470,None,Temperate,Forest,Deciduous,"Loamy clay (Black soil, Fulvic Andisols)",0.357,NA,NA,NA,NA,13.1,1330,NA,NA,NA,Gas chromatography,15,5,1256,,60,1,Isotope,485,145,340,0.3,7426,2002
+4155,CN-XEF-II,2001,26.19,117.43,NA,None,Subtropical,Forest,Evergreen,,1.1,NA,NA,NA,NA,19.1,1749,1585,NA,NA,Soda lime,NA,NA,615.44,,5,1,Exclusion,981,406,576,0.41,NA,2002
+4155,CN-XEF-III,2001,26.19,117.43,NA,None,Subtropical,Forest,Evergreen,,1.2,NA,NA,NA,NA,19.1,1749,1585,NA,NA,Soda lime,NA,NA,615.44,,5,1,Exclusion,476,194,282,0.41,NA,2003
+4155,CN-XEF-IV,2002,26.19,117.43,NA,None,Subtropical,Forest,Evergreen,,0.93,NA,NA,NA,NA,19.1,1749,1585,NA,NA,Soda lime,NA,NA,615.44,,5,1,Exclusion,1502,730,772,0.49,NA,2001
+4155,CN-XEF-VI,2002,26.19,117.43,NA,None,Subtropical,Forest,Evergreen,,1.2,NA,NA,NA,NA,19.1,1749,1585,NA,NA,Soda lime,NA,NA,615.44,,5,1,Exclusion,509,211,298,0.41,NA,2003
+4155,CN-XEF-VII,2003,26.19,117.43,NA,None,Subtropical,Forest,Evergreen,,0.93,NA,NA,NA,NA,19.1,1749,1585,NA,NA,Soda lime,NA,NA,615.44,,5,1,Exclusion,1246,578,669,0.46,NA,2001
+4155,CN-XEF-VIII,2003,26.19,117.43,NA,None,Subtropical,Forest,Evergreen,,1.1,NA,NA,NA,NA,19.1,1749,1585,NA,NA,Soda lime,NA,NA,615.44,,5,1,Exclusion,843,356,487,0.42,NA,2002
+4159,CN-DHS-BF,2001,23.17,112.54,NA,None,Tropical,Forest,Deciduous,Lateric red- and yellow-earth,0.85,NA,NA,NA,NA,21,1927,NA,NA,NA,IRGA,8.1,2,39.57,,30,1,Exclusion,1142,1008,134,0.31,NA,2002
+4159,CN-DHS-MF,2001,23.17,112.54,NA,None,Tropical,Forest,Mixed,Lateric red- and yellow-earth,1.03,NA,NA,NA,NA,21,1927,NA,NA,NA,IRGA,8.1,2,39.57,,30,1,Exclusion,1026,913,113,0.26,NA,2002
+4159,CN-DHS-PF,2001,23.17,112.54,NA,None,Tropical,Forest,Evergreen,Lateric red- and yellow-earth,1.4,NA,NA,NA,NA,21,1927,NA,NA,NA,IRGA,8.1,2,39.57,,30,1,Exclusion,1040,921,120,0.23,NA,2002
+4303,CA-CSK,2004,54,-105.1,NA,None,Boreal,Forest,Evergreen,Typic cryaquept,NA,NA,NA,NA,NA,0.4,457,NA,NA,NA,IRGA,13,3.5,2163.66,,0.1,1,Exclusion,611,342,269,0.56,NA,2001
+4303,CA-CSK,2004,54,-105.1,NA,None,Boreal,Forest,Evergreen,Typic cryaquept,NA,NA,NA,NA,NA,0.4,457,NA,NA,NA,IRGA,13,3.5,2163.66,,0.1,1,Exclusion,611,342,269,0.56,NA,2003
+4435,FI-KAN-SITE1,2004,65.92,23.85,NA,None,Boreal,Forest,Deciduous,Organic,0.25,NA,NA,NA,NA,2.3,525,NA,NA,NA,IRGA,16.9,2,778.92,,10,1,Exclusion,682,273,409,0.4,NA,2005
+4605,US-PHF-CK,2004,36.67,-80.17,NA,None,Temperate,Forest,Evergreen,Rhodic Kanhapludults; Ruptic-Ultic Dystrudepts,1.36,NA,NA,NA,NA,18.5,1279,NA,13.7,1289,IRGA,13.5,NA,510.45,,NA,NA,Extraction,NA,NA,NA,NA,NA,2005
+4605,US-PHF-FERT,2004,36.67,-80.17,NA,Fertilized,Temperate,Forest,Evergreen,Rhodic Kanhapludults; Ruptic-Ultic Dystrudepts,1.37,NA,NA,NA,NA,18.5,1279,NA,13.7,1289,IRGA,13.5,NA,510.45,,NA,NA,Extraction,NA,NA,NA,NA,NA,2005
+4629,CN-YAE,2005,31.27,105.47,500,None,Subtropical,Forest,Evergreen,Purple soil (Eutric Regosol),1.42,NA,40,42,18,17.3,826,NA,NA,NA,IRGA,5,3,78.5,,7,1,Exclusion,627,232,395,0.37,NA,2006
+5113,CN-AMN-CK,2004,24.53333333,101.0166667,2476,None,Subtropical,Forest,Evergreen,Loamy alfisols,NA,NA,NA,NA,NA,11.3,1840,NA,NA,NA,IRGA,30,2,490.8,,30,1,Comparison,992,327.36,664.64,0.33,NA,2007
+5125,JP-SHE-CK,2005,42.43333333,142.4833333,NA,None,Temperate,Grassland,Deciduous,Thaptic Melanudands Mollic Andisol,0.78,NA,74,19,4,7.9,1365,NA,NA,1152,IRGA,25,3,471,,15,1,Exclusion,1070,40,1030,0.037383178,7660,2007
+5310,PA-BCN-CK,2008,NA,9.15,-79.85,None,Tropical,Forest,Evergreen,,NA,NA,NA,NA,NA,27,2600,NA,NA,NA,IRGA,12,2,314,,NA,NA,Exclusion,NA,NA,NA,0.39,NA,2007
+5317,CH-LGE-FAGUS1,2007,47.47833333,8.364388889,680,None,Temperate,Forest,Deciduous,Haplic cambisols,NA,NA,NA,NA,NA,8.4,930,NA,NA,NA,IRGA,10,1.5,301.57,,17.5,1,Exclusion,901,405,497,0.45,3900,2006
+5317,CH-LGE-FAGUS1,2007,47.47833333,8.364388889,680,None,Temperate,Forest,Deciduous,Haplic cambisols,NA,NA,NA,NA,NA,8.4,930,NA,NA,NA,IRGA,10,1.5,301.57,,17.5,1,Exclusion,901,405,497,0.45,3900,2008
+5524,KR-GWF-ABIES,2005,38.23333333,127.2666667,NA,None,Temperate,Forest,Deciduous,Inceptisols,NA,NA,NA,NA,NA,11.3,1365,NA,NA,NA,IRGA,5,1.5,88.2,,30,1,Exclusion,781,265.54,515.46,0.34,NA,2004
+5524,KR-GWF-ABIES,2006,38.23333333,127.2666667,NA,None,Temperate,Forest,Deciduous,Inceptisols,NA,NA,NA,NA,NA,11.3,1365,NA,NA,NA,IRGA,5,1.5,88.2,,30,1,Exclusion,608,206.72,401.28,0.34,NA,2007
+5727,GB-WYW,2007,51.76666667,-1.316666667,NA,None,Temperate,Forest,Deciduous,Cambisols and Luvisols,NA,NA,NA,NA,NA,10.1,725.8,NA,NA,NA,IRGA,10,5,94.99,,7,0.75,Exclusion,412,89,290,0.215,NA,2006
+5766,PE-SPE-WQC,2008,-13.19138889,-71.59,3030,None,Tropical,Forest,Evergreen,Lithic histosol,NA,25,NA,NA,NA,NA,NA,NA,12.5,1710,IRGA,NA,NA,83.5,,15,1,Exclusion,1064,455,609,0.43,25690,2007
+5766,PE-SPE-WQC,2008,-13.19138889,-71.59,3030,None,Tropical,Forest,Evergreen,Lithic histosol,NA,25,NA,NA,NA,NA,NA,NA,12.5,1710,IRGA,NA,NA,83.5,,15,1,Exclusion,1064,455,609,0.43,25690,2009
+5766,PE-SPE-SPD,2008,-13.04777778,-71.54277778,1500,None,Tropical,Forest,Evergreen,Umbric gleysol,NA,15,NA,NA,NA,NA,NA,NA,18.3,2630,IRGA,NA,NA,83.5,,15,1,Exclusion,1344,651,693,0.48,13290,2007
+5766,PE-SPE-SPD,2008,-13.04777778,-71.54277778,1500,None,Tropical,Forest,Evergreen,Umbric gleysol,NA,15,NA,NA,NA,NA,NA,NA,18.3,2630,IRGA,NA,NA,83.5,,15,1,Exclusion,1344,651,693,0.48,13290,2009
+5766,PE-SPE-TON,2008,-12.89027778,-71.55472222,1000,None,Tropical,Forest,Evergreen,Fluvic gleysol,NA,20,NA,NA,NA,NA,NA,NA,21.3,3090,IRGA,NA,NA,83.5,,15,1,Exclusion,1291,284,1007,0.22,9050,2007
+5766,PE-SPE-TON,2008,-12.89027778,-71.55472222,1000,None,Tropical,Forest,Evergreen,Fluvic gleysol,NA,20,NA,NA,NA,NA,NA,NA,21.3,3090,IRGA,NA,NA,83.5,,15,1,Exclusion,1291,284,1007,0.22,9050,2009
+5766,PE-SPE-TAM,2008,-12.83055556,-69.26972222,200,None,Tropical,Forest,Evergreen,Haplic ferralsol,NA,14,NA,NA,NA,NA,NA,NA,26.4,2730,IRGA,NA,NA,83.5,,15,1,Exclusion,1639,1219,420,0.74,4110,2007
+5766,PE-SPE-TAM,2008,-12.83055556,-69.26972222,200,None,Tropical,Forest,Evergreen,Haplic ferralsol,NA,14,NA,NA,NA,NA,NA,NA,26.4,2730,IRGA,NA,NA,83.5,,15,1,Exclusion,1639,1219,420,0.74,4110,2009
+5831,DE-SOF-SPRUCE,2005,51.78333333,9.616666667,275,None,Temperate,Forest,Deciduous,Silt loam (Dystric cambisol),NA,NA,NA,NA,NA,6.5,1090,NA,NA,NA,IRGA,25,10,176.63,,30,0.75,Subtraction,271,115,156,0.42,NA,2006
+5831,DE-SOF-MIX,2005,51.78333333,9.616666667,275,None,Temperate,Forest,Deciduous,Silt loam (Dystric cambisol),NA,NA,NA,NA,NA,6.5,1090,NA,NA,NA,IRGA,25,10,176.63,,30,0.75,Subtraction,319,157,162,0.49,NA,2006
+5831,DE-SOF-BEECH,2005,51.78333333,9.616666667,275,None,Temperate,Forest,Deciduous,Silt loam (Dystric cambisol),NA,NA,NA,NA,NA,6.5,1090,NA,NA,NA,IRGA,25,10,176.63,,30,0.75,Subtraction,395,231,164,0.59,NA,2006
+5831,DE-SOF-GAP,2005,51.78333333,9.616666667,275,None,Temperate,Forest,Deciduous,Silt loam (Dystric cambisol),NA,NA,NA,NA,NA,6.5,1090,NA,NA,NA,IRGA,25,10,176.63,,30,0.75,Subtraction,211,51,160,0.24,NA,2006
+5866,CL-CDT,2009,-30.59805556,-71.19194444,NA,None,Mediterranean,Agriculture,Deciduous,Clay,NA,NA,29,17,55,NA,120,NA,NA,NA,IRGA,NA,NA,314,,30,1,Exclusion,540,250,290,0.46,NA,2010
+5889,US-REL-GRASS,2008,41.59,-109.2,NA,Mowing,Temperate,Agriculture,Deciduous,Silt loam (Typic hapludult),NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,IRGA,10,5,490.63,,NA,NA,Isotope,NA,NA,NA,NA,NA,2009
+5889,US-REL-CLOVER,2008,41.59,-109.2,NA,Mowing,Temperate,Agriculture,Deciduous,Silt loam (Typic hapludult),NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,IRGA,10,5,490.63,,NA,NA,Isotope,NA,NA,NA,NA,NA,2009
+5927,CN-HHL-CKCRA,2007,22.56666667,112.8333333,NA,None,Subtropical,Forest,Evergreen,,NA,NA,NA,NA,NA,21.7,1295,NA,NA,NA,Gas chromatography,5,5,254.34,,30,1,,721,245,476,0.34,NA,2008
+5927,CN-HHL-CKURO,2007,22.56666667,112.8333333,NA,None,Subtropical,Forest,Evergreen,,NA,NA,NA,NA,NA,21.7,1295,NA,NA,NA,Gas chromatography,5,5,254.34,,30,1,,608,176,432,0.29,NA,2008
+6010,TH-MKW-R,1997,14.58333333,98.86666667,150,None,Tropical,Forest,Evergreen,Alfisols,NA,NA,NA,NA,NA,25,1650,NA,NA,1927,IRGA,30,3,706.5,,30,1,Exclusion,1908,370,1538,0.194,12600,1999
+6010,TH-MKW-U,1998,14.58333333,98.86666667,250,None,Tropical,Forest,Evergreen,Alfisols,NA,NA,NA,NA,NA,25,1650,NA,NA,1243,IRGA,30,3,706.5,,30,1,Exclusion,NA,NA,NA,NA,11200,1999
+6010,TH-MKW-L,1998,14.58333333,98.86666667,350,None,Tropical,Forest,Evergreen,Alfisols,NA,NA,NA,NA,NA,25,1650,NA,NA,1243,IRGA,30,3,706.5,,30,1,Exclusion,1421,NA,NA,NA,11500,1999
+6029,BE-LON,2006,50.55222222,4.745,165,Fertilized,Temperate,Agriculture,Deciduous,Luvisol,1.5,NA,20,7.5,72.5,9.2,NA,NA,11.5,NA,IRGA,NA,NA,78.5,,NA,NA,Exclusion,NA,NA,532,NA,NA,2007
+6029,BE-LON,2006,50.55222222,4.745,165,Fertilized,Temperate,Agriculture,Deciduous,Luvisol,1.5,NA,20,7.5,72.5,9.2,NA,NA,11.5,NA,IRGA,NA,NA,78.5,,NA,NA,Exclusion,NA,NA,532,NA,NA,2008
+6070,CN-HHL-CK,2008,22.56666667,112.8333333,NA,None,Subtropical,Forest,Evergreen,Acrisol,NA,NA,NA,NA,NA,21.7,1290,NA,NA,NA,IRGA,6,3,314,,30,1,Exclusion,594,202,313,0.34,NA,2009
+6090,CN-BTM-40YR,2008,33.5,112,1450,None,Temperate,Forest,Deciduous,Yellow-brown soil,0.73,NA,NA,NA,NA,15.1,900,NA,NA,NA,IRGA,NA,NA,NA,,21,1,Exclusion,624,192,432,0.308,84700,2009
+6090,CN-BTM-48YR,2008,33.5,112,1450,None,Temperate,Forest,Deciduous,Yellow-brown soil,0.66,NA,NA,NA,NA,15.1,900,NA,NA,NA,IRGA,NA,NA,NA,,21,1,Exclusion,659,207,452,0.314,118900,2009
+6090,CN-BTM-80YR,2008,33.5,112,1450,None,Temperate,Forest,Deciduous,Yellow-brown soil,0.65,NA,NA,NA,NA,15.1,900,NA,NA,NA,IRGA,NA,NA,NA,,21,1,Exclusion,806,321,485,0.398,107100,2009
+6090,CN-BTM-143YR,2008,33.5,112,1450,None,Temperate,Forest,Deciduous,Yellow-brown soil,0.57,NA,NA,NA,NA,15.1,900,NA,NA,NA,IRGA,NA,NA,NA,,21,1,Exclusion,832,153,679,0.184,125600,2009
+6219,JP-APF,2007,40,140.56,NA,None,Temperate,Forest,Deciduous,Andosols,NA,NA,NA,NA,NA,6.1,1207,NA,NA,NA,IRGA,25,5,3025,,30,0.58,Isotope,747,211,536,0.3,NA,2008
+6243,BR-PMC-I,2008,-14.683,-52.333,318,None,Tropical,Savanna,Deciduous,Dystrophic Ferrasols,NA,NA,NA,NA,NA,24.9,1500,NA,NA,NA,IRGA,NA,2,176.7,,30,1,Exclusion,1741,1097,644,0.63,NA,2009
+6243,BR-PMC-II,2008,-14.683,-52.333,318,None,Tropical,Savanna,Deciduous,Dystrophic Ferrasols,NA,NA,NA,NA,NA,24.9,1500,NA,NA,NA,IRGA,NA,2,176.7,,30,1,Exclusion,1722,1085,637,0.63,NA,2009
+6372,CA-AJB-MW,2007,49.158,-78.825,NA,None,Boreal,Forest,Deciduous,Grey luvisol,NA,NA,14,39,46,0.7,890,NA,NA,NA,IRGA,5,NA,78.5,,30,1,Exclusion,1353,56,1313,0.041,NA,2008
+6372,CA-AJB-MW,2007,49.158,-78.825,NA,None,Boreal,Forest,Deciduous,Grey luvisol,NA,NA,14,39,46,0.7,890,NA,NA,NA,IRGA,5,NA,78.5,,30,1,Exclusion,1353,56,1313,0.041,NA,2009
+6540,US-UOM-CK,2009,43.385,-71.215,NA,None,Temperate,Grassland,Deciduous,Mesic Typic Dystrudept,NA,NA,45,46,9,10.3,1063,NA,NA,NA,IRGA,5,2.5,490.63,,30,1,Exclusion,NA,NA,575,NA,NA,2010
+6548,CN-YHS,2010,29.5,103.6,NA,None,Temperate,Forest,Evergreen,,NA,NA,NA,NA,NA,15,1489.8,NA,16,1510.7,IRGA,4.4,1.2,78.5,,30,1,Exclusion,427,208,87,0.49,NA,2011
+6575,DE-SPP-CK,2009,50.13166667,11.88083333,700,None,Temperate,Wetland,Deciduous,Organic,0.11,NA,NA,NA,NA,6.3,1020,NA,NA,NA,IRGA,45,5,1808.64,,17,1,Exclusion,365,NA,NA,NA,49000,2008
+6575,DE-SPP-CK,2010,50.13166667,11.88083333,700,None,Temperate,Wetland,Deciduous,Organic,0.11,NA,NA,NA,NA,6.3,1020,NA,NA,NA,IRGA,45,5,1808.64,,17,1,Exclusion,307,NA,NA,NA,49000,2011
+6896,US-FRS-CK,2008,45.62333333,-90.79666667,NA,None,Temperate,Forest,Deciduous,Silt loams (glossudalfs),NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,IRGA,NA,NA,NA,,21,1,Mass balance,1018,NA,582,NA,NA,2009
+6984,CN-NFR-GRA,2010,47.43,128.63,240,None,Temperate,Grassland,Deciduous,Silty clay loam (Mollisols),1.01,NA,NA,NA,NA,1.5,550,NA,NA,528,Gas chromatography,25,5,1311,,3.5,0.75,Comparison,205.6,27.3,178.3,0.13,6400,2009
+6984,CN-NFR-MZ,2010,47.43,128.63,240,None,Temperate,Agriculture,Deciduous,Silty clay loam (Mollisols),1.07,NA,NA,NA,NA,1.5,550,NA,NA,528,Gas chromatography,25,5,1311,,3.5,0.75,Comparison,215.2,48.2,167,0.22,6660,2009
+6984,CN-NFR-SOY,2010,47.43,128.63,240,None,Temperate,Agriculture,Deciduous,Silty clay loam (Mollisols),1.06,NA,NA,NA,NA,1.5,550,NA,NA,528,Gas chromatography,25,5,1311,,3.5,0.75,Comparison,315.1,86.5,228.6,0.27,6380,2009
+6984,CN-NFR-WET,2010,47.43,128.63,240,None,Temperate,Agriculture,Deciduous,Silty clay loam (Mollisols),1.14,NA,NA,NA,NA,1.5,550,NA,NA,528,Gas chromatography,25,5,1311,,3.5,0.75,Comparison,170.9,41.6,129.3,0.24,6280,2009
+7100,NL-OLD-28YR,2012,52.4,5.92,25,None,Temperate,Wetland,Deciduous,Haplic Podzol with mormoder humus form,NA,27.7,NA,NA,NA,10.1,1018,NA,NA,NA,IRGA,6,1,78.5,,14,1,Exclusion,435,113,322,0.26,8010,2013
+7100,NL-OLD-19YR,2012,52.4,5.92,25,None,Temperate,Wetland,Deciduous,Haplic Podzol with mormoder humus form,NA,27.7,NA,NA,NA,10.1,1018,NA,NA,NA,IRGA,6,1,78.5,,14,1,Exclusion,462,139,323,0.3,7610,2013
+7100,NL-OLD-12YR,2012,52.4,5.92,25,None,Temperate,Wetland,Deciduous,Haplic Podzol with mormoder humus form,NA,27.7,NA,NA,NA,10.1,1018,NA,NA,NA,IRGA,6,1,78.5,,14,1,Exclusion,650,325,325,0.5,6180,2013
+7282,KR-NN-HD,2008,37.78361111,127.1769444,425,None,Temperate,Forest,Evergreen,Silt loam,NA,NA,54,42,4,11.3,1518,NA,NA,NA,IRGA,NA,2,88.2,,30,1,Extraction,907,408,499,0.45,4700,2009
+7282,KR-NN-HD,2008,37.78361111,127.1769444,425,None,Temperate,Forest,Evergreen,Silt loam,NA,NA,54,42,4,11.3,1518,NA,NA,NA,IRGA,NA,2,88.2,,30,1,Extraction,907,408,499,0.45,4700,2010
+7282,KR-NN-HD,2008,37.78361111,127.1769444,425,None,Temperate,Forest,Evergreen,Silt loam,NA,NA,54,42,4,11.3,1518,NA,NA,NA,IRGA,NA,2,88.2,,30,1,Extraction,907,408,499,0.45,4700,2011
+7282,KR-NN-HD,2008,37.78361111,127.1769444,425,None,Temperate,Forest,Evergreen,Silt loam,NA,NA,54,42,4,11.3,1518,NA,NA,NA,IRGA,NA,2,88.2,,30,1,Extraction,907,408,499,0.45,4700,2012
+7282,KR-NN-LD,2008,37.78361111,127.1769444,425,None,Temperate,Forest,Evergreen,Silt loam,NA,NA,50,45,5,11.3,1518,NA,NA,NA,IRGA,NA,2,88.2,,30,1,Extraction,706,275,431,0.39,3500,2009
+7282,KR-NN-LD,2008,37.78361111,127.1769444,425,None,Temperate,Forest,Evergreen,Silt loam,NA,NA,50,45,5,11.3,1518,NA,NA,NA,IRGA,NA,2,88.2,,30,1,Extraction,706,275,431,0.39,3500,2010
+7282,KR-NN-LD,2008,37.78361111,127.1769444,425,None,Temperate,Forest,Evergreen,Silt loam,NA,NA,50,45,5,11.3,1518,NA,NA,NA,IRGA,NA,2,88.2,,30,1,Extraction,706,275,431,0.39,3500,2011
+7282,KR-NN-LD,2008,37.78361111,127.1769444,425,None,Temperate,Forest,Evergreen,Silt loam,NA,NA,50,45,5,11.3,1518,NA,NA,NA,IRGA,NA,2,88.2,,30,1,Extraction,706,275,431,0.39,3500,2012
+7289,JP-FUJ,2007,35.45,138.77,1030,None,Temperate,Forest,Evergreen,,NA,NA,NA,NA,NA,9.7,2025,NA,NA,NA,IRGA,4.5,1,86.5,,30,0.75,Extraction,610,190,420,0.31,NA,2006
+7477,CN-JS-FLN,2006,32.58472222,119.7,NA,"Free-air CO2 enrichment, Plowed, Fertilized, Insecticide and Herbicide applied,",Temperate,Agriculture,Deciduous,"Shajiang-Aquic Cambosol, clay laomy texture",1.16,9.44,51.3,27.7,21,NA,329.7,NA,NA,NA,Gas Chromatography,20,3,210,,10,0.6,Exclusion,NA,NA,NA,NA,NA,2008
+7477,CN-JS-FNN,2006,32.58472222,119.7,NA,"Free-air CO2 enrichment, Plowed, Fertilized, Insecticide and Herbicide applied,",Temperate,Agriculture,Deciduous,"Shajiang-Aquic Cambosol, clay laomy texture",1.16,9.44,51.3,27.7,21,NA,329.7,NA,NA,NA,Gas Chromatography,20,3,210,,10,0.6,Exclusion,NA,NA,NA,NA,NA,2008
+7517,JP-ANP-TR,2010,36.33,138.55,1004,None,Temperate,Forest,Deciduous,,NA,NA,NA,NA,NA,7.9,1198,NA,NA,NA,IRGA,NA,NA,1200,,30,1,Exclusion,479,110,369,0.23,NA,2009
+7527,CN-LJS-CK,2010,29.7,103.2333333,600,None,Subtropical,Forest,Deciduous,Dystric Purpli-Orthic Primosols,NA,11,NA,NA,NA,NA,1490,NA,15.9,1151,IRGA,4.4,2,78.5,,30,1,Exclusion,427.63,208.14,344.38,0.49,NA,2011
+7583,CN-HUN-CK,2006,27,110,NA,None,Subtropical,Forest,Evergreen,Oxisol,NA,NA,32,22,46,16.5,1200,NA,NA,NA,IRGA,NA,NA,NA,,30,1,,439,115,324,0.262,NA,2007
+7678,CN-NWS-WHEAT,2010,36.65,116.2166667,NA,None,Temperate,Agriculture,Deciduous,,NA,9.8,32,58,10,13.3,532,NA,NA,NA,IRGA,12,9,78.5,,3,0.5,Exclusion,NA,NA,NA,NA,NA,2009
+7678,CN-NWS-WHEAT,2010,36.65,116.2166667,NA,None,Temperate,Agriculture,Deciduous,,NA,9.8,32,58,10,13.3,532,NA,NA,NA,IRGA,12,9,78.5,,3,0.5,Exclusion,NA,NA,NA,NA,NA,2011
+7678,CN-NWS-CORM,2010,36.65,116.2166667,NA,None,Temperate,Agriculture,Deciduous,,NA,9.8,32,58,10,13.3,532,NA,NA,NA,IRGA,12,9,78.5,,3,0.5,Exclusion,NA,NA,NA,NA,NA,2007
+7688,CN-SPT-HEDYSARUM,2007,32.53333333,105.0333333,1300,None,Temperate,Desert,Deciduous,Orthic Sierozem and aeolian sandy soil,NA,NA,99,1,0,10,186,2900,NA,NA,IRGA,NA,3,NA,,30,1,Exclusion,33,NA,NA,NA,NA,2006
+7688,CN-SPT-HEDYSARUM,2007,32.53333333,105.0333333,1300,None,Temperate,Desert,Deciduous,Orthic Sierozem and aeolian sandy soil,NA,NA,99,1,0,10,186,2900,NA,NA,IRGA,NA,3,NA,,30,1,Exclusion,33,NA,NA,NA,NA,2008
+7811,CN-JJ-CK,2013,28.55111111,113.3311111,80,None,Subtropical,Agriculture,Evergreen,Stagnic Anthrosols,1.31,NA,42.4,30.4,27.2,17.5,1330,NA,NA,NA,Gas chromatography,NA,20,4096,,NA,NA,,NA,NA,179.9,NA,NA,2014
+7868,CN-SES-CK,2012,42.41666667,117.25,1505,None,Boreal,Forest,Evergreen,Predominently sandy,1.38,NA,NA,NA,NA,-1.4,450,NA,NA,NA,IRGA,11,8,314,,NA,0.5,Exclusion,NA,NA,NA,NA,5323,2009
+7955,KE-GAB-CK,2010,-4.409,39.523,NA,None,Tropical,Forest,Evergreen,,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,Gas chromatography,17,5,640,,30,1,Comparison,971,403,568,0.415,NA,2011
+8007,CN-XFF-LSS,2012,26.8,117.9666667,NA,None,Subtropical,Forest,Deciduous,Sandy clay loam Ferric Acrisol,0.94,17.9,NA,NA,NA,NA,NA,NA,19.3,1669,IRGA,5,1.5,314,,30,1,Exclusion,1022,242,526,0.315,NA,2013
+8007,CN-XFF-LST,2012,26.8,117.9666667,NA,None,Subtropical,Forest,Evergreen,Sandy clay loam Ferric Acrisol,0.96,16.2,NA,NA,NA,NA,NA,NA,19.3,1669,IRGA,5,1.5,314,,30,1,Exclusion,768,167,855,0.163,NA,2013
+8088,CN-ASF,2011,24.53,101.02,2480,None,Subtropical,Forest,,Alfisols,NA,NA,NA,NA,NA,11.3,1778,NA,NA,NA,IRGA,20,2,314,,30,1,Exclusion,2062,928,1134,0.45,NA,2012
+8088,CN-ASF,2011,24.53,101.02,2480,None,Subtropical,Forest,,Alfisols,NA,NA,NA,NA,NA,11.3,1778,NA,NA,NA,IRGA,20,2,314,,30,1,Exclusion,2062,928,1134,0.45,NA,2013
+8227,CN-FJ-CK,2010,26.5,117.72,NA,Untrenched,Subtropical,Forest,Evergreen,Acrisol,NA,NA,NA,NA,NA,19.2,1628,NA,NA,NA,IRGA,NA,2,314,9to12,30,1,Exclusion,1140.22,432.85,715.61,NA,NA,2009
+8227,CN-FJ-60KGN,2010,26.5,117.72,NA,"N addition, untrenched",Subtropical,Forest,Evergreen,Acrisol,NA,NA,NA,NA,NA,19.2,1628,NA,NA,NA,IRGA,NA,2,314,9to12,30,1,Exclusion,1006.97,386.06,645.15,NA,NA,2009
+8227,CN-FJ-120KGN,2010,26.5,117.72,NA,"N addition, untrenched",Subtropical,Forest,Evergreen,Acrisol,NA,NA,NA,NA,NA,19.2,1628,NA,NA,NA,IRGA,NA,2,314,9to12,30,1,Exclusion,863.81,287.72,574.76,NA,NA,2009
+8227,CN-FJ-240KGN,2010,26.5,117.72,NA,"N addition, untrenched",Subtropical,Forest,Evergreen,Acrisol,NA,NA,NA,NA,NA,19.2,1628,NA,NA,NA,IRGA,NA,2,314,9to12,30,1,Exclusion,765.08,238.45,532.79,NA,NA,2009
+8382,NZ-UOC-CK,2010,-43.03,171.75,590,None,Temperate,Grassland,Deciduous,Typic Dystrochrept,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,IRGA,NA,7,78.5,,21,1,Exclusion,363,NA,NA,0.29,NA,2011
+8580,CN-HB-CK,2011,32.63,110.62,234,None,Subtropical,Agriculture,Deciduous,Sandy loam,1.3,8.73,61.1,33.7,5.2,15.3,834,NA,NA,NA,Gas chromatography,NA,NA,2500,8to11,1.5,1,Exclusion,NA,NA,292,NA,NA,2012
+8580,CN-HB-CUN,2011,32.63,110.62,234,Fertilized,Subtropical,Agriculture,Deciduous,Sandy loam,1.3,8.73,61.1,33.7,5.2,15.3,834,NA,NA,NA,Gas chromatography,NA,NA,2500,8to11,1.5,1,Exclusion,NA,NA,294,NA,NA,2012
+8580,CN-HB-GNN,2011,32.63,110.62,234,Fertilized,Subtropical,Agriculture,Deciduous,Sandy loam,1.3,8.73,61.1,33.7,5.2,15.3,834,NA,NA,NA,Gas chromatography,NA,NA,2500,8to11,1.5,1,Exclusion,NA,NA,272,NA,NA,2012
+8580,CN-HB-GUN,2011,32.63,110.62,234,Fertilized,Subtropical,Agriculture,Deciduous,Sandy loam,1.3,8.73,61.1,33.7,5.2,15.3,834,NA,NA,NA,Gas chromatography,NA,NA,2500,8to11,1.5,1,Exclusion,NA,NA,247,NA,NA,2012
+8580,CN-HB-GCM,2011,32.63,110.62,234,Fertilized,Subtropical,Agriculture,Deciduous,Sandy loam,1.3,8.73,61.1,33.7,5.2,15.3,834,NA,NA,NA,Gas chromatography,NA,NA,2500,8to11,1.5,1,Exclusion,NA,NA,316,NA,NA,2012
+8580,CN-HB-GUM,2011,32.63,110.62,234,Fertilized,Subtropical,Agriculture,Deciduous,Sandy loam,1.3,8.73,61.1,33.7,5.2,15.3,834,NA,NA,NA,Gas chromatography,NA,NA,2500,8to11,1.5,1,Exclusion,NA,NA,287,NA,NA,2012
+8603,ES-BSL-L2NR,2012,41.83,2.5,750,None,Mediterranean,Forest,Evergreen,Sandy loam,1.09,10.4,NA,NA,NA,12,872,NA,NA,NA,IRGA,NA,3,3316.63,0to24,90,0.5,Exclusion,NA,NA,NA,NA,NA,2011
+8603,ES-BSL-L3IM,2012,41.83,2.5,750,None,Mediterranean,Forest,Evergreen,Sandy loam,1.09,10,NA,NA,NA,12,872,NA,NA,NA,IRGA,NA,3,3316.63,0to24,90,0.5,Exclusion,NA,NA,NA,NA,NA,2011
+8603,ES-BSL-L4UPHILL,2012,41.83,2.5,750,None,Mediterranean,Forest,Evergreen,Sandy loam,1.09,9.15,NA,NA,NA,12,872,NA,NA,NA,IRGA,NA,3,3316.63,0to24,90,0.5,Exclusion,NA,NA,NA,NA,NA,2011
+8665,CN-ZJ-MSW,2010,30.1,119.98,NA,None,Temperate,Plantation,Evergreen,,NA,NA,NA,NA,NA,16.2,1464,NA,NA,NA,IRGA,NA,NA,3600,0to24,0.1,1,Exclusion,1392.64,NA,1127.73,NA,NA,2011
+8697,BO-KEN-DRY,2010,-16.0158,-62.7301,NA,None,Tropical,Forest,Evergreen,Sandy loam,NA,NA,76,8,16,NA,NA,NA,NA,NA,IRGA,NA,10,113.04,,30,1,Exclusion,1191,240,951,0.2,NA,2011
+8697,BO-KEN-WET,2010,-16.0158,-62.7301,NA,None,Tropical,Forest,Evergreen,Sandy loam,NA,NA,76,8,16,NA,NA,NA,NA,NA,IRGA,NA,10,113.04,,30,1,Exclusion,1287,440,847,0.34,NA,2011
+8700,PE-SPD-02,2009,-13.049,-71.537,1500,None,Tropical,Forest,Evergreen,Umbrisol,NA,NA,NA,NA,NA,18.8,5302,NA,NA,NA,IRGA,NA,10,NA,,30,1,Exclusion,1342,879,463,0.65,NA,2010
+8700,PE-SPD-01,2010,-13.047,-71.542,1750,None,Tropical,Forest,Evergreen,Umbrisol,NA,NA,NA,NA,NA,17.4,5302,NA,NA,NA,IRGA,NA,10,NA,,30,1,Exclusion,1047,610,437,0.58,NA,2009
+8706,CN-XJ-UG8,2010,42.88,83.7,2500,None,Temperate,Grassland,Deciduous,,1,NA,NA,NA,NA,-4.8,265.7,NA,NA,NA,IRGA,6,3,81.67,,7,0.83,Exclusion,NA,NA,NA,NA,NA,2011
+8706,CN-XJ-UG5,2010,42.88,83.7,2500,None,Temperate,Grassland,Deciduous,,1.1,NA,NA,NA,NA,-4.8,265.7,NA,NA,NA,IRGA,6,3,81.67,,7,0.83,Exclusion,NA,NA,NA,NA,NA,2011
+8706,CN-XJ-LGB,2010,42.88,83.7,2500,Grazing,Temperate,Grassland,Deciduous,,1.1,NA,NA,NA,NA,-4.8,265.7,NA,NA,NA,IRGA,6,3,81.67,,7,0.83,Exclusion,NA,NA,NA,NA,NA,2011
+8760,CN-CQ-SWU,2009,30.433,106.433,230,None,Temperate,Agriculture,Deciduous,Hydragric Anthrosol,1.2,8.9,NA,NA,42,NA,1105.4,NA,NA,NA,Gas chromatography,NA,3,314,7to19,30,0.5,,NA,NA,NA,NA,NA,2010
+8793,IT-BG-CK,2010,44.55,11.37,32,Biochar,Mediterranean,Orchard,Deciduous,Haplic Calcisol,NA,NA,18,50,32,13,700,NA,NA,NA,IRGA,NA,8,78.5,11to13,20,1,Exclusion,671.6,NA,463.55,0.31,NA,2009
+8793,IT-BG-BIOCHAR,2010,44.55,11.37,32,Biochar,Mediterranean,Orchard,Deciduous,Haplic Calcisol,NA,NA,18,50,32,13,700,NA,NA,NA,IRGA,NA,8,78.5,11to13,20,1,Exclusion,657,NA,631.45,0.04,NA,2009
+8866,KR-MTB,2014,37.44,127.9,NA,None,Temperate,Forest,Deciduous,,NA,NA,NA,NA,NA,12.8,1571.6,NA,NA,NA,IRGA,NA,NA,NA,,30,1,Exclusion,582,221,361,0.38,NA,2013
+8896,CN-GDP-BF,2011,23.17,112.525,NA,None,Subtropical,Forest,Evergreen,Oxisol,1.1,NA,25,35,40,22.3,1678,NA,NA,NA,IRGA,5,3,314,,15,1,Exclusion,NA,NA,590,NA,NA,2010
+8896,CN-GDP-CF,2011,23.17,112.525,NA,None,Subtropical,Forest,Evergreen,Oxisol,1.2,NA,37,29,34,22.3,1678,NA,NA,NA,IRGA,5,3,314,,15,1,Exclusion,NA,NA,570,NA,NA,2010
+8896,CN-GDP-CP,2011,22.68,112.9,NA,None,Subtropical,Forest,Evergreen,Oxisol,1.4,NA,47,19,22,21.7,1700,NA,NA,NA,IRGA,5,3,314,,15,1,Exclusion,NA,NA,430,NA,NA,2010
+8896,CN-GDP-BP,2011,22.68,112.9,NA,None,Subtropical,Forest,Evergreen,Oxisol,1.4,NA,47,22,16,21.7,1700,NA,NA,NA,IRGA,5,3,314,,15,1,Exclusion,NA,NA,490,NA,NA,2010
+8896,CN-GDP-BF,2011,23.17,112.525,NA,None,Subtropical,Forest,Evergreen,Oxisol,1.1,NA,25,35,40,22.3,1678,NA,NA,NA,IRGA,5,3,314,,15,1,Exclusion,NA,NA,590,NA,NA,2012
+8896,CN-GDP-CF,2011,23.17,112.525,NA,None,Subtropical,Forest,Evergreen,Oxisol,1.2,NA,37,29,34,22.3,1678,NA,NA,NA,IRGA,5,3,314,,15,1,Exclusion,NA,NA,570,NA,NA,2012
+8896,CN-GDP-CP,2011,22.68,112.9,NA,None,Subtropical,Forest,Evergreen,Oxisol,1.4,NA,47,19,22,21.7,1700,NA,NA,NA,IRGA,5,3,314,,15,1,Exclusion,NA,NA,430,NA,NA,2012
+8896,CN-GDP-BP,2011,22.68,112.9,NA,None,Subtropical,Forest,Evergreen,Oxisol,1.4,NA,47,22,16,21.7,1700,NA,NA,NA,IRGA,5,3,314,,15,1,Exclusion,NA,NA,490,NA,NA,2012
+8910,CN-SX-CK,2010,36.62,112.13,1619,None,Temperate,Plantation,Evergreen,,1.21,6.09,NA,NA,NA,8.6,656.7,NA,NA,NA,IRGA,4.5,1.5,314,10to16,15,0.5,Exclusion,NA,NA,NA,NA,NA,2011
+8910,CN-SX-LT,2010,36.62,112.13,1619,None,Temperate,Plantation,Evergreen,,1.11,6.97,NA,NA,NA,8.6,656.7,NA,NA,NA,IRGA,4.5,1.5,314,10to16,15,0.5,Exclusion,NA,NA,NA,NA,NA,2011
+8910,CN-SX-MT,2010,36.62,112.13,1619,None,Temperate,Plantation,Evergreen,,1.14,7.88,NA,NA,NA,8.6,656.7,NA,NA,NA,IRGA,4.5,1.5,314,10to16,15,0.5,Exclusion,NA,NA,NA,NA,NA,2011
+8910,CN-SX-HT,2010,36.62,112.13,1619,None,Temperate,Plantation,Evergreen,,1.09,7.39,NA,NA,NA,8.6,656.7,NA,NA,NA,IRGA,4.5,1.5,314,10to16,15,0.5,Exclusion,NA,NA,NA,NA,NA,2011
+8910,CN-SX-CK,2010,36.62,112.13,1619,None,Temperate,Plantation,Evergreen,,1.21,6.09,NA,NA,NA,8.6,656.7,NA,NA,NA,IRGA,4.5,1.5,314,10to16,15,0.5,Exclusion,NA,NA,NA,NA,NA,2012
+8910,CN-SX-LT,2010,36.62,112.13,1619,None,Temperate,Plantation,Evergreen,,1.11,6.97,NA,NA,NA,8.6,656.7,NA,NA,NA,IRGA,4.5,1.5,314,10to16,15,0.5,Exclusion,NA,NA,NA,NA,NA,2012
+8910,CN-SX-MT,2010,36.62,112.13,1619,None,Temperate,Plantation,Evergreen,,1.14,7.88,NA,NA,NA,8.6,656.7,NA,NA,NA,IRGA,4.5,1.5,314,10to16,15,0.5,Exclusion,NA,NA,NA,NA,NA,2012
+8910,CN-SX-HT,2010,36.62,112.13,1619,None,Temperate,Plantation,Evergreen,,1.09,7.39,NA,NA,NA,8.6,656.7,NA,NA,NA,IRGA,4.5,1.5,314,10to16,15,0.5,Exclusion,NA,NA,NA,NA,NA,2012
+9177,CN-DMS,2011,29.67,113.83,161,None,Subtropical,Forest,Evergreen,,1.28,NA,NA,NA,NA,16.9,1430,NA,NA,NA,IRGA,12,3,314,,0.1,1,Exclusion,897,261,636,0.29,NA,2012
+9297,IT-BOL-CK,2010,46.35,11.27,240,None,Mediterranean,Forest,Deciduous,Calcaric Cambisols,NA,8.41,44,45,11,12.5,838,NA,NA,NA,IGRA,11,3,314,,1,0.92,,NA,NA,NA,NA,NA,2011
+9310,US-SC-YT,2011,31.27,105.48,500,None,Subtropical,Agriculture,Deciduous,Entisol,1.33,14.11,NA,NA,NA,17.3,826,NA,NA,NA,Gas chromatography,50,NA,2500,9to11,NA,1,Exclusion,466.8,NA,NA,NA,NA,2012
+9343,IT-TUS-CK,2011,10.29,13.05,6,None,Mediterranean,Forest,Evergreen,Sand,NA,32.5,93,4,3,15.35,883,NA,NA,NA,Eddy covariance,5,2,78.5,,7,1,,1108.81,NA,NA,NA,NA,2012
+9488,CN-GS-GRAZ,2005,35.95,104.15,1966,Grazed,Temperate,Grassland,Deciduous,Sierozem,NA,NA,NA,NA,NA,6.7,382,NA,NA,NA,IRGA,5,3,94.99,8to11,NA,0.67,Exclusion,NA,NA,NA,NA,NA,2009
+9488,CN-GS-GRAZ,2005,35.95,104.15,1966,Grazed,Temperate,Grassland,Deciduous,Sierozem,NA,NA,NA,NA,NA,6.7,382,NA,NA,NA,IRGA,5,3,94.99,8to11,NA,0.67,Exclusion,NA,NA,NA,NA,NA,2010
+9488,CN-GS-FENCH,2005,35.95,104.15,1966,Fench,Temperate,Grassland,Deciduous,Sierozem,NA,NA,NA,NA,NA,6.7,382,NA,NA,NA,IRGA,5,3,94.99,8to11,NA,0.67,Exclusion,NA,NA,NA,NA,NA,2008
+9488,CN-GS-FENCH,2005,35.95,104.15,1966,Fench,Temperate,Grassland,Deciduous,Sierozem,NA,NA,NA,NA,NA,6.7,382,NA,NA,NA,IRGA,5,3,94.99,8to11,NA,0.67,Exclusion,NA,NA,NA,NA,NA,2009
+9488,CN-GS-FENCH,2005,35.95,104.15,1966,Fench,Temperate,Grassland,Deciduous,Sierozem,NA,NA,NA,NA,NA,6.7,382,NA,NA,NA,IRGA,5,3,94.99,8to11,NA,0.67,Exclusion,NA,NA,NA,NA,NA,2010
+9501,CN-WCS-CK,2010,30.73,103.45,NA,None,Subtropical,Forest,Evergreen,,NA,NA,NA,NA,NA,15.2,1243,NA,NA,NA,IRGA,NA,NA,314,,1,1,Exclusion,1083.47,561.97,521.5,0.52,NA,2009
+9548,CN-JS-NTCK,2009,33.316,120.75,4,None,,Agriculture,Evergreen,Fluvoaquic,1.28,17.5,67,12,21,NA,NA,NA,16.75,1078,Gas chromatography,NA,5,314,9to11,10,1,Exclusion,278,NA,227.05,NA,NA,2010
+9548,CN-JS-RTCK,2009,33.316,120.75,4,None,,Agriculture,Evergreen,Fluvoaquic,1.28,17.5,67,12,21,NA,NA,NA,16.75,1078,Gas chromatography,NA,5,314,9to11,10,1,Exclusion,293,NA,265.051,NA,NA,2010
+9670,CN-TYM-CK,2011,36.3,111.75,1560,None,Temperate,Forest,Evergreen,Brown forest soil,NA,NA,NA,NA,NA,9.9,548,NA,NA,NA,IRGA,NA,NA,NA,,15,0.5,Exclusion,NA,NA,NA,NA,NA,2010
+9674,CN-MEF-22YR,2008,31.78,102.7,3215,None,Temperate,Forest,Evergreen,Aqualfs,NA,NA,NA,NA,NA,7.27,687.3,NA,NA,NA,IRGA,NA,NA,81.7,,14,1,Exclusion,1004,348,656,0.35,NA,2007
+9674,CN-MEF-47YR,2008,31.78,102.7,3207,None,Temperate,Forest,Evergreen,Aqualfs,NA,NA,NA,NA,NA,7.27,687.3,NA,NA,NA,IRGA,NA,NA,81.7,,14,1,Exclusion,792,249,543,0.31,NA,2007
+9674,CN-MEF-68YR,2008,31.78,102.7,3135,None,Temperate,Forest,Evergreen,Aqualfs,NA,NA,NA,NA,NA,7.27,687.3,NA,NA,NA,IRGA,NA,NA,81.7,,14,1,Exclusion,952,345,607,0.36,NA,2007
+9674,CN-MEF-150YR,2008,31.78,102.7,3378,None,Temperate,Forest,Evergreen,Aqualfs,NA,NA,NA,NA,NA,7.27,687.3,NA,NA,NA,IRGA,NA,NA,81.7,,14,1,Exclusion,1070,358,712,0.33,NA,2007
+9755,CN-QERC-MP1,2005,26.73,115.05,101,None,Subtropical,Forest,Evergreen,,1.42,14.09,NA,NA,NA,6.4,1469,NA,NA,NA,IRGA,6,2,88.2,8.5to17,15,1,Exclusion,975.3,537.9,441.3,0.55,5151,2008
+9755,CN-QERC-MP2,2005,26.73,115.05,110,None,Subtropical,Forest,Evergreen,,1.42,14.09,NA,NA,NA,6.4,1469,NA,NA,NA,IRGA,6,2,88.2,8.5to17,15,1,Exclusion,975.3,537.9,441.3,0.55,5151,2008
+9755,CN-QERC-SP1,2005,26.73,115.05,92,None,Subtropical,Forest,Evergreen,,1.4,12.27,NA,NA,NA,6.4,1469,NA,NA,NA,IRGA,6,2,88.2,8.5to17,15,1,Exclusion,789.1,245.8,525.3,0.32,5640,2008
+9755,CN-QERC-SP2,2005,26.73,115.05,114,None,Subtropical,Forest,Evergreen,,1.4,12.27,NA,NA,NA,6.4,1469,NA,NA,NA,IRGA,6,2,88.2,8.5to17,15,1,Exclusion,789.1,245.8,525.3,0.32,5640,2008
+9755,CN-QERC-MP1,2005,26.73,115.05,101,None,Subtropical,Forest,Evergreen,,1.42,14.09,NA,NA,NA,6.4,1469,NA,NA,NA,IRGA,6,2,88.2,8.5to17,15,1,Exclusion,975.3,537.9,441.3,0.55,5151,2009
+9755,CN-QERC-MP2,2005,26.73,115.05,110,None,Subtropical,Forest,Evergreen,,1.42,14.09,NA,NA,NA,6.4,1469,NA,NA,NA,IRGA,6,2,88.2,8.5to17,15,1,Exclusion,975.3,537.9,441.3,0.55,5151,2009
+9755,CN-QERC-SP1,2005,26.73,115.05,92,None,Subtropical,Forest,Evergreen,,1.4,12.27,NA,NA,NA,6.4,1469,NA,NA,NA,IRGA,6,2,88.2,8.5to17,15,1,Exclusion,789.1,245.8,525.3,0.32,5640,2009
+9755,CN-QERC-SP2,2005,26.73,115.05,114,None,Subtropical,Forest,Evergreen,,1.4,12.27,NA,NA,NA,6.4,1469,NA,NA,NA,IRGA,6,2,88.2,8.5to17,15,1,Exclusion,789.1,245.8,525.3,0.32,5640,2009
+9844,EE-KAM,2010,58.05,27.02,NA,None,Temperate,Forest,Deciduous,Sandy loam (Albeluvisol),NA,15.2,NA,NA,NA,NA,NA,NA,NA,NA,IRGA,15,1.5,78.5,,30,0.5,Exclusion,618,321,297,0.52,NA,2011
+9844,EE-ALA,2010,58.62,27.03,NA,None,Temperate,Forest,Deciduous,Sandy loam (Gleyic umbrisol),NA,13.6,NA,NA,NA,NA,NA,NA,NA,NA,IRGA,15,1.5,78.5,,30,0.5,Exclusion,972,551,421,0.57,NA,2011
+9844,EE-ERA,2010,57.13,26.93,NA,None,Temperate,Forest,Deciduous,Sandy loam (Albeluvisol),NA,15.8,NA,NA,NA,NA,NA,NA,NA,NA,IRGA,15,1.5,78.5,,30,0.5,Exclusion,817,456,361,0.56,NA,2011
+10006,CN-CHQ-PINUS,2011,29.775,106.342,864.5,None,Subtropical,Forest,Evergreen,,1.03,NA,NA,NA,NA,NA,NA,NA,NA,NA,IRGA,15,13,314,,10,0.33,Exclusion,1029,280,749,0.27,NA,2012
+10006,CN-CHQ-BAMB,2011,29.775,106.342,855.2,None,Subtropical,Forest,Evergreen,,0.96,NA,NA,NA,NA,NA,NA,NA,NA,NA,IRGA,15,13,314,,10,0.33,Exclusion,1491,174,1317,0.11,NA,2010
+10006,CN-CHQ-PINUS,2011,29.775,106.342,864.5,None,Subtropical,Forest,Evergreen,,1.03,NA,NA,NA,NA,NA,NA,NA,NA,NA,IRGA,15,13,314,,10,0.33,Exclusion,1029,280,749,0.27,NA,2010
+10006,CN-CHQ-BAMB,2011,29.775,106.342,855.2,None,Subtropical,Forest,Evergreen,,0.96,NA,NA,NA,NA,NA,NA,NA,NA,NA,IRGA,15,13,314,,10,0.33,Exclusion,1491,174,1317,0.11,NA,2012
+10075,CN-PFF-3YR,2008,43.75,81.15,NA,Irrigation,Temperate,Forest,Deciduous,Sandy loam,1.25,NA,NA,NA,NA,NA,203.8,NA,NA,NA,IRGA,NA,2.5,NA,,30,0.33,Exclusion,1990,1290,700,NA,NA,2007
+10075,CN-PFF-8YR,2008,43.75,81.15,NA,Irrigation,Temperate,Forest,Deciduous,Sandy loam,1.24,NA,NA,NA,NA,NA,203.8,NA,NA,NA,IRGA,NA,2.5,NA,,30,0.33,Exclusion,1771,995,776,NA,NA,2007
+10075,CN-PFF-15YR,2008,43.75,81.15,NA,Irrigation,Temperate,Forest,Deciduous,Sandy loam,1.21,NA,NA,NA,NA,NA,203.8,NA,NA,NA,IRGA,NA,2.5,NA,,30,0.33,Exclusion,1695,715,980,NA,NA,2007
+10087,CN-LWM-CK,2010,32.2,118.72,NA,None,Subtropical,Forest,Mixed,Typic Paleudults,NA,34.4,NA,NA,NA,15.6,1100,NA,NA,NA,IRGA,NA,3,314,,7,1,Exclusion,932.7,283.9,648.8,0.3,NA,2012
+10087,CN-LWM-CK,2010,32.2,118.72,NA,None,Subtropical,Forest,Mixed,Typic Paleudults,NA,34.4,NA,NA,NA,15.6,1100,NA,NA,NA,IRGA,NA,3,314,,7,1,Exclusion,932.7,283.9,648.8,0.3,NA,2013
+10087,CN-LWM-3AR,2010,32.2,118.72,NA,Acid rain,Subtropical,Forest,Mixed,Typic Paleudults,NA,32.9,NA,NA,NA,15.6,1100,NA,NA,NA,IRGA,NA,3,314,,7,1,Exclusion,875.7,79.1,796.6,0.09,NA,2013
+10104,AU-MEL-CK,2011,-37.42236111,144.0941944,706,None,Mediterranean,Forest,Evergreen,"Acidic-mottled, Dystrophic, Yellow Dermosol",NA,NA,NA,NA,NA,12.1,871,NA,NA,NA,IRGA,8,4.5,176.63,,30,1,Exclusion,1771,944,827,0.533,NA,2010
+10104,AU-MEL-CK,2011,-37.42236111,144.0941944,706,None,Mediterranean,Forest,Evergreen,"Acidic-mottled, Dystrophic, Yellow Dermosol",NA,NA,NA,NA,NA,12.1,871,NA,NA,NA,IRGA,8,4.5,176.63,,30,1,Exclusion,1771,944,827,0.533,NA,2012
+10342,CN-TBT-CK,2011,34.82,92.93,4635,None,Temperate,Grassland,Deciduous,Cryosol,NA,NA,NA,NA,NA,-3.8,290.9,1316.9,NA,NA,IRGA,5,2.5,80,,21,1,Exclusion,305,44,203,0.14,NA,2010
+10342,CN-TBT-CK,2012,34.82,92.93,4635,None,Temperate,Grassland,Deciduous,Cryosol,NA,NA,NA,NA,NA,-3.8,290.9,1316.9,NA,NA,IRGA,5,2.5,80,,21,1,Exclusion,376,57,242,0.15,NA,2013
+10351,CN-LSR-BPF,2012,47.18055556,128.8888889,NA,None,Temperate,Forest,Deciduous,Cryumbreps,NA,NA,NA,NA,NA,-0.3,676,NA,NA,NA,IRGA,6,4,85,,14,0.42,Exclusion,NA,NA,NA,NA,4800,2011
+10351,CN-LSR-SBF,2012,47.18055556,128.8888889,NA,None,Temperate,Forest,Deciduous,Cryumbreps,NA,NA,NA,NA,NA,-0.3,676,NA,NA,NA,IRGA,6,4,85,,14,0.42,Exclusion,NA,NA,NA,NA,5790,2011
+10351,CN-LSR-LP,2012,47.18055556,128.8888889,NA,None,Temperate,Forest,Deciduous,Cryumbreps,NA,NA,NA,NA,NA,-0.3,676,NA,NA,NA,IRGA,6,4,85,,14,0.42,Exclusion,NA,NA,NA,NA,5650,2011
+10351,CN-LSR-PP,2012,47.18055556,128.8888889,NA,None,Temperate,Forest,Evergreen,Cryumbreps,NA,NA,NA,NA,NA,-0.3,676,NA,NA,NA,IRGA,6,4,85,,14,0.42,Exclusion,NA,NA,NA,NA,5580,2011
+10456,CN-SIC-CK1,2013,31.27,105.47,NA,None,Subtropical,Forest,Deciduous,Pup-Orthic Entisols,1.42,12.98,40.2,42.2,17.6,17.3,826,NA,NA,NA,Gas chromatography,NA,10,2500,,10,1,Exclusion,NA,NA,404,NA,NA,2012
+10456,CN-SIC-CK1,2013,31.27,105.47,NA,None,Subtropical,Forest,Deciduous,Pup-Orthic Entisols,1.42,12.98,40.2,42.2,17.6,17.3,826,NA,NA,NA,Gas chromatography,NA,10,2500,,10,1,Exclusion,NA,NA,404,NA,NA,2014
+10456,CN-SIC-CK1,2013,31.27,105.47,NA,None,Subtropical,Forest,Deciduous,Pup-Orthic Entisols,1.42,12.98,40.2,42.2,17.6,17.3,826,NA,NA,NA,Gas chromatography,NA,10,2500,,10,1,Exclusion,NA,NA,404,NA,NA,2015
+10456,CN-SIC-CH1,2013,31.27,105.47,NA,Crop harvest,Subtropical,Agriculture,Deciduous,Pup-Orthic Entisols,1.34,14.31,40.1,50.3,19.6,17.3,826,NA,NA,NA,Gas chromatography,NA,10,2500,,10,1,Exclusion,NA,NA,371,NA,NA,2012
+10456,CN-SIC-CH1,2013,31.27,105.47,NA,Crop harvest,Subtropical,Agriculture,Deciduous,Pup-Orthic Entisols,1.34,14.31,40.1,50.3,19.6,17.3,826,NA,NA,NA,Gas chromatography,NA,10,2500,,10,1,Exclusion,NA,NA,371,NA,NA,2014
+10456,CN-SIC-CH1,2013,31.27,105.47,NA,Crop harvest,Subtropical,Agriculture,Deciduous,Pup-Orthic Entisols,1.34,14.31,40.1,50.3,19.6,17.3,826,NA,NA,NA,Gas chromatography,NA,10,2500,,10,1,Exclusion,NA,NA,371,NA,NA,2015
+10487,CN-HUN-CK,2013,26.67,109.43,450,None,Subtropical,Forest,Evergreen,Utisol,NA,11.3,11.4,44.8,43.8,16.5,NA,NA,NA,NA,IRGA,8,5,85,,30,1,,476,119,357,0.25,NA,2011
+10487,CN-HUN-CK,2013,26.67,109.43,450,None,Subtropical,Forest,Evergreen,Utisol,NA,11.3,11.4,44.8,43.8,16.5,NA,NA,NA,NA,IRGA,8,5,85,,30,1,,476,119,357,0.25,NA,2012
+10487,CN-HUN-CK,2013,26.67,109.43,450,None,Subtropical,Forest,Evergreen,Utisol,NA,11.3,11.4,44.8,43.8,16.5,NA,NA,NA,NA,IRGA,8,5,85,,30,1,,476,119,357,0.25,NA,2014
+10526,CN-HE-CK,2014,31.965,111.925,1400,None,Temperate,Forest,Deciduous,Haplic luvisol,NA,NA,59,12,29,15.1,890,NA,NA,927.2,IRGA,8,NA,301.72,,30,1,Exclusion,497,109,388,0.22,4000,2013
+10526,CN-HE-PR,2014,31.965,111.925,1400,Percipitation remove,Temperate,Forest,Deciduous,Haplic luvisol,NA,NA,59,12,29,15.1,890,NA,NA,927.2,IRGA,8,NA,301.72,,30,1,Exclusion,567,150,417,0.26,4000,2013
+10555,UK-TF-GRA,2014,52.4,0.87,NA,None,Mediterranean,Grassland,Deciduous,,NA,18,0.6,NA,NA,14.5,665,NA,NA,NA,IRGA,6,4,314,,30,1,Exclusion,1317.65,NA,NA,NA,NA,2013
+10559,CN-HI-PF,2013,18.6,108.9,870,None,Tropical,Forest,Evergreen,Typical lateritic,1.15,26.57,NA,NA,NA,19.15,2198,NA,19.66,2198,IRGA,5,2,314,8.5to12.5,30,1,Exclusion,1567,589,978,0.38,NA,2012
+10559,CN-HI-SF,2013,18.6,108.9,880,None,Tropical,Forest,Evergreen,Typical lateritic,1.21,29.91,NA,NA,NA,19.15,2198,NA,20,2198,IRGA,5,2,314,8.5to12.5,30,1,Exclusion,1300,572,728,0.44,NA,2012
+10559,CN-HI-PF,2013,18.6,108.9,870,None,Tropical,Forest,Evergreen,Typical lateritic,1.15,26.57,NA,NA,NA,19.15,2198,NA,19.66,2198,IRGA,5,2,314,8.5to12.5,30,1,Exclusion,1567,589,978,0.38,NA,2014
+10559,CN-HI-SF,2013,18.6,108.9,880,None,Tropical,Forest,Evergreen,Typical lateritic,1.21,29.91,NA,NA,NA,19.15,2198,NA,20,2198,IRGA,5,2,314,8.5to12.5,30,1,Exclusion,1300,572,728,0.44,NA,2014
+10599,ID-KAL-FORCT,2013,-2.823,111.84,NA,None,Tropical,Forest,Deciduous,,0.15,31.5,NA,NA,NA,27,2058,NA,29.4,NA,IRGA,5,5,78.5,7to13,30,1,Exclusion,1310,NA,950,0.27,NA,2014
+10599,ID-KAL-OP12CT,2013,-2.794,111.82,NA,"Drained, fertilized",Tropical,Agriculture,Deciduous,,0.32,39.9,NA,NA,NA,27,2058,NA,35.6,NA,IRGA,5,5,78.5,7to13,30,1,Exclusion,1200,NA,1170,0.03,NA,2014
+10599,ID-KAL-OP07CT,2013,-2.791,111.8,NA,"Drained, fertilized",Tropical,Agriculture,Deciduous,,0.27,57.1,NA,NA,NA,27,2058,NA,29.8,NA,IRGA,5,5,78.5,7to13,30,1,Exclusion,2050,NA,840,0.59,NA,2014
+10639,CN-SH-RWCK,2013,31.65,121.53,NA,Conventional tilling,Temperate,Agriculture,Deciduous,,NA,NA,NA,NA,NA,15.2,1025,NA,NA,NA,IRGA,11,5.5,314.2,9to16,30,1,Other,165.24,NA,NA,0.51,NA,2014
+10639,CN-SH-RWN1,2013,31.65,121.53,NA,"N addtion, conventional tilling",Temperate,Agriculture,Deciduous,,NA,NA,NA,NA,NA,15.2,1025,NA,NA,NA,IRGA,11,5.5,314.2,9to16,30,1,Other,197.15,NA,NA,0.6,NA,2014
+10639,CN-SH-RWN2,2013,31.65,121.53,NA,"N addtion, conventional tilling",Temperate,Agriculture,Deciduous,,NA,NA,NA,NA,NA,15.2,1025,NA,NA,NA,IRGA,11,5.5,314.2,9to16,30,1,Other,223.49,NA,NA,0.54,NA,2014
+10639,CN-SH-RWN3,2013,31.65,121.53,NA,"N addtion, conventional tilling",Temperate,Agriculture,Deciduous,,NA,NA,NA,NA,NA,15.2,1025,NA,NA,NA,IRGA,11,5.5,314.2,9to16,30,1,Other,265.72,NA,NA,0.59,NA,2014
+10639,CN-SH-MWCK,2013,31.65,121.53,NA,Conventional tilling,Temperate,Agriculture,Deciduous,,NA,NA,NA,NA,NA,15.2,1025,NA,NA,NA,IRGA,11,5.5,314.2,9to16,30,1,Other,173,NA,NA,NA,NA,2014
+10639,CN-SH-MWN1,2013,31.65,121.53,NA,"N addtion, conventional tilling",Temperate,Agriculture,Deciduous,,NA,NA,NA,NA,NA,15.2,1025,NA,NA,NA,IRGA,11,5.5,314.2,9to16,30,1,Other,215,NA,NA,NA,NA,2014
+10639,CN-SH-MWN2,2013,31.65,121.53,NA,"N addtion, conventional tilling",Temperate,Agriculture,Deciduous,,NA,NA,NA,NA,NA,15.2,1025,NA,NA,NA,IRGA,11,5.5,314.2,9to16,30,1,Other,261,NA,NA,NA,NA,2014
+10639,CN-SH-MWN3,2013,31.65,121.53,NA,"N addtion, conventional tilling",Temperate,Agriculture,Deciduous,,NA,NA,NA,NA,NA,15.2,1025,NA,NA,NA,IRGA,11,5.5,314.2,9to16,30,1,Other,275,NA,NA,NA,NA,2014
+10645,IE-SWI-SPCK,2015,52.3,-9.16,293,None,Temperate,Wetland,Evergreen,Dystric histosol,0.12,NA,NA,NA,NA,6.6,1600,NA,NA,NA,IRGA,14.8,0,186.27,,NA,0.91,Exclusion,1015.325,NA,442,0.56,NA,2014
+10645,IE-SWI-LPCK,2015,52.3,-9.15,287,None,Temperate,Wetland,Evergreen,Dystric histosol,0.11,NA,NA,NA,NA,6.6,1600,NA,NA,NA,IRGA,14.8,0,186.27,,NA,0.91,Exclusion,656.975,NA,370,0.44,NA,2014
+10649,CN-HLJ-CK,2011,47.43,126.62,NA,None,Temperate,Agriculture,Deciduous,Typic Hapludoll,1,12.5,8,72,20,1.9,556,NA,NA,NA,IRGA,20,10,2100,9to12,5,1,Exclusion,318,NA,182,0.43,NA,2014
+10649,CN-HLJ-NF,2013,47.43,126.62,NA,Fertilized,Temperate,Agriculture,Deciduous,Typic Hapludoll,1,12.5,8,72,20,1.9,556,NA,NA,NA,IRGA,20,10,2100,9to12,5,1,Exclusion,494,NA,122.5,0.75,NA,2014
+10687,CN-HLJ-CK,2011,47.43,126.62,NA,None,Temperate,Agriculture,Deciduous,Typic Hapludoll,1,12.5,8,72,20,1.9,556,NA,NA,544,IRGA,10,5,78.5,9to12,30,1,Exclusion,313,NA,183.3,0.41,NA,2012
+10733,CN-SN-SY,2013,37.75,113.2,1202,None,Temperate,Agriculture,Deciduous,,1.34,11.39,NA,NA,NA,8.2,474.5,NA,NA,NA,IRGA,11,NA,323.49,,NA,0.42,Exclusion,NA,NA,NA,NA,NA,2012
+10733,CN-SN-SY,2013,37.75,113.2,1202,None,Temperate,Agriculture,Deciduous,,1.34,11.39,NA,NA,NA,8.2,474.5,NA,NA,NA,IRGA,11,NA,323.49,,NA,0.42,Exclusion,NA,NA,NA,NA,NA,2014
+10737,UK-WS-WIL,2012,50.9,0.4,NA,None,Mediterranean,Forest,Deciduous,,1.2,NA,30,60,10,NA,NA,NA,NA,NA,IRGA,10,3,196,0to24,0.1,1,Exclusion,NA,NA,543.85,NA,NA,2013
+10737,IT-PS-POP,2012,45.6,8.4,NA,None,Mediterranean,Forest,Deciduous,,1.4,NA,54,34,12,NA,NA,NA,NA,NA,IRGA,10,3,196,0to24,0.1,1,Exclusion,NA,NA,500.05,NA,NA,2013
+10745,CN-GD-SHR,2012,22.683,112.9,NA,None,Subtropical,Shrubland,Deciduous,Acrisol,NA,15,NA,NA,NA,21.7,1676,NA,NA,NA,IRGA,15,3,314,9to12,15,1,Exclusion,727,NA,587.65,0.19,NA,2011
+10745,CN-GD-MC,2012,22.683,112.9,NA,None,Subtropical,Plantation,Evergreen,Acrisol,NA,12,NA,NA,NA,21.7,1676,NA,NA,NA,IRGA,15,3,314,9to12,15,1,Exclusion,666,NA,536.55,0.19,NA,2011
+10745,CN-GD-ML,2012,22.683,112.9,NA,None,Subtropical,Plantation,Evergreen,Acrisol,NA,11,NA,NA,NA,21.7,1676,NA,NA,NA,IRGA,15,3,314,9to12,15,1,Exclusion,1086,NA,850.45,0.22,NA,2011
+10745,CN-GD-MN,2012,22.683,112.9,NA,None,Subtropical,Plantation,Evergreen,Acrisol,NA,12,NA,NA,NA,21.7,1676,NA,NA,NA,IRGA,15,3,314,9to12,15,1,Exclusion,1075,NA,773.8,0.28,NA,2011
+10768,CH-AC1,2012,-40.17,-73.44,850,None,Mediterranean,Forest,Evergreen,Sandy loam,0.75,34.5,NA,NA,NA,7.26,4860,NA,NA,NA,IRGA,NA,4,78.5,9to17,20,1,Exclusion,666,338,314,0.51,NA,2011
+10768,CH-AA1,2012,-41.53,-72.6,760,None,Mediterranean,Forest,Evergreen,Sandy loam,0.16,113.2,NA,NA,NA,7.26,4860,NA,NA,NA,IRGA,NA,4,78.5,9to17,20,1,Exclusion,506,268,314,0.53,NA,2011
+10795,IT-SAR-MA,2011,39.8,8.55,3,Manure,Mediterranean,Agriculture,Deciduous,Psammentic Palexeralfs,1.5,10,NA,NA,NA,16.7,572,NA,NA,NA,IRGA,10,9,78.5,8.5to12,20,1,Exclusion,1646.15,NA,1116.9,0.32,NA,2012
+10795,IT-SAR-SL,2011,39.8,8.55,3,Slurry,Mediterranean,Agriculture,Deciduous,Psammentic Palexeralfs,1.5,10,NA,NA,NA,16.7,572,NA,NA,NA,IRGA,10,9,78.5,8.5to12,20,1,Exclusion,1470.95,NA,872.35,0.41,NA,2012
+10795,IT-SAR-SM,2011,39.8,8.55,3,"Slurry, mineral",Mediterranean,Agriculture,Deciduous,Psammentic Palexeralfs,1.5,10,NA,NA,NA,16.7,572,NA,NA,NA,IRGA,10,9,78.5,8.5to12,20,1,Exclusion,1262.9,NA,733.65,0.42,NA,2012
+10795,IT-SAR-MI,2011,39.8,8.55,3,Mineral,Mediterranean,Agriculture,Deciduous,Psammentic Palexeralfs,1.5,10,NA,NA,NA,16.7,572,NA,NA,NA,IRGA,10,9,78.5,8.5to12,20,1,Exclusion,1062.15,NA,514.65,0.52,NA,2012
+10820,UK-LC-NA,2010,52.23,-0.54,NA,None,Temperate,Plantation,Evergreen,Loam,NA,10.3,49,36,15,9.9,605,NA,NA,NA,Gas chromatography ,20,3,1256,10.5to14.5,30,1,Exclusion,297.75,NA,173,0.42,NA,2011
+10862,CN-NA-YOUNG,2010,29.2,118.2,375,None,Subtropical,Forest,Evergreen,,NA,NA,NA,NA,NA,15.1,2000,NA,NA,NA,IRGA,8,3,314,0to24,60,1,Exclusion,623.7,NA,419.58,0.33,NA,2011
+10862,CN-NA-MED,2010,29.2,118.2,471,None,Subtropical,Forest,Evergreen,,NA,NA,NA,NA,NA,15.1,2000,NA,NA,NA,IRGA,8,3,314,0to24,60,1,Exclusion,502.74,NA,389.34,0.23,NA,2011
+10862,CN-NA-OLD,2010,29.2,118.2,558,None,Subtropical,Forest,Evergreen,,NA,NA,NA,NA,NA,15.1,2000,NA,NA,NA,IRGA,8,3,314,0to24,60,1,Exclusion,548.1,NA,381.78,0.3,NA,2011
+10862,CN-NA-YOUNG,2010,29.2,118.2,375,None,Subtropical,Forest,Evergreen,,NA,NA,NA,NA,NA,15.1,2000,NA,NA,NA,IRGA,8,3,314,0to24,60,1,Exclusion,623.7,NA,419.58,0.33,NA,2012
+10862,CN-NA-MED,2010,29.2,118.2,471,None,Subtropical,Forest,Evergreen,,NA,NA,NA,NA,NA,15.1,2000,NA,NA,NA,IRGA,8,3,314,0to24,60,1,Exclusion,502.74,NA,389.34,0.23,NA,2012
+10862,CN-NA-OLD,2010,29.2,118.2,558,None,Subtropical,Forest,Evergreen,,NA,NA,NA,NA,NA,15.1,2000,NA,NA,NA,IRGA,8,3,314,0to24,60,1,Exclusion,548.1,NA,381.78,0.3,NA,2012
+10893,CN-HT-CT,2014,26.67,109.43,NA,None,Temperate,Forest,Evergreen,Ultisol,1.43,10.1,NA,NA,NA,16.5,1200,NA,NA,NA,IRGA,4.5,1.5,84.91,,30,1,Exclusion,576.7,NA,427.05,0.27,NA,2013
+10893,CN-HT-N,2014,26.67,109.43,NA,None,Temperate,Forest,Evergreen,Ultisol,1.41,11,NA,NA,NA,16.5,1200,NA,NA,NA,IRGA,4.5,1.5,84.91,,30,1,Exclusion,448.95,NA,335.8,0.26,NA,2013
+10893,CN-HT-P,2014,26.67,109.43,NA,None,Temperate,Forest,Evergreen,Ultisol,1.32,10.1,NA,NA,NA,16.5,1200,NA,NA,NA,IRGA,4.5,1.5,84.91,,30,1,Exclusion,459.9,NA,350.4,0.24,NA,2013
+10893,CN-HT-NP,2014,26.67,109.43,NA,None,Temperate,Forest,Evergreen,Ultisol,1.38,10.7,NA,NA,NA,16.5,1200,NA,NA,NA,IRGA,4.5,1.5,84.91,,30,1,Exclusion,467.2,NA,328.5,0.29,NA,2013
+10916,IE-CL-CF,2010,52.6,-8.9,NA,None,Temperate,Forest,Evergreen,Clay loam,1.09,NA,NA,NA,NA,10.7,978,NA,NA,NA,IRGA,15,NA,78,,10,1,Exclusion,817.6,NA,605.9,0.26,NA,2011
+10962,US-IL-CK,2010,40.04,-88.23,215,None,Temperate,Agriculture,Deciduous,Argiudoll,NA,NA,NA,NA,NA,11,NA,NA,NA,585,IRGA,NA,3,314,,20,NA,Exclusion,1051.2,NA,667.95,0.36,NA,2009
+10962,US-IL-WARM,2010,40.04,-88.23,215,CO2 elevation,Temperate,Agriculture,Deciduous,Argiudoll,NA,NA,NA,NA,NA,11,NA,NA,NA,585,IRGA,NA,3,314,,20,NA,Exclusion,1080.4,NA,821.25,0.24,NA,2009
+10962,US-IL-CO2,2010,40.04,-88.23,215,Warm,Temperate,Agriculture,Deciduous,Argiudoll,NA,NA,NA,NA,NA,11,NA,NA,NA,585,IRGA,NA,3,314,,20,NA,Exclusion,1266.55,NA,733.65,0.42,NA,2009
+10962,US-IL-WARMCO2,2010,40.04,-88.23,215,Warm and CO2 elevation,Temperate,Agriculture,Deciduous,Argiudoll,NA,NA,NA,NA,NA,11,NA,NA,NA,585,IRGA,NA,3,314,,20,NA,Exclusion,1270.2,NA,927.1,0.27,NA,2009
+10962,US-IL-CK,2010,40.04,-88.23,215,None,Temperate,Agriculture,Deciduous,Argiudoll,NA,NA,NA,NA,NA,11,NA,NA,NA,585,IRGA,NA,3,314,,20,NA,Exclusion,1051.2,NA,667.95,0.36,NA,2011
+10962,US-IL-WARM,2010,40.04,-88.23,215,CO2 elevation,Temperate,Agriculture,Deciduous,Argiudoll,NA,NA,NA,NA,NA,11,NA,NA,NA,585,IRGA,NA,3,314,,20,NA,Exclusion,1080.4,NA,821.25,0.24,NA,2011
+10962,US-IL-CO2,2010,40.04,-88.23,215,Warm,Temperate,Agriculture,Deciduous,Argiudoll,NA,NA,NA,NA,NA,11,NA,NA,NA,585,IRGA,NA,3,314,,20,NA,Exclusion,1266.55,NA,733.65,0.42,NA,2011
+10962,US-IL-WARMCO2,2010,40.04,-88.23,215,Warm and CO2 elevation,Temperate,Agriculture,Deciduous,Argiudoll,NA,NA,NA,NA,NA,11,NA,NA,NA,585,IRGA,NA,3,314,,20,NA,Exclusion,1270.2,NA,927.1,0.27,NA,2011
+11020,CN-SC-DAY,2011,30.883,102.966,2700,None,,Forest,Deciduous,Brown mountainous soil,1.47,NA,NA,NA,NA,8.4,861.8,NA,NA,NA,IRGA,NA,5,314,9to16,30,1,Exclusion,836.34,NA,605.5,0.28,NA,2012
+11054,JP-KYU,2011,31.85,131.3,130,None,Temperate,Forest,Evergreen,Brown forest soil,NA,14.2,NA,NA,NA,17.6,2604,NA,NA,NA,IRGA,NA,10,NA,0to24,0.1,1,Exclusion,1562.93,NA,1188.28,0.24,9920,2009
+11054,JP-KYU,2011,31.85,131.3,130,None,Temperate,Forest,Evergreen,Brown forest soil,NA,14.2,NA,NA,NA,17.6,2604,NA,NA,NA,IRGA,NA,10,NA,0to24,0.1,1,Exclusion,1562.93,NA,1188.28,0.24,9920,2010
+11054,JP-KYU,2011,31.85,131.3,130,None,Temperate,Forest,Evergreen,Brown forest soil,NA,14.2,NA,NA,NA,17.6,2604,NA,NA,NA,IRGA,NA,10,NA,0to24,0.1,1,Exclusion,1562.93,NA,1188.28,0.24,9920,2012
+11054,JP-KYU,2011,31.85,131.3,130,None,Temperate,Forest,Evergreen,Brown forest soil,NA,14.2,NA,NA,NA,17.6,2604,NA,NA,NA,IRGA,NA,10,NA,0to24,0.1,1,Exclusion,1562.93,NA,1188.28,0.24,9920,2013
+11054,JP-KYU,2011,31.85,131.3,130,None,Temperate,Forest,Evergreen,Brown forest soil,NA,14.2,NA,NA,NA,17.6,2604,NA,NA,NA,IRGA,NA,10,NA,0to24,0.1,1,Exclusion,1562.93,NA,1188.28,0.24,9920,2014
+11098,RS-BUG-ACT,2010,46.69,19.6,114,None,Temperate,Grassland,Evergreen,Chernozem-type sandy,NA,NA,NA,NA,NA,10.4,575,NA,NA,NA,EC,NA,NA,19.6,0to24,0.1,0.5,Exclusion,NA,NA,NA,NA,NA,2013
+11120,ES-IP-NDP,2012,42.62,2.42,1020,None,Mediterranean,Forest,Evergreen,Xerochrepts,NA,NA,49,32,19,12,664,NA,11.68,NA,IRGA,NA,NA,NA,,15,1,Excision,1135.15,NA,751.9,0.34,NA,2013
+11120,ES-IP-DFP,2012,42.62,2.42,1020,None,Mediterranean,Forest,Evergreen,Xerochrepts,NA,NA,49,32,19,12,664,NA,11.7,NA,IRGA,NA,NA,NA,,15,1,Excision,1069.45,NA,675.25,0.37,NA,2013
+11120,ES-IP-DP,2012,42.62,2.42,1020,None,Mediterranean,Forest,Evergreen,Xerochrepts,NA,NA,49,32,19,12,664,NA,12,NA,IRGA,NA,NA,NA,,15,1,Excision,1065.8,NA,722.7,0.32,NA,2013
+11120,ES-IP-HO,2012,42.62,2.42,1020,None,Mediterranean,Forest,Evergreen,Xerochrepts,NA,NA,49,32,19,12,664,NA,11.21,NA,IRGA,NA,NA,NA,,15,1,Excision,792.05,NA,485.45,0.39,NA,2013
+11146,CN-DHS-PF,2010,23.15,112.5,NA,None,Subtropical,Forest,Evergreen,Ultisol,NA,NA,NA,NA,NA,22.3,1680,NA,NA,NA,IRGA,10,3,NA,9to12,30,1,Exclusion,1022,NA,766.5,0.25,NA,2012
+11146,CN-DHS-MF,2010,23.15,112.5,NA,None,Subtropical,Forest,Evergreen,Ultisol,NA,NA,NA,NA,NA,22.3,1680,NA,NA,NA,IRGA,10,3,NA,9to12,30,1,Exclusion,1073.1,NA,788.4,0.27,NA,2012
+11146,CN-DHS-BF,2011,23.15,112.5,NA,None,Subtropical,Forest,Evergreen,Ultisol,NA,NA,NA,NA,NA,22.3,1680,NA,NA,NA,IRGA,10,3,NA,9to12,30,1,Exclusion,1164.35,NA,751.9,0.35,NA,2012
+11247,IT-ST-BZ,2014,46.382,11.288,220,None,Temperate,Agriculture,Deciduous,Sandy loam,NA,9.6,70,20,10,12.4,800,NA,NA,NA,IRGA,NA,2,314,8to14,30,1,Extraction,660.65,NA,500.05,0.24,NA,2015
+11365,CN-HB-SITE1,2011,29.7,113.88,160,None,Temperate,Forest,Evergreen,,1.28,17.52,NA,NA,NA,16.9,1429.5,NA,NA,NA,IRGA,NA,NA,NA,9to12,NA,1,Exclusion,3260,1070,NA,0.33,NA,2012
+11365,CN-HB-SITE2,2011,29.7,113.88,158,None,Temperate,Forest,Evergreen,,1.2,11.55,NA,NA,NA,16.9,1429.5,NA,NA,NA,IRGA,NA,NA,NA,9to12,NA,1,Exclusion,3860,1250,NA,0.32,NA,2012
+11368,CN-IM-Ck,2011,43.63,116.7,1250,None,Temperate,Grassland,Deciduous,,NA,NA,NA,NA,NA,0.3,346,NA,NA,NA,IRGA,8,3,323.49,0to24,0.1,0.5,Exclusion,NA,NA,NA,NA,NA,2013
+11368,CN-IM-F,2011,43.63,116.7,1250,Fungicide application,Temperate,Grassland,Deciduous,,NA,NA,NA,NA,NA,0.3,346,NA,NA,NA,IRGA,8,3,323.49,0to24,0.1,0.5,Exclusion,NA,NA,NA,NA,NA,2013
+11368,CN-IM-W,2011,43.63,116.7,1250,Water addition,Temperate,Grassland,Deciduous,,NA,NA,NA,NA,NA,0.3,346,NA,NA,NA,IRGA,8,3,323.49,0to24,0.1,0.5,Exclusion,NA,NA,NA,NA,NA,2013
+11368,CN-IM-WF,2011,43.63,116.7,1250,"Water addition, Fungicide application",Temperate,Grassland,Deciduous,,NA,NA,NA,NA,NA,0.3,346,NA,NA,NA,IRGA,8,3,323.49,0to24,0.1,0.5,Exclusion,NA,NA,NA,NA,NA,2013
+11426,CN-HU-AH,2011,29.6,114.25,NA,Herbicides,Temperate,Forest,Evergreen,,NA,NA,NA,NA,NA,17.1,1496.2,NA,NA,NA,IRGA,12,3,314,,NA,1,Exclusion,861.82,330,NA,0.62,NA,2012
+11426,CN-HU-HW,2011,29.6,114.25,NA,Hand weeded,Temperate,Forest,Evergreen,,NA,NA,NA,NA,NA,17.1,1496.2,NA,NA,NA,IRGA,12,3,314,,NA,1,Exclusion,924.55,275.45,NA,0.7,NA,2012
+11480,CN-SC-WHEAT,2012,31.27,105.47,500,None,Subtropical,Agriculture,Deciduous,,1.34,14.31,30.1,50.3,19.6,17.3,826,NA,NA,NA,Gas chromatography,NA,10,NA,9to11,7,1,Exclusion,NA,NA,127.352,NA,NA,2015
+11480,CN-SC-FOR,2014,31.27,105.47,500,None,Subtropical,Forest,Evergreen,,1.42,12.98,40.2,42.2,17.6,17.3,826,NA,NA,NA,Gas chromatography,NA,10,NA,9to11,7,1,Exclusion,NA,NA,385.167,NA,NA,2015
+11765,CN-YTS-FER,2002,31.27,105.45,500,Fertilized,Subtropical,Agriculture,Deciduous,Paddy soil,NA,15.66,NA,NA,NA,17.3,826,NA,NA,NA,Gas Chromatography,NA,NA,NA,,5,0.5,,NA,NA,NA,NA,NA,2003
+11765,CN-YTS-CK,2002,31.27,105.45,500,None,Subtropical,Agriculture,Deciduous,Paddy soil,NA,15.66,NA,NA,NA,17.3,826,NA,NA,NA,Gas Chromatography,NA,NA,NA,,5,0.5,,NA,NA,NA,NA,NA,2003
+11766,CN-DHS-MPF,2009,23.15,112.51,200,None,Subtropical,Forest,Evergreen,Red soil,NA,NA,NA,NA,NA,21.4,1927,NA,NA,NA,IRGA,NA,NA,NA,,22,1,,1692.1,558.94,856.92,0.39,NA,2010
+11766,CN-DHS-MF,2009,23.15,112.51,200,None,Subtropical,Forest,Evergreen,Red soil,NA,NA,NA,NA,NA,21.4,1927,NA,NA,NA,IRGA,NA,NA,NA,,22,1,,1346.5,448.21,898.28,0.33,NA,2010
+11766,CN-DHS-MEBF,2009,23.15,112.51,250,None,Subtropical,Forest,Evergreen,Red soil,NA,NA,NA,NA,NA,21.4,1927,NA,NA,NA,IRGA,NA,NA,NA,,22,1,,1415.9,753.34,938.72,0.45,NA,2010
+11771,CN-HBH-NCO,2004,36.87,115.02,40,Fertilized,Temperate,Agriculture,Deciduous,,NA,NA,NA,NA,NA,13.2,514.3,NA,NA,NA,Gas Chromatography,NA,NA,NA,,22,1,,675.25,NA,NA,NA,NA,2005
+11771,CN-HBH-SCO,2004,36.87,115.02,40,Fertilized,Temperate,Agriculture,Deciduous,,NA,NA,NA,NA,NA,13.2,514.3,NA,NA,NA,Gas Chromatography,NA,NA,NA,,22,1,,1208.15,NA,NA,NA,NA,2005
+11780,CN-XSB-RF,2008,21.5,100.83,NA,None,Subtropical,Forest,Evergreen,Red soil,NA,17.98,NA,NA,NA,21.5,1557,NA,NA,NA,IRGA,NA,NA,NA,,15,1,,1006.64,268.69,737.95,0.27,NA,2009
+11780,CN-XSB-RP,2008,21.5,100.83,NA,None,Subtropical,Forest,Evergreen,Red soil,NA,13.71,NA,NA,NA,21.5,1557,NA,NA,NA,IRGA,NA,NA,NA,,15,1,,779.57,317.88,461.69,0.41,NA,2009
+11781,CN-SNJ-EBF,2009,31.35,110.52,780,None,Subtropical,Forest,Evergreen,Mountain yellow earth soil,NA,NA,NA,NA,NA,NA,850,NA,NA,NA,IRGA,NA,NA,NA,,20,1,Exclusion,615.71,189.97,425.74,0.31,NA,2010
+11781,CN-SNJ-MF,2009,31.32,110.48,1670,None,Subtropical,Forest,Mixed of evergreen and deciduous,Mountain yellow brown earth soil,NA,NA,NA,NA,NA,NA,1200,NA,NA,NA,IRGA,NA,NA,NA,,20,1,Exclusion,677.28,254.69,422.33,0.38,NA,2010
+11781,CN-SNJ-DBF,2009,31.3,110.52,1970,None,Subtropical,Forest,Deciduous,Mountain yellow brown earth soil,NA,NA,NA,NA,NA,NA,1050,NA,NA,NA,IRGA,NA,NA,NA,,20,1,Exclusion,657.72,214.95,442.77,0.33,NA,2010
+11781,CN-SNJ-CF,2009,31.47,110.3,2570,None,Subtropical,Forest,Evergreen,Mountain dark yellow earth soil,NA,NA,NA,NA,NA,NA,1100,NA,NA,NA,IRGA,NA,NA,NA,,20,1,Exclusion,512.78,210.79,301.99,0.41,NA,2010
+11903,CN-LJS-CK,2010,29.7,103.23,600,None,Subtropical,Forest,Evergreen,Primosols,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,IRGA,NA,NA,NA,,30,1,Exclusion,428,208.14,219.86,NA,NA,2011
+11941,CN-SHB-MAT,2011,42.41,117.25,1505,None,Temperate,Forest,Deciduous,Sandy soil,1.47,9,54.2,28.3,17.5,-1.4,450,NA,NA,NA,IRGA,NA,NA,NA,,15,0.75,Exclusion,464.27,162.64,317,NA,NA,2010
+11941,CN-SHB-SAP,2011,42.41,117.25,1505,None,Temperate,Forest,Deciduous,Sandy soil,1.47,8.9,74,15.4,10.6,-1.4,450,NA,NA,NA,IRGA,NA,NA,NA,,15,0.75,Exclusion,426.22,149.49,262,NA,NA,2012
