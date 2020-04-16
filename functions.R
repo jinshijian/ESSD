@@ -144,6 +144,48 @@ word_bkgd <- function (sdata) {
                        labels = seq(-90,90,15))
 }
 
+# make global Rh spatial distribution figures
+mgrhd_site <- function(sdata){
+  worldMap <- map_data(map = "world")
+  basemap <- word_bkgd(worldMap)
+  
+  # filter and get those sites with rh measurements
+  sdata %>% 
+    select(Latitude, Longitude, Partition_method, Rh_annual, Ra_annual) %>% 
+    filter(!is.na(Rh_annual) | !is.na(Ra_annual)) %>% 
+    filter(Partition_method != "") ->
+    srdbv5_rh
+  
+  sdata %>% 
+    select(Study_number, Latitude, Longitude, Partition_method, Rh_annual) %>% 
+    filter(Partition_method != "" & is.na(Rh_annual)) ->
+    srdbv5_partition
+  
+  # create legend
+  cc_legend <- tibble(
+    x = rep(-177, 2),
+    y = c(-20, -41),
+    size = c(1, 1)
+  )
+  
+  rhmap <- basemap +
+    geom_point(data = srdbv5_rh, aes(x = Longitude, y = Latitude), 
+               color = "black", shape = 1, size = 2.5, alpha = 0.5) +
+    geom_point(data = srdbv5_partition, aes(x = Longitude, y = Latitude), 
+               color = "red", shape = 3, size = 3, alpha = 0.5) +
+    # legend
+    geom_point(
+      data = cc_legend, aes(x, y, size = size), shape = c(1, 3),
+      color = c("black", "red"), alpha = c(1, 1)
+    ) +
+    annotate("text", x = -165, y = -25, label = paste0("Annual coverage = 1\n(n = ", nrow(srdbv5_rh), ")")
+             , size = 3.5, hjust = 0) +
+    annotate("text", x = -165, y = -45, label = paste0("Annual coverage < 1\n(n = ", nrow(srdbv5_partition),")")
+             , size = 3.5, hjust = 0)
+  
+  print(rhmap)
+}
+
 #*****************************************************************************************************************
 # data processing functions
 #*****************************************************************************************************************
@@ -155,13 +197,31 @@ get_mgrhd <- function(sdata) {
     filter(!is.na(Rh_Norm) | !is.na(Ra_Norm)) ->
     MGRhD
   
-  MGRhD %>% filter(is.na(Rh_Norm)) %>% nrow()
+  # MGRhD %>% filter(is.na(Rh_Norm)) %>% nrow()
   MGRhD$Rh_Norm <- ifelse(is.na(MGRhD$Rh_Norm), MGRhD$Rs_Norm - MGRhD$Ra_Norm, MGRhD$Rh_Norm)
   
-  MGRhD %>% filter(is.na(Ra_Norm)) %>% nrow()
+  # MGRhD %>% filter(is.na(Ra_Norm)) %>% nrow()
   MGRhD$Ra_Norm <- ifelse(is.na(MGRhD$Ra_Norm), MGRhD$Rs_Norm - MGRhD$Rh_Norm, MGRhD$Ra_Norm)
-  
   MGRhD$Site_ID <- as.character(MGRhD$Site_ID)
+  
+  MGRhD %>% 
+    mutate(
+      Meas_Month2 = case_when(
+        Meas_DOY %in% (0:31) ~ 1,
+        Meas_DOY %in% (32:59) ~ 2,
+        Meas_DOY %in% (60:90) ~ 3,
+        Meas_DOY %in% (91:120) ~ 4,
+        Meas_DOY %in% (121:151) ~ 5,
+        Meas_DOY %in% (152:181) ~ 6,
+        Meas_DOY %in% (182:212) ~ 7,
+        Meas_DOY %in% (213:243) ~ 8,
+        Meas_DOY %in% (244:273) ~ 9,
+        Meas_DOY %in% (274:304) ~ 10,
+        Meas_DOY %in% (305:334) ~ 11,
+        Meas_DOY %in% (335:365) ~ 12
+      )
+    ) ->
+    MGRhD
   return(MGRhD)
 }
 

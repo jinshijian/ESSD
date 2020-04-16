@@ -27,172 +27,48 @@ library(leaflet)
 library(sp)
 # Source all needed functions
 source('functions.R')
-
 # set data and outputs file direction
 DATA_DIR <- 'data'
 OUT_DIR <- 'outputs'
-
 # Set chunks defaults; these options will be applied to all subsequent chunks
 knitr::opts_chunk$set(results = 'hide', message = TRUE, include = TRUE, 
                       echo = FALSE, warning = FALSE,
                       fig.height = 4, fig.width = 8, cache = FALSE)
 ```
 
-# Load data
-```{r load data}
-# load all data necessary for this analysis
-# srdbv5 <- read_file('srdb-data-v5.csv')
-srdbv5 <- read.csv('../srdb/srdb-data.csv')
-srdbv5$Site_ID <- as.factor(srdbv5$Site_ID)
-IGBP <- read_file('IGBP.txt') %>% 
-  left_join(read_file("igbp_mapping.csv"), by = "IGBP2001Pr")
-# load global climate data (University of Delaware)
-GlobalMATMAP <- read_file('summarized_climate.csv')
-srdb_citation <- read_xlsx('SRDB_cited.xlsx')
-MGRsD <- read_file('MGRsD.csv')
-srdb_study <- read_file('srdb-studies.csv')
-```
+# Prepare data
+## get MGRhD
+```{r get MGRhD}
+srdbv5 <- readd(srdbv5)
+MGRhD <- readd(MGRhD)
+rhchecked <- readd(rhchecked)
+``` 
+
+## get Meas_Month based on DOY
+
+
 
 # Global Rh project analysis
 # Find out those studies seperated Rh and Ra from Rs but not covered a whole year
 ```{r plot Rh sites}
 # plot word background map
-worldMap <- map_data(map = "world")
-basemap <- word_bkgd(worldMap)
-# find out Ra and Rh is not null but partition_method is null
-srdbv5 %>% select(Study_number, Latitude, Longitude, Partition_method, Rh_annual, Ra_annual) %>% 
-  filter(!is.na(Rh_annual) | !is.na(Ra_annual)) %>% 
-  filter(Partition_method == "") %>% 
-  count(Study_number)
-
-# filter and get those sites with rh measurements
-srdbv5$Partition_method %>% unique()
-srdbv5 %>% 
-  select(Latitude, Longitude, Partition_method, Rh_annual, Ra_annual) %>% 
-  filter(!is.na(Rh_annual) | !is.na(Ra_annual)) %>% 
-  filter(Partition_method != "") ->
-  srdbv5_rh
-
-srdbv5 %>% 
-  select(Study_number, Latitude, Longitude, Partition_method, Rh_annual) %>% 
-  filter(Partition_method != "" & is.na(Rh_annual)) ->
-  srdbv5_partition
-
-# create legend
-cc_legend <- tibble(
-    x = rep(-177, 2),
-    y = c(-20, -41),
-    size = c(1, 1)
-  )
-
-rhmap <- basemap +
-  geom_point(data = srdbv5_rh, aes(x = Longitude, y = Latitude), 
-               color = "black", shape = 1, size = 2.5, alpha = 0.5) +
-  geom_point(data = srdbv5_partition, aes(x = Longitude, y = Latitude), 
-               color = "red", shape = 3, size = 3, alpha = 0.5) +
-  # legend
-  geom_point(
-    data = cc_legend, aes(x, y, size = size), shape = c(1, 3),
-    color = c("black", "red"), alpha = c(1, 1)
-  ) +
-  annotate("text", x = -165, y = -25, label = paste0("Annual coverage = 1\n(n = ", nrow(srdbv5_rh), ")")
-           , size = 3.5, hjust = 0) +
-  annotate("text", x = -165, y = -45, label = paste0("Annual coverage < 1\n(n = ", nrow(srdbv5_partition),")")
-           , size = 3.5, hjust = 0)
-
-print(rhmap)
+mgrhd_site(srdbv5)
 ```
-
-## Find out studies seperate Rs into Rh and Ra, Annual_coverage < 1, and not included in MGRsD
-```{r Find studies with Rh measured but not in MGRsD}
-srdbv5 %>% 
-  select(Study_number, Latitude, Longitude, Partition_method, Rh_annual, Ra_annual) %>% 
-  filter(!is.na(Rh_annual) | !is.na(Ra_annual) | Partition_method != "") ->
-  srdbv5_sub
-
-rhchecked <- read.csv('outputs/rhchecked.csv')
-
-srdbv5_sub %>% 
-  filter(srdbv5_sub$Study_number %!in% rhchecked$Study_number) %>% 
-  select(Study_number) %>% 
-  unique() %>% 
-  arrange(Study_number)
-```
-
-
-```{r get MGRhD}
-MGRhD <- get_mgrhd(MGRsD)
-sub_srdbv5 <- get_subsrdbv5(srdbv5)
-sub_srdbv5_meas_year_na <- read_file ('sub_srdbv5_meas_year_na.csv')
-sub_srdbv5 <- bind_rows(sub_srdbv5, sub_srdbv5_meas_year_na)
-## Joint to SRDB-V5 and get meta data
-left_join(MGRhD, sub_srdbv5, by = c("Study_number", "Site_ID", "Meas_Year")) ->
-  MGRhD
-``` 
-
-
-```{r}
-sub_srdbv5 %>% 
-  select(Study_number, Meas_Year, Site_ID) %>% 
-  count(Study_number, Meas_Year, Site_ID, sort = TRUE) %>% 
-  filter (n >= 2) %>% 
-  arrange(Study_number)
-```
-
-
-```{r resolve mismatch measure year caused NA issue}
-# writ_file(sub_srdbv5_meas_year_na, 'sub_srdbv5_meas_year_na.csv')
-# find out measure year problem
-MGRhD %>% select(Study_number, Site_ID, Meas_Year, Study_midyear) %>% 
-  mutate(dif = Meas_Year - Study_midyear) %>% 
-  # filter(is.na(dif)) %>% 
-  unique() %>% 
-  arrange(Study_number)
-
-MGRhD %>% select(Study_number, Site_ID, Meas_Year, Study_midyear, Latitude, Longitude) %>% 
-  mutate(dif = Meas_Year - Study_midyear) %>% 
-  filter(is.na(Latitude)) %>%
-  unique() %>% 
-  arrange(Study_number)
-
-```
-
-
-```{r}
-srdbv5 %>% select(Study_number, Site_ID, Study_midyear, Latitude, Longitude) %>% 
-  filter(Study_number == 6168)
-
-MGRsD %>% select(Study_number, Site_ID, Meas_Year) %>% 
-  filter(Study_number == 6168) %>% 
-  unique()
-
-MGRhD %>% select(Study_number, Site_ID, Meas_Year, Latitude, Longitude) %>%
-  filter(Study_number == 6168)
-# 
-# sub_srdbv5 %>% select(Study_number, Site_ID, Study_midyear, Meas_Year, Latitude, Longitude) %>% 
-#   filter(Study_number == 313)
-# 
-# sub_srdbv5_meas_year_na %>% select(Study_number, Site_ID, Study_midyear, Meas_Year, Latitude, Longitude) %>% 
-#   filter(Study_number == 313)
-```
-
-
 
 ## Rh vs Tsoil by month and hetmosphere
 ```{r, fig.height=12, fig.width=6}
 MGRhD %>% 
   ggplot(aes(Tsoil, Rh_Norm)) +
   geom_point(alpha = 0.25) +
-  facet_grid(rows = vars(Meas_Month),
+  facet_grid(rows = vars(Meas_Month2),
              scales = "free")
 
 MGRhD %>% 
   ggplot(aes(Tsoil, Ra_Norm)) +
   geom_point(alpha = 0.25) +
-  facet_grid(rows = vars(Meas_Month),
+  facet_grid(rows = vars(Meas_Month2),
              scales = "free")
 ```
-
 
 
 
