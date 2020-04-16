@@ -221,7 +221,7 @@ srdb_comb %>%
 
 # Data quality check 
 ## Check the duplicate Site_ID in srdb
-```{r check 1 - unique Site-ID}
+```{r QCK - unique Site-ID}
 # Idealy, every row in srdbv5 should have a unique ID (which is the combine of study_number, measure_year, and site_ID)
 
 srdbv5 %>% 
@@ -233,7 +233,7 @@ srdbv5 %>%
 
 
 ## Check Site_ID
-```{r check 2 - check lower case character in Site_ID}
+```{r QCK - check lower case character in Site_ID}
 # check there are no lower case character in Site_ID column for bother srdb and MGRsD
 # this code does not work, why?
 MGRsD %>% 
@@ -253,7 +253,7 @@ mgrsd_notin_srdb(srdbv5, MGRsD)
 ```
 
 ## Find out those studies in SRDB but not in MGRsD
-```{r check 4 - studies in SRDB but not in MGRsD, results = 'hide' }
+```{r QCK - studies in SRDB but not in MGRsD, results = 'hide' }
 srdb_notin_mgrsd(srdbv5, MGRsD) %>% 
   arrange(Study_number) %>% 
   unique()
@@ -262,7 +262,7 @@ srdb_notin_mgrsd(srdbv5, MGRsD) %>%
 
 
 ## Check all countries and whether they have currect acronym
-```{r check 5 - contries duplication check}
+```{r QCK - contries duplication check}
 srdbv5 %>% 
   mutate(Country_acronym = substr(Site_ID, 1,2)) %>% 
   select (Country) %>% 
@@ -271,7 +271,7 @@ srdbv5 %>%
 ```
 
 ## Check country code
-```{r check 5 - contry code duplication check}
+```{r QCK - contry code duplication check}
 MGRsD %>% 
   mutate(Country_acronym = substr(Site_ID, 1, 2)) %>% 
   select (Country, Country_acronym) %>% 
@@ -281,7 +281,7 @@ MGRsD %>%
 
 
 ## Find out those Site_ID in MGRsD but not in SRDB 
-```{r check 6 - Site-ID in MGRsD but not in SRDB}
+```{r QCK - Site-ID in MGRsD but not in SRDB}
 site_ID_check(srdbv5) %>% 
   filter(is.na(srdb_ID)) %>% 
   filter(Study_number %!in% mgrsd_notin_srdb(srdbv5, MGRsD)[,1]) %>% 
@@ -289,7 +289,7 @@ site_ID_check(srdbv5) %>%
 ```
 
 ## For those have more than 11 months Rs from MGRsD, comparing that with SRDB
-```{r check 7.1 - Rs_annual agreement between MGRsD and SRDB}
+```{r QCK - Rs_annual agreement between MGRsD and SRDB}
 # prepare data
 srdb_vs_mgrsd <- srdb_vs_mgrsd()
 
@@ -308,7 +308,7 @@ lm(RS_annual_srdb ~ RS_annual_mgrsd, data = srdb_vs_mgrsd) %>% summary()
 
 
 ## Find out sites with big Rs_annual difference between SRDB and MGRsD
-```{r check 7.2 - Rs_annual agreement between MGRsD and SRDB}
+```{r QCK - Rs_annual agreement between MGRsD and SRDB}
 srdb_vs_mgrsd %>% 
   mutate(ratio = RS_annual_mgrsd / RS_annual_srdb) %>% 
   arrange(ratio)
@@ -316,7 +316,7 @@ srdb_vs_mgrsd %>%
 
 
 ## Check sites by country
-```{r check 8 - sites by country}
+```{r QCK - sites by country}
 # Find out those countries with most sites
 srdbv5 %>% count(Country, sort = TRUE)
 
@@ -336,7 +336,7 @@ lot_long_check(srdbv5, "Germany")
 
 
 ## check manipulation etc.
-```{r check 9 - check meta data}
+```{r QCK - check meta data}
 srdbv5 %>% 
   count(Manipulation, sort = TRUE) 
 srdbv5 %>% 
