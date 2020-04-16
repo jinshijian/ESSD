@@ -25,6 +25,7 @@ library(maps)
 library(mapdata)
 library(leaflet)
 library(sp)
+library(drake)  # 6.1.0
 # Source all needed functions
 source('functions.R')
 # set data and outputs file direction
@@ -44,10 +45,6 @@ MGRhD <- readd(MGRhD)
 rhchecked <- readd(rhchecked)
 ``` 
 
-## get Meas_Month based on DOY
-
-
-
 # Global Rh project analysis
 # Find out those studies seperated Rh and Ra from Rs but not covered a whole year
 ```{r plot Rh sites}
@@ -55,19 +52,116 @@ rhchecked <- readd(rhchecked)
 mgrhd_site(srdbv5)
 ```
 
-## Rh vs Tsoil by month and hetmosphere
-```{r, fig.height=12, fig.width=6}
-MGRhD %>% 
-  ggplot(aes(Tsoil, Rh_Norm)) +
-  geom_point(alpha = 0.25) +
-  facet_grid(rows = vars(Meas_Month2),
-             scales = "free")
+## Rh and Ra measument counts by DOY in south and north hetmosphere
+```{r Rh and Ra frequency with month}
+bind_rows(
+  MGRhD %>% select(Latitude, Meas_Month2, Rh_Norm) %>% 
+  mutate(Hemisphere = case_when(
+    Latitude > 0 ~ "North",
+    Latitude <= 0 ~ "South"),
+    Group = "Rh"
+    ) %>% 
+  rename(Flux = Rh_Norm) %>% 
+  na.omit(),
+  
+  MGRhD %>% select(Latitude, Meas_Month2, Ra_Norm) %>% 
+  mutate(Hemisphere = case_when(
+    Latitude > 0 ~ "North",
+    Latitude <= 0 ~ "South"),
+    Group = "Ra"
+    ) %>% 
+  rename(Flux = Ra_Norm) %>% 
+  na.omit()
+) %>% 
+  ggplot(aes(Meas_Month2)) +
+  geom_histogram(bins = 12, binwidth = 0.5,
+                 fill = "black", alpha = 0.75) +
+  scale_x_continuous(breaks = c(1:12),
+                     labels = c(1:12)) +
+  facet_grid(rows = vars(Hemisphere),
+             cols = vars(Group),
+             scales = "free") +
+  labs(x = expression(Measure~month),
+       y = expression(Count))
+```
 
-MGRhD %>% 
-  ggplot(aes(Tsoil, Ra_Norm)) +
+## Rh vs Tsoil by month and hetmosphere
+```{r Rh and Ra vs Tsoil, fig.height=12, fig.width=8}
+bind_rows(
+  MGRhD %>% select(Rh_Norm, Tsoil, Meas_Month2) %>% 
+  mutate(Group = "Rh") %>% 
+  rename(Flux = Rh_Norm) %>% 
+  na.omit(),
+  
+  MGRhD %>% select(Ra_Norm, Tsoil, Meas_Month2) %>% 
+  mutate(Group = "Ra") %>% 
+  rename(Flux = Ra_Norm) %>% 
+  na.omit()
+) %>% 
+  ggplot(aes(Tsoil, Flux)) +
   geom_point(alpha = 0.25) +
-  facet_grid(rows = vars(Meas_Month2),
-             scales = "free")
+  geom_smooth(method = "loess") +
+  # Meas_Month2 is based on Meas_DOY, meas_Month is directly from paper
+  facet_grid(rows = vars(Meas_Month2), 
+             cols = vars(Group),
+             scales = "free") +
+  labs(x = expression(T[soil]~"("~degree~C~")"),
+       y = expression(CO[2]~flux~"("~mg~C~m^{-2}~day^{-1}~")"))
+```
+
+## Test whether measure method affects Rh
+```{r Rh violin by measure method}
+MGRhD %>% select(Rh_Norm, Meas_method) %>% 
+  mutate(Meas_method2 = case_when(
+    Meas_method %in% c("Alkali absorption", "Soda lime", "KOH trap") ~ "Alkali (n=518)",
+    Meas_method %in% c("IRGA", "IGRA") ~ "IRGA (n=9013)",
+    Meas_method %in% c("Gas chromatography", "Gas Chromatography", "Gas chromatography ") ~ "GC (n=1639)",
+    Meas_method %in% c("EC", "Eddy covariance") ~ "EC (n=87)",
+    # Meas_method %in% c("Soil profile", "Gradient") ~ "Gradient",
+    TRUE ~ "Other (n=94)")
+    ) %>% 
+  na.omit() %>% 
+  filter(Rh_Norm <= 15) %>% 
+  # count(Meas_method2) %>%
+  ggplot(aes(x = Meas_method2, y = Rh_Norm, fill = as.factor(Meas_method2))) +
+  geom_violin(draw_quantiles = c(0.25, 0.5, 0.75)) +
+  # geom_jitter(shape = 16, position = position_jitter(0.2), col = "gray") +
+  # geom_boxplot(width = 0.1) +
+  theme(legend.title = element_blank()) +
+  scale_fill_brewer(palette="Spectral") +
+  xlab("Rh by measure method") +
+  ylab(expression(Rh ~ "(mg C" ~ m^{-2} ~ day^{-1} ~ ")"))
+```
+
+## Test whether partition method affects HC
+```{r HC violin by partition method}
+MGRhD %>% 
+  select(Rs_Norm, Rh_Norm, Ra_Norm, Partition_method) %>% 
+  mutate(HC2 = round(Rh_Norm / Rs_Norm, 2),
+         RC2 = round(Ra_Norm / Rs_Norm, 2)) %>% 
+  mutate(Partition_group = case_when(
+    Partition_method %in% c("Extraction") ~ "Extraction (623)",
+    Partition_method %in% c("Isotope") ~ "Isotope (155)",
+    Partition_method %in% c("Girdling") ~ "Girdling (90)",
+    Partition_method %in% c("Excision") ~ "Excision (100)",
+    # Partition_method %in% c("TBCA") ~ "TBCA (11)",
+    Partition_method %in% c("Model", "Regression") ~ "Model (86)",
+    Partition_method %in% c("Exclusion") ~ "Exclusion (8338)",
+    Partition_method %in% c("Comparison") ~ "Comparison (791)",
+    TRUE ~ "Other (1631)")
+    ) %>% 
+  # count(Partition_group)
+  filter(HC2 > 0 & HC2 < 1) %>% 
+  na.omit() %>% 
+  ggplot(aes(x = Partition_group, y = HC2, fill = as.factor(Partition_group))) +
+  geom_violin(draw_quantiles = c(0.25, 0.5, 0.75)) +
+  # geom_jitter(shape = 16, position = position_jitter(0.2), col = "gray") +
+  # geom_boxplot(width = 0.1) +
+  theme(legend.title = element_blank()) +
+  scale_fill_brewer(palette="Set2") +
+  xlab(expression(Partition~method)) +
+  ylab(expression(Rh~":"~R[S])) +
+  theme(axis.text.x = element_text(angle = 30, hjust = 1))
 ```
 
 
