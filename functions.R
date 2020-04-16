@@ -2,7 +2,6 @@
 #*****************************************************************************************************************
 # load file functions 
 #*****************************************************************************************************************
-
 # input csv data
 read_file <- function(x) read.csv(file.path(DATA_DIR, x), comment.char = "#", stringsAsFactors = FALSE)
 # input xlsx data
@@ -13,11 +12,9 @@ read_xlsx <- function(x) read_excel(file.path(DATA_DIR, x), sheet = 1)
 writ_file <- function(input, output) write.csv(input, file.path(OUT_DIR, output), row.names = FALSE)
 '%!in%' <- function(x,y)!('%in%'(x,y))
 
-
 #*****************************************************************************************************************
 # data quality check functions
 #*****************************************************************************************************************
-
 # not in function
 '%!in%' <- function(x,y)!('%in%'(x,y))
 
@@ -25,7 +22,6 @@ writ_file <- function(input, output) write.csv(input, file.path(OUT_DIR, output)
 mgrsd_notin_srdb <- function (sdata = srdb, sdata2 = mgrsd) {
   sdata %>% select(Study_number) %>% unique() %>% mutate(srdb_ID = paste(Study_number, "srdb", sep = "-")) -> srdb_study
   sdata2 %>% select(Study_number) %>% unique() -> mgrsd_study
-  
   results <- mgrsd_study %>% filter(Study_number %!in% srdb_study$Study_number)
   # results <- left_join(mgrsd_study, srdb_study, by = c("Study_number") )
   return (results)
@@ -35,7 +31,6 @@ mgrsd_notin_srdb <- function (sdata = srdb, sdata2 = mgrsd) {
 srdb_notin_mgrsd <- function (sdata = srdb, sdata2 = mgrsd) {
   sdata %>% select(Study_number) %>% unique() -> srdb_study
   sdata2 %>% select(Study_number) %>% unique() -> mgrsd_study
-  
   results <- srdb_study %>% filter(Study_number %!in% mgrsd_study$Study_number) 
   return (results)
 }
@@ -65,20 +60,16 @@ representative <- function (srdb_data, igbp_data, mat_map_data) {
   srdb_data %>% mutate(Latitude = round(Latitude*2)/2+0.25, Longitude = round(Longitude*2)/2+0.25, Source = "SRDB") %>% 
     select(Latitude, Longitude, Source) -> 
     sub_srdb
-  
   # Change Latitude and Longitude to 0.5 resolution for IGBP
   igbp_data %>% mutate(Latitude = round(Latitude*4)/4, Longitude = round(Longitude*4)/4) %>% 
     select(Latitude, Longitude, Ecosystem) ->
     sub_IGBP
-  
   # Get Ecosystem class, MAT and MAP for srdb data
   left_join(sub_srdb, sub_IGBP, by=c("Latitude", "Longitude")) -> sub_srdb
   left_join(sub_srdb, mat_map_data, by=c("Latitude", "Longitude")) -> sub_srdb
-  
   # Get IGBP for global climate data
   left_join(mat_map_data, sub_IGBP, by=c("Latitude", "Longitude")) -> mat_map_data
   mat_map_data %>% mutate(Source = "Global") -> mat_map_data
-  
   # combine data from different resources into one dataset
   bind_rows(sub_srdb, mat_map_data) -> rep_data
   return(rep_data)
@@ -108,7 +99,6 @@ srdb_vs_mgrsd <- function () {
     group_by(Study_number, Site_ID) %>% 
     summarise(RS_annual_mgrsd = mean(RS_mean)) -> 
     mgrsd_sum
-  
   # Select sites and get the mean Rs value from srdb data
   srdbv5 %>% 
     select(Study_number, Site_ID, Rs_annual) %>% 
@@ -116,7 +106,6 @@ srdb_vs_mgrsd <- function () {
     group_by(Study_number, Site_ID) %>% 
     summarise(RS_annual_srdb = mean(Rs_annual)/365) -> 
     srdb_sum
-  
   # use inner join to combine Rs from srdb and mgrsd  
   results <- inner_join(mgrsd_sum, srdb_sum, by=c("Study_number", "Site_ID"))
   return(results)
@@ -148,26 +137,24 @@ word_bkgd <- function (sdata) {
 mgrhd_site <- function(sdata){
   worldMap <- map_data(map = "world")
   basemap <- word_bkgd(worldMap)
-  
   # filter and get those sites with rh measurements
   sdata %>% 
     select(Latitude, Longitude, Partition_method, Rh_annual, Ra_annual) %>% 
     filter(!is.na(Rh_annual) | !is.na(Ra_annual)) %>% 
     filter(Partition_method != "") ->
     srdbv5_rh
-  
+  # Studies with Rh and Ra partition method not null
   sdata %>% 
     select(Study_number, Latitude, Longitude, Partition_method, Rh_annual) %>% 
     filter(Partition_method != "" & is.na(Rh_annual)) ->
     srdbv5_partition
-  
   # create legend
   cc_legend <- tibble(
     x = rep(-177, 2),
     y = c(-20, -41),
     size = c(1, 1)
   )
-  
+  # plot map
   rhmap <- basemap +
     geom_point(data = srdbv5_rh, aes(x = Longitude, y = Latitude), 
                color = "black", shape = 1, size = 2.5, alpha = 0.5) +
@@ -182,7 +169,7 @@ mgrhd_site <- function(sdata){
              , size = 3.5, hjust = 0) +
     annotate("text", x = -165, y = -45, label = paste0("Annual coverage < 1\n(n = ", nrow(srdbv5_partition),")")
              , size = 3.5, hjust = 0)
-  
+  # print map
   print(rhmap)
 }
 
@@ -196,14 +183,12 @@ get_mgrhd <- function(sdata) {
     select(-Rs_Paper, -Rh_Paper, -Ra_Paper, -Rs_units, -Converter) %>% 
     filter(!is.na(Rh_Norm) | !is.na(Ra_Norm)) ->
     MGRhD
-  
   # MGRhD %>% filter(is.na(Rh_Norm)) %>% nrow()
   MGRhD$Rh_Norm <- ifelse(is.na(MGRhD$Rh_Norm), MGRhD$Rs_Norm - MGRhD$Ra_Norm, MGRhD$Rh_Norm)
-  
   # MGRhD %>% filter(is.na(Ra_Norm)) %>% nrow()
   MGRhD$Ra_Norm <- ifelse(is.na(MGRhD$Ra_Norm), MGRhD$Rs_Norm - MGRhD$Rh_Norm, MGRhD$Ra_Norm)
   MGRhD$Site_ID <- as.character(MGRhD$Site_ID)
-  
+  # get Meas_Month based on DOY
   MGRhD %>% 
     mutate(
       Meas_Month2 = case_when(
@@ -234,9 +219,8 @@ get_subsrdbv5 <- function(sdata) {
            Collar_height, Collar_depth, Chamber_area, Time_of_day, Meas_interval, Annual_coverage, Partition_method, Rs_annual, Ra_annual,
            Rh_annual, RC_annual,C_soilmineral ) %>% 
     mutate(Meas_Year = floor(Study_midyear)) -> sub_srdbv5
-  
+  # change site_ID to character
   sub_srdbv5$Site_ID <- as.character(sub_srdbv5$Site_ID)
   return(sub_srdbv5)
 }
-
 
