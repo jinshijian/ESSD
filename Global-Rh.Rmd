@@ -25,6 +25,7 @@ library(maps)
 library(mapdata)
 library(leaflet)
 library(sp)
+library(RColorBrewer)
 library(drake)  # 6.1.0
 # Source all needed functions
 source('functions.R')
@@ -41,6 +42,7 @@ knitr::opts_chunk$set(results = 'hide', message = TRUE, include = TRUE,
 ## get MGRhD
 ```{r get MGRhD}
 srdbv5 <- readd(srdbv5)
+MGRsD <- readd(MGRsD)
 MGRhD <- readd(MGRhD)
 rhchecked <- readd(rhchecked)
 ``` 
@@ -85,7 +87,7 @@ bind_rows(
        y = expression(Count))
 ```
 
-## Rh vs Tsoil by month and hetmosphere
+## Rh vs Tsoil by month
 ```{r Rh and Ra vs Tsoil, fig.height=12, fig.width=8}
 bind_rows(
   MGRhD %>% select(Rh_Norm, Tsoil, Meas_Month2) %>% 
@@ -164,5 +166,30 @@ MGRhD %>%
   theme(axis.text.x = element_text(angle = 30, hjust = 1))
 ```
 
-
+## HC by month in south and north
+```{r HC violin by partition method}
+mycolors = c(brewer.pal(name="BrBG", n = 6), brewer.pal(name="PiYG", n = 6))
+MGRhD %>% 
+  select(Latitude, Rs_Norm, Rh_Norm, Ra_Norm, Meas_Month2) %>% 
+  mutate(HC2 = round(Rh_Norm / Rs_Norm, 2),
+         RC2 = round(Ra_Norm / Rs_Norm, 2)) %>%  
+  mutate(Hetmosphere = case_when(
+    Latitude > 0 ~ "North",
+    Latitude <= 0 ~ "Sourth")
+    ) %>% 
+  # count(Partition_group)
+  filter(HC2 > 0 & HC2 < 1) %>% 
+  na.omit() %>% 
+  ggplot(aes(x = Meas_Month2, y = HC2, fill = as.factor(Meas_Month2))) +
+  geom_violin(draw_quantiles = c(0.25, 0.5, 0.75)) +
+  # geom_jitter(shape = 16, position = position_jitter(0.2), col = "gray") +
+  # geom_boxplot(width = 0.1) +
+  theme(legend.title = element_blank()) +
+  scale_fill_manual(values = mycolors) +
+  scale_x_continuous(breaks = c(1:12), labels = c(1:12)) +
+  facet_grid(rows = vars(Hetmosphere)) + 
+  xlab(expression(Measure~month)) +
+  ylab(expression(Rh~":"~R[S])) +
+  theme(axis.text.x = element_text(angle = 0, hjust = 0.5))
+```
 

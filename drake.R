@@ -15,14 +15,19 @@ DATA_DIR <- 'data'
 # make a drake plan
 plan = drake_plan(
   # load data
-  srdbv5 = read.csv('../srdb/srdb-data.csv'),
+  srdbv1 = read_file('srdb-data-v1.csv'), 
+  srdbv2 = read_file('srdb-data-v2.csv'), 
+  srdbv3 = read_file('srdb-data-v3.csv'), 
+  srdbv4 = read_file('srdb-data-v4.csv'), 
+  srdbv5 = read_file('srdb-data-v5.csv'),
+  # srdbv5 = read.csv(file_in('../srdb/srdb-data.csv')),
   # srdbv5$Site_ID = as.factor(srdbv5$Site_ID),
   IGBP = read_file('IGBP.txt') %>% 
     left_join(read_file("igbp_mapping.csv"), by = "IGBP2001Pr"),
   # load global climate data (University of Delaware)
   GlobalMATMAP = read_file('summarized_climate.csv'),
   srdb_citation = read_xlsx('SRDB_cited.xlsx'),
-  MGRsD = read_file('MGRsD.csv'),
+  MGRsD = read.csv(file_in(!!file.path(DATA_DIR,'MGRsD.csv'))),
   srdb_study = read_file('srdb-studies.csv'),
   sub_srdbv5_meas_year_na = read_file ('sub_srdbv5_meas_year_na.csv'),
   rhchecked = read.csv('outputs/rhchecked.csv'),

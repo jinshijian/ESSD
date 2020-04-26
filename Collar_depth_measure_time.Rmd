@@ -1,0 +1,255 @@
+---
+title: "Collar_depth_measure_time"
+output: html_document
+---
+
+# loading necessary packages
+```{r preliminaries, message=FALSE, echo=FALSE}
+library(readxl)
+library(styler)
+library(ggplot2)
+theme_set(theme_bw())
+library(cowplot)
+library(tidyr)
+library(dplyr)
+library(cowplot)
+library(data.table)
+library(lubridate)
+library(kableExtra)
+library(knitr)
+library(ggpubr)
+library(ggmap)
+library(maps)
+library(mapdata)
+library(leaflet)
+library(sp)
+library(RColorBrewer)
+library(drake)  # 6.1.0
+# Source all needed functions
+source('functions.R')
+# set data and outputs file direction
+DATA_DIR <- 'data'
+OUT_DIR <- 'outputs'
+# Set chunks defaults; these options will be applied to all subsequent chunks
+knitr::opts_chunk$set(results = 'hide', message = TRUE, include = TRUE, 
+                      echo = FALSE, warning = FALSE,
+                      fig.height = 4, fig.width = 8, cache = FALSE)
+```
+
+# Prepare data
+## get MGRhD
+```{r get MGRhD}
+srdbv5 <- readd(srdbv5)
+``` 
+
+# Data analysis
+## test whether collar depth affect Rs_annual
+```{r test collar insert depth}
+srdbv5 %>% 
+  select(Rs_annual, Collar_height, Collar_depth, Chamber_area, Time_of_day, Meas_interval, Annual_coverage) %>% 
+  filter(Rs_annual < 5000 & Collar_height < 50) %>% 
+  ggplot(aes(Collar_height, Rs_annual)) +
+  geom_point(shape = 1, alpha = 0.25) +
+  geom_smooth(method = "lm")
+summary(lm(srdbv5$Rs_annual ~ srdbv5$Collar_height))
+```
+
+
+```{r test collar insert depth}
+srdbv5 %>% 
+  select(Rs_annual, Collar_height, Collar_depth, Chamber_area, Time_of_day, Meas_interval, Annual_coverage) %>% 
+  filter(Rs_annual < 5000 & Collar_depth < 50) %>% 
+  ggplot(aes(Collar_depth, Rs_annual)) +
+  geom_point(shape = 1, alpha = 0.25) +
+  geom_smooth(method = "lm")
+summary(lm(srdbv5$Rs_annual ~ srdbv5$Collar_depth))
+```
+
+```{r test chamber area}
+srdbv5 %>% 
+  select(Rs_annual, Collar_height, Collar_depth, Chamber_area, Time_of_day, Meas_interval, Annual_coverage) %>% 
+  filter(Rs_annual < 5000 & Chamber_area < 4000) %>% 
+  ggplot(aes(Chamber_area, Rs_annual)) +
+  geom_point(shape = 1, alpha = 0.25) +
+  geom_smooth(method = "lm")
+
+srdbv5 %>% 
+  filter(Rs_annual < 5000 & Chamber_area < 4000) ->
+  sub_srdbv5
+summary(lm(sub_srdbv5$Rs_annual ~ sub_srdbv5$Chamber_area))
+```
+
+
+```{r test time of day}
+srdbv5 %>% 
+  select(Rs_annual, Collar_height, Collar_depth, Chamber_area, Time_of_day, Meas_interval, Annual_coverage) %>% 
+  filter(Time_of_day!="") %>% 
+  count(Time_of_day) %>% 
+  arrange(n)
+
+srdbv5 %>% 
+  select(Rs_annual, Collar_height, Collar_depth, Chamber_area, Time_of_day, Meas_interval, Annual_coverage) %>% 
+  filter(Time_of_day!="" & !is.na(Rs_annual)) %>% 
+  mutate(Time_day_group = case_when(
+    Time_of_day == "0to24" ~ "Full day",
+    TRUE ~ "Not full day")
+    ) %>% 
+  ggplot(aes(Time_day_group, Rs_annual, fill = as.factor(Time_day_group))) +
+  geom_violin(draw_quantiles = c(0.25, 0.5, 0.75)) +
+  # geom_jitter(shape = 16, position = position_jitter(0.2), col = "gray") +
+  # geom_boxplot(width = 0.1) +
+  theme(legend.title = element_blank()) +
+  scale_fill_brewer(palette="Set2") +
+  xlab(expression(Measure~time~group)) +
+  ylab(expression(Annual~R[S])) +
+  theme(axis.text.x = element_text(angle = 0, hjust = 0.5))
+```
+
+```{r test chamber area}
+srdbv5 %>% 
+  select(Rs_annual, Collar_height, Collar_depth, Chamber_area, Time_of_day, Meas_interval, Annual_coverage) %>% 
+  filter(Rs_annual < 5000 & Meas_interval < 100) %>% 
+  ggplot(aes(Meas_interval, Rs_annual)) +
+  geom_point(shape = 1, alpha = 0.25) +
+  geom_smooth(method = "lm")
+summary(lm(srdbv5$Rs_annual ~ srdbv5$Meas_interval))
+```
+
+## Test whether add Rs_annual data significantly change the density distribution
+```{r, fig.height=6, fig.width=8}
+
+plot_grid(
+  # plot annual and growing season Rs
+  bind_rows(
+  srdbv4 %>% 
+    select(Rs_annual, Rs_growingseason) %>%
+    rename("(a) Annual" = Rs_annual,
+           "(b) Growing season" = Rs_growingseason) %>% 
+    tidyr::gather(key = "Season", value = "Rs") %>% 
+    filter(Rs < 5000 & Rs > 0 & !is.na(Rs)) %>% 
+    mutate(Version = "SRDB-V4"),
+  srdbv5 %>% 
+    select(Rs_annual, Rs_growingseason) %>%
+    rename("(a) Annual" = Rs_annual,
+           "(b) Growing season" = Rs_growingseason) %>%
+    tidyr::gather(key = "Season", value = "Rs") %>% 
+    filter(Rs < 5000 & Rs > 0  & !is.na(Rs)) %>% 
+    mutate(Version = "SRDB-V5")) %>% 
+  ggplot(aes(x=Version, y=Rs, group = Version, col = Version)) +
+  geom_jitter(shape = 16, position = position_jitter(0.2), col = "gray") +
+  geom_violin(draw_quantiles = c(0.25, 0.5, 0.75), alpha = 0.25) +
+  facet_grid(rows = vars(Season),
+             scales = "free") +
+  # geom_density(alpha = 0.35) +
+  theme(legend.title = element_blank(), legend.position = "none") +
+  labs(y = expression(R[S]~"("~g~C~m^{2}~day^{-1}~"),     "~"("~g~C~m^{2}~yr^{-1}~")"),
+       x = element_blank()),
+  
+  # plot spring and summer season Rs
+  bind_rows(
+  srdbv4 %>% 
+    select(Rs_spring, Rs_summer) %>%
+    rename("(c) Spring" = Rs_spring,
+           "(d) Summer" = Rs_summer) %>% 
+    tidyr::gather(key = "Season", value = "Rs") %>% 
+    filter(Rs < 5000 & Rs > 0 & !is.na(Rs)) %>% 
+    mutate(Version = "SRDB-V4"),
+  srdbv5 %>% 
+    select(Rs_spring, Rs_summer) %>%
+    rename("(c) Spring" = Rs_spring,
+           "(d) Summer" = Rs_summer) %>%
+    tidyr::gather(key = "Season", value = "Rs") %>% 
+    filter(Rs < 5000 & Rs > 0  & !is.na(Rs)) %>% 
+    mutate(Version = "SRDB-V5")) %>% 
+  ggplot(aes(x=Version, y=Rs, group = Version, col = Version)) +
+  geom_jitter(shape = 16, position = position_jitter(0.2), col = "gray") +
+  geom_violin(draw_quantiles = c(0.25, 0.5, 0.75), alpha = 0.25) +
+  facet_grid(rows = vars(Season),
+             scales = "free") +
+  # geom_density(alpha = 0.35) +
+  theme(legend.title = element_blank(), legend.position = "none") +
+  labs(y = expression(R[S]~"("~g~C~m^{2}~day^{-1}~")"),
+       x = element_blank()),
+  
+  # plot autumn and winter season Rs
+  bind_rows(
+  srdbv4 %>% 
+    select(Rs_autumn, Rs_winter) %>%
+    rename("(e) Autumn" = Rs_autumn,
+           "(f) Winter" = Rs_winter) %>% 
+    tidyr::gather(key = "Season", value = "Rs") %>% 
+    filter(Rs < 5000 & Rs > 0 & !is.na(Rs)) %>% 
+    mutate(Version = "SRDB-V4"),
+  srdbv5 %>% 
+    select(Rs_autumn, Rs_winter) %>%
+    rename("(e) Autumn" = Rs_autumn,
+           "(f) Winter" = Rs_winter) %>% 
+    tidyr::gather(key = "Season", value = "Rs") %>% 
+    filter(Rs < 5000 & Rs > 0  & !is.na(Rs)) %>% 
+    mutate(Version = "SRDB-V5")) %>% 
+  ggplot(aes(x=Version, y=Rs, group = Version, col = Version)) +
+  geom_jitter(shape = 16, position = position_jitter(0.2), col = "gray") +
+  geom_violin(draw_quantiles = c(0.25, 0.5, 0.75), alpha = 0.25) +
+  facet_grid(rows = vars(Season),
+             scales = "free") +
+  # geom_density(alpha = 0.35) +
+  theme(legend.title = element_blank(), legend.position = "none") +
+  labs(y = expression(R[S]~"("~g~C~m^{2}~day^{-1}~")"),
+       x = element_blank()),
+  
+  # plot dry and wet season Rs
+  bind_rows(
+  srdbv4 %>% 
+    select(Rs_dry, Rs_wet) %>%
+    rename("(g) Dry season" = Rs_dry,
+           "(h) Wet season" = Rs_wet) %>% 
+    tidyr::gather(key = "Season", value = "Rs") %>% 
+    filter(Rs < 5000 & Rs > 0 & !is.na(Rs)) %>% 
+    mutate(Version = "SRDB-V4"),
+  srdbv5 %>% 
+    select(Rs_dry, Rs_wet) %>%
+    rename("(g) Dry season" = Rs_dry,
+           "(h) Wet season" = Rs_wet) %>% 
+    tidyr::gather(key = "Season", value = "Rs") %>% 
+    filter(Rs < 5000 & Rs > 0  & !is.na(Rs)) %>% 
+    mutate(Version = "SRDB-V5")) %>% 
+  ggplot(aes(x=Version, y=Rs, group = Version, col = Version)) +
+  geom_jitter(shape = 16, position = position_jitter(0.2), col = "gray") +
+  geom_violin(draw_quantiles = c(0.25, 0.5, 0.75), alpha = 0.25) +
+  facet_grid(rows = vars(Season),
+             scales = "free") +
+  # geom_density(alpha = 0.35) +
+  theme(legend.title = element_blank(), legend.position = "none") +
+  labs(y = expression(R[S]~"("~g~C~m^{2}~day^{-1}~")"),
+       x = element_blank()),
+  
+  ncol = 2
+)
+
+```
+
+```{r, fig.height=8, fig.width=6}
+bind_rows(
+  srdbv4 %>% 
+    select(Rs_annual, Rs_spring, Rs_summer, Rs_autumn, Rs_winter, Rs_growingseason) %>%
+    tidyr::gather(key = "Season", value = "Rs") %>% 
+    filter(Rs < 5000 & Rs > 0 & !is.na(Rs)) %>% 
+    mutate(Version = "SRDB-V4"),
+  srdbv5 %>% 
+    select(Rs_annual, Rs_spring, Rs_summer, Rs_autumn, Rs_winter, Rs_growingseason) %>%
+    tidyr::gather(key = "Season", value = "Rs") %>% 
+    filter(Rs < 5000 & Rs > 0  & !is.na(Rs)) %>% 
+    mutate(Version = "SRDB-V5")) %>% 
+  ggplot(aes(x=Version, y=Rs, group = Version, col = Version)) +
+  geom_jitter(shape = 16, position = position_jitter(0.2), col = "gray") +
+  geom_violin(draw_quantiles = c(0.25, 0.5, 0.75), alpha = 0.25) +
+  facet_grid(rows = vars(Season),
+             scales = "free") +
+  # geom_density(alpha = 0.35) +
+  theme(legend.title = element_blank(), legend.position = "none") +
+  labs(y = expression(Annual~R[S]~"("~g~C~m^{2}~yr^{-1}~")"),
+       x = element_blank())
+
+```
+
+
