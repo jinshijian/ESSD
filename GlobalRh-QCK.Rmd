@@ -4,6 +4,114 @@ output: html_document
 ---
 
 # MGRhD data quality check
+## Check the duplicate Site_ID in srdb
+```{r QCK - unique Site-ID}
+# Idealy, every row in srdbv5 should have a unique ID (which is the combine of study_number, measure_year, and site_ID)
+srdbv5 %>% 
+  select(Study_number, Study_midyear, Site_ID) %>% 
+  count(Study_number, Study_midyear, Site_ID, sort = TRUE) %>% 
+  filter (n >= 2) %>% 
+  arrange(Study_number)
+```
+
+## Check Site_ID
+```{r QCK - check lower case character in Site_ID}
+# check there are no lower case character in Site_ID column for bother srdb and MGRsD
+# this code does not work, why?
+MGRsD %>% 
+  select (Study_number, Site_ID) %>% 
+  filter (MGRsD$Site_ID %in% letters )
+
+srdbv5 %>% 
+  select (Study_number, Site_ID) %>%
+  filter (Site_ID %in% letters )
+```
+
+## Find out those studies in MGRsD but not in SRDB
+```{r QCK - studies in MGRsD but not in SRDB}
+# find out studies not in srdb, need to add the information
+mgrsd_notin_srdb(srdbv5, MGRsD) 
+```
+
+## Find out those studies in SRDB but not in MGRsD
+```{r QCK - studies in SRDB but not in MGRsD, results = 'hide' }
+srdb_notin_mgrsd(srdbv5, MGRsD) %>% 
+  arrange(Study_number) %>% 
+  unique()
+```
+
+## Check all countries and whether they have currect acronym
+```{r QCK - contries duplication check}
+srdbv5 %>% 
+  mutate(Country_acronym = substr(Site_ID, 1,2)) %>% 
+  select (Country) %>% 
+  unique() %>% 
+  count(Country, sort = TRUE)
+```
+
+## Check country code
+```{r QCK - contry code duplication check}
+MGRsD %>% 
+  mutate(Country_acronym = substr(Site_ID, 1, 2)) %>% 
+  select (Country, Country_acronym) %>% 
+  unique() %>% 
+  count(Country, Country_acronym, sort = TRUE)
+```
+
+## Find out those Site_ID in MGRsD but not in SRDB 
+```{r QCK - Site-ID in MGRsD but not in SRDB}
+site_ID_check(srdbv5) %>% 
+  filter(is.na(srdb_ID)) %>% 
+  filter(Study_number %!in% mgrsd_notin_srdb(srdbv5, MGRsD)[,1]) %>% 
+  arrange (Study_number)
+```
+
+## For those have more than 11 months Rs from MGRsD, comparing that with SRDB
+```{r QCK - Rs_annual agreement between MGRsD and SRDB}
+# prepare data
+srdb_vs_mgrsd <- srdb_vs_mgrsd()
+
+# Regression between Rs_annual from SRDB and Rs_annual from MGRsD
+srdb_vs_mgrsd %>% 
+  ggplot(aes(RS_annual_mgrsd, RS_annual_srdb)) + 
+  geom_point() + 
+  geom_smooth(method = "lm") +
+  geom_abline(slope = 1, intercept = 0, col = "red", linetype = "dashed", size = 1.5) +
+  labs(x=expression(Annual~R[S]~"(MGRsD)"), y=expression(Annual~R[S]~"(SRDB)"))
+
+ggsave('outputs/Figure5.SRDB-MGRsD.jpg', width = 6, height = 4)
+
+lm(RS_annual_srdb ~ RS_annual_mgrsd, data = srdb_vs_mgrsd) %>% summary()
+```
+
+
+## Find out sites with big Rs_annual difference between SRDB and MGRsD
+```{r QCK - Rs_annual agreement between MGRsD and SRDB}
+srdb_vs_mgrsd %>% 
+  mutate(ratio = RS_annual_mgrsd / RS_annual_srdb) %>% 
+  arrange(ratio)
+```
+
+
+## Check sites by country
+```{r QCK - sites by country}
+# Find out those countries with most sites
+srdbv5 %>% count(Country, sort = TRUE)
+
+# plot by country
+lot_long_check(srdbv5, "USA")
+# srdbv5 %>% filter(Longitude > 0) %>% select(Study_number) %>% unique()
+lot_long_check(srdbv5, "China")
+srdbv5 %>% filter(Latitude < 22 & Country == "China") %>% 
+  select(Study_number, Country, Region, Latitude, Longitude) %>% 
+  arrange(Latitude)
+
+lot_long_check(srdbv5, "Canada")
+lot_long_check(srdbv5, "Finland")
+lot_long_check(srdbv5, "Japan")
+lot_long_check(srdbv5, "Germany")
+```
+
 ## Find out studies seperate Rs into Rh and Ra, Annual_coverage < 1, and not included in MGRsD
 ```{r Find studies with Rh measured but not in MGRsD}
 srdbv5 %>% 
@@ -18,16 +126,16 @@ srdbv5_sub %>%
   arrange(Study_number)
 ```
 
-
+## Identify duplicate site-id
 ```{r}
-sub_srdbv5 %>% 
-  select(Study_number, Meas_Year, Site_ID) %>% 
-  count(Study_number, Meas_Year, Site_ID, sort = TRUE) %>% 
+srdbv5 %>% 
+  select(Study_number, Study_midyear, Site_ID) %>% 
+  count(Study_number, Study_midyear, Site_ID, sort = TRUE) %>% 
   filter (n >= 2) %>% 
   arrange(Study_number)
 ```
 
-
+## NA latitude and longitude
 ```{r resolve mismatch measure year caused NA issue}
 # writ_file(sub_srdbv5_meas_year_na, 'sub_srdbv5_meas_year_na.csv')
 # find out measure year problem
@@ -45,7 +153,7 @@ MGRhD %>% select(Study_number, Site_ID, Meas_Year, Study_midyear, Latitude, Long
 
 ```
 
-
+## Select a specific study to check
 ```{r}
 srdbv5 %>% select(Study_number, Site_ID, Study_midyear, Latitude, Longitude) %>% 
   filter(Study_number == 1478)
@@ -64,6 +172,7 @@ MGRhD %>% select(Study_number, Site_ID, Meas_Year, Latitude, Longitude) %>%
 #   filter(Study_number == 313)
 ```
 
+## Check HC
 ```{r}
 MGRhD %>% 
   select(Study_number,Rs_Norm, Rh_Norm, Ra_Norm, Site_ID, HC, RC) %>% 
@@ -76,7 +185,7 @@ MGRhD %>%
   arrange(HCdif)
 ```
 
-
+## find out those records with Rh > Rs
 ```{r}
 MGRhD %>% 
   select(Study_number,Rs_Norm, Rh_Norm, Ra_Norm, Site_ID, HC, RC) %>% 
@@ -89,4 +198,61 @@ MGRhD %>%
   
 ```
 
+## Check Manipulation
+```{r}
+srdbv5 %>% 
+  select(Manipulation) %>% 
+  count(Manipulation) %>% 
+  arrange(Manipulation) ->
+  manipulation
 
+manipulation %>% 
+  arrange(n)
+
+# writ_file(manipulation, "manipulation.csv")
+```
+
+## Check measure method
+```{r}
+srdbv5 %>% 
+  select(Meas_method) %>% 
+  count(Meas_method) %>% 
+  arrange(n)
+```
+
+## Check partition method
+```{r}
+srdbv5 %>% 
+  select(Partition_method) %>% 
+  count(Partition_method) %>% 
+  arrange(Partition_method)
+```
+
+## check other meta information etc.
+```{r QCK - check meta data}
+srdbv5 %>% 
+  count(Manipulation, sort = TRUE) 
+srdbv5 %>% 
+  select(Manipulation) %>% 
+  unique() %>% 
+  arrange(Manipulation) -> 
+  manipltion
+manipltion 
+
+# writ_file(manipltion, 'manipulation.csv')
+
+srdbv5 %>% 
+  count(Meas_method, sort = TRUE) 
+srdbv5 %>% 
+  count(Partition_method, sort = TRUE) 
+
+# questions
+srdbv5 %>% 
+  count(Biome, sort = TRUE) 
+srdbv5 %>% 
+  count(Ecosystem_state, sort = TRUE) 
+srdbv5 %>% 
+  count(Leaf_habit, sort = TRUE) 
+srdbv5 %>% 
+  count(Stage, sort = TRUE) 
+```

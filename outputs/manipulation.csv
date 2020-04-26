@@ -1,690 +1,277 @@
-"Manipulation"
-""
-"+120 gC/m2 POM"
-"+240 gC/m2 POM"
-"+60 gC/m2 POM"
-"50% oaks girdled"
-"Acid addition"
-"Acid rain"
-"Acidification"
-"Agroecosystem"
-"Alfalfa intercrop"
-"Altered rainfall timing"
-"Ammonium-based mineral fertilizer"
-"Annual fire"
-"Annual fire, irrigation"
-"Ant mound"
-"Ant nest"
-"Arable rotation"
-"AS"
-"Ash"
-"Bare soil"
-"Barley straw"
-"Barley straw residue"
-"Biochar"
-"Biochar addition"
-"Biochar, ferilized"
-"Biocrust cover"
-"biomass harvesting"
-"Biomass removal"
-"Biomass return"
-"Black carbon"
-"Black fallow"
-"Bluegrass residue"
-"Broiler litter"
-"Bruned, thinned"
-"Bryophyte removal"
-"Buried"
-"Burn"
-"Burned"
-"Burned, charcoal removed"
-"Burned, cleared"
-"Burned, conventional tilling"
-"Burned, Drained"
-"Burned, understory thinned"
-"Burning"
-"Burning, thinning"
-"Burnt"
-"Burnt, clear-cut"
-"C. alata addition"
-"CaCl2 added"
-"CaHPO4 added"
-"Cattle manure"
-"Cearcut harvest"
-"Chamber"
-"Changes in precipitation"
-"Chisel plow tillage"
-"Chisel tillage"
-"Chloroform"
-"Chopped, burned"
-"Chopped, burned, thinned"
-"Clear-cut"
-"Clear-cut harvest"
-"Clear-cut, Humus and mineral soil mixed thoroughly to a depth of 30 cm"
-"Clear-cut, Humus layer removed"
-"Clear-cut, Layer of humus and mineral soil removed from an independent site and inverted on top of undisturbed soil"
-"Clear cut"
-"Clear cut, burnt"
-"Clearcut"
-"Clearcut no slash"
-"Clearcut With mechanical soil ripping"
-"Clearcut with slash"
-"Clearcut Without mechanical soil ripping"
-"Clearcut, burning"
-"Clearcut, fertilized"
-"Clearcut, logging residue"
-"Clearcut, no residue"
-"Clearcut, OM"
-"Clearcut, screefing"
-"Clearcut, slash burnt"
-"Clearcut, soil mixing"
-"Clearing"
-"Clip"
-"Clip and N addition"
-"Cliped"
-"Clipped"
-"Clipped, shaded"
-"Clipped, warmed"
-"Clipped, Warming"
-"Clipping"
-"Clipping + locust carcass addition"
-"CN"
-"CO2"
-"CO2 elevation"
-"CO2, fertilized"
-"CO2, heated"
-"CO2, irrigated"
-"CO2, nitrogen"
-"CO2, O3"
-"Cold season grazing"
-"Collar depth"
-"Compost"
-"Concrete"
-"Conservation management, Early "
-"Conservation management, Late"
-"Conservation management, Middle"
-"Conservation till"
-"Continuous Flooding"
-"Continuous grazing"
-"Continuous rice"
-"Continuous rice, no-till"
-"Conventinal till"
-"Conventinal till+warming"
-"Conventinal tillage"
-"Conventional till"
-"Conventional till, fallow"
-"Conventional till, fertilized"
-"Conventional till, straw"
-"Conventional till; fertilized"
-"Conventional tillage"
-"Conventional Tillage"
-"Conventional Tillage, Fertilized"
-"Conventional tillage+ residue retention"
-"Conventional tilling"
-"Convertinal tillage"
-"Corn residue mulch"
-"Corn Stover Removal"
-"Corn straw incorporating"
-"Corn straw mulching"
-"Cover crop"
-"Cover crop residue incorporated (Brassica napus); fertilized: 102 kg P ha^-1, 102 kg K ha^-1,  140 kg N ha^-1 (NH4NO3) (5/27), 70 kg N ha^-1 (NH4NO3) (6/29)"
-"Cover crop residue incorporated (Hordeum vulgare); fertilized: 102 kg P ha^-1, 102 kg K ha^-1,  140 kg N ha^-1 (NH4NO3) (5/27), 70 kg N ha^-1 (NH4NO3) (6/29)"
-"Cover crop residue incorporated (Vicia villosa); fertilized: 102 kg P ha^-1, 102 kg K ha^-1,  140 kg N ha^-1 (NH4NO3) (5/27), 70 kg N ha^-1 (NH4NO3) (6/29)"
-"COW"
-"CP with wheat stwaw"
-"Crop cover"
-"Crop harvest"
-"Crust removed"
-"CS"
-"CTBN"
-"CTBO"
-"Cultivated"
-"Cut"
-"Cut plus lopping"
-"Cut, fertilized"
-"Cut, fertilized, grazed"
-"Cut, grazed"
-"Cutting"
-"Dead stem removal"
-"Deep ploughing"
-"Deep plowing"
-"Deep soil frost"
-"Deep soil loosening"
-"Defoliation"
-"Dextrose+water"
-"Diesel polluted soil"
-"Direct drilling"
-"Disaggregated"
-"Disc tilling"
-"Disk harrowing"
-"Distanced from crop, fertilized"
-"Disturbed"
-"Diversity"
-"Double litter"
-"Double precipitation"
-"Double slash"
-"Double wood"
-"Drained"
-"Drained, burned"
-"Drained, burned, clearcut"
-"Drained, drought"
-"Drained, fertilized"
-"Drained, planted"
-"Drained, re-dammed"
-"Drained, warmed"
-"Drip irrigation, chicken manure + NPK, stubble incorporated"
-"Drip irrigation, chicken manure + NPK, stubble removed"
-"Drip irrigation, chicken manure, stubble incorporated"
-"Drip irrigation, chicken manure, stubble removed"
-"Drip irrigation, no fertilization, stubble incorporated"
-"Drip irrigation, no fertilization, stubble removed"
-"Drip irrigation, NPK, stubble incorporated"
-"Drip irrigation, NPK, stubble removed"
-"Drought"
-"Drought-treated"
-"Drought, altered rainfall timing"
-"Drought, CO2"
-"Drought, irrigation"
-"Drought, warming"
-"Drought, warming, CO2"
-"Dry"
-"Dual tillage"
-"Dung application"
-"Dust"
-"Dust-Control"
-"Early-Spring Nitrogen addition early spring"
-"Early fire"
-"Ecological farming"
-"Elevated atmospheric humidity"
-"Elevated CO2"
-"Elevated CO2, N addition"
-"Elevated O3"
-"Enclosed"
-"Enhanced-efficiency fertilizer"
-"Experimental"
-"Extra litter"
-"Extra litter, litter mixture"
-"Fallow"
-"Fenced"
-"Fench"
-"Fertilization, warm"
-"Fertilized"
-"Fertilized (coated NPK)"
-"Fertilized, Biochar"
-"Fertilized, burned"
-"Fertilized, clipped"
-"Fertilized, CO2"
-"Fertilized, conventional till"
-"Fertilized, conventional till, no straw return"
-"Fertilized, cover crop"
-"Fertilized, drained"
-"Fertilized, filtered air"
-"Fertilized, filtered air, CO2"
-"Fertilized, grazing"
-"Fertilized, irrigated"
-"Fertilized, irrigation"
-"Fertilized, Leaf Litter"
-"Fertilized, lime"
-"Fertilized, manure"
-"Fertilized, modern cultivation"
-"Fertilized, mulch"
-"Fertilized, no-till"
-"Fertilized, no till, no straw return"
-"Fertilized, nonfiltered air"
-"Fertilized, nonfiltered air, CO2"
-"Fertilized, Plant Residue"
-"Fertilized, Plowed"
-"Fertilized, reduced tillage"
-"Fertilized, residue removal"
-"Fertilized, rice straw application"
-"Fertilized, rice straw removal"
-"Fertilized, straw"
-"Fertilized, straw return"
-"Fertilized, straw return, Organic fertilizer"
-"Fertilized, thinned"
-"Fertilized, Tillage"
-"Fertilized, traditional cultivation"
-"Fertilized, understory removal, harvesting"
-"Fertilized, warmed"
-"Fire"
-"Flood irrigation, chicken manure + NPK, stubble incorporated"
-"Flood irrigation, chicken manure + NPK, stubble removed"
-"Flood irrigation, chicken manure, stubble incorporated"
-"Flood irrigation, chicken manure, stubble removed"
-"Flood irrigation, no fertilization, stubble incorporated"
-"Flood irrigation, no fertilization, stubble removed"
-"Flood irrigation, NPK, stubble incorporated"
-"Flood irrigation, NPK, stubble removed"
-"Flooded"
-"Flooded and Dry intermittent Irrigation"
-"Flooded and Wet intermittent Irrigation"
-"Flooded seasonally, Fertilized, Weeded inconsistently"
-"Flooded, burned, clearcut"
-"Flooding"
-"Fluoridecontaminated gray"
-"Foliar scorching"
-"Forest floor removed"
-"Free-air CO2 enrichment, Plowed, Fertilized, Insecticide and Herbicide applied,"
-"Frenched"
-"Full tree biomass harvest"
-"Fungicide application"
-"Gap"
-"Gaps"
-"Gaps, woody debris"
-"Girdled"
-"Girdled, fertilized"
-"Girdled, litter removed"
-"Girdling"
-"Girdling, litter removal"
-"Girdling, litter removal, trenching"
-"Girdling, trenching"
-"Girdling, understory removal"
-"Glucose addition and N fertilization"
-"Glyphosate"
-"Grass contour strips"
-"Grass cover crop"
-"Grazed"
-"Grazed+Lower slope"
-"Grazing"
-"Grazing exclusion"
-"Grazing, Nitrogen fertilization"
-"Grazing, warming"
-"Green-tree clump"
-"Hairy vetch"
-"Hand weeded"
-"Harvest"
-"Hay feeding"
-"Heated"
-"Heated (air)"
-"Heated (air, soil)"
-"Heated (soil)"
-"Heated, CO2"
-"Heating"
-"Heating, CO2"
-"HEI"
-"Herbicide"
-"Herbicide + ground roots"
-"Herbicide, disk till"
-"Herbicide, fertilization"
-"Herbicide, mulching"
-"Herbicide, zero till"
-"Herbicides"
-"Herbivore exclusion"
-"High C/N"
-"High N"
-"High residue, fertilized"
-"High soil N"
-"High soil N, CO2"
-"Hollow"
-"Humus on humus"
-"Hydrothermal carbonization"
-"Increased CO2 concentration"
-"Increased precipitation"
-"Increased precipitation at a high level"
-"Increased precipitation at low level"
-"Increased precipitation, Fertilized"
-"Infrequent fire"
-"Inorganic fertilizer with cover crop"
-"Insecticide"
-"Intact soil"
-"Intensive management"
-"Inter-canopy"
-"Intercropping"
-"Irrigated"
-"Irrigated with N addition"
-"Irrigated, Fertilized"
-"Irrigated, Fertilized, Herbicide applied"
-"Irrigated; +120 gC/m2 POM"
-"Irrigated; +240 gC/m2 POM"
-"Irrigated; +60 gC/m2 POM"
-"Irrigated+fertilized"
-"Irrigation"
-"Irrigation and liquid fertilisation"
-"Irrigation and trim"
-"Irrigation water, Crop harvest"
-"Irrigation, acidification"
-"Irrigation, chamber"
-"Irrigation, CO2"
-"Irrigation, CO2, high N"
-"Irrigation, CTBN"
-"Irrigation, CTBO"
-"Irrigation, fertilized"
-"Irrigation, high N"
-"Irrigation, mulch"
-"Irrigation, NTB-P"
-"Irrigation, NTBN"
-"Irrigation, NTBO"
-"Irrigation, organic matter"
-"Irrigation, warming"
-"L-layer removal"
-"Lacy phacelia"
-"Late-Fall Nitrogen addition late fall"
-"Liming"
-"Liming, double litter"
-"Liming, litter removal"
-"Litter add"
-"Litter addition"
-"Litter and root removal"
-"Litter burned"
-"Litter excluded"
-"Litter exclusion"
-"Litter harvesting"
-"Litter harvesting, fertilized"
-"Litter manual removed"
-"Litter removal"
-"Litter removal, root trenching"
-"Litter removal, trenching"
-"Litter remove"
-"Litter removed"
-"Litter, roots excluded"
-"Live fenced, grazed"
-"Locust carcass addition"
-"Log removal"
-"Log removal, clear-cut harvest"
-"Logged"
-"Logging residue"
-"Long warming"
-"Low C/N"
-"Low N"
-"Low resudue"
-"Low snow"
-"Low soil N"
-"Low soil N, CO2"
-"Lower slope"
-"Maize residue"
-"Managed"
-"Manure"
-"Manure application"
-"Manure application, irrigation"
-"Manure fertilization"
-"Manure with cover crop"
-"Manure without cover crop"
-"Manure, Urea, Irrigation water, Crop harvest"
-"Manure, Urea, NPK, Irrigation water, Crop harvest"
-"Manure+fertilization"
-"Mastication, burning"
-"Meal pollution"
-"MF with wheat straw"
-"Mine spoil"
-"Mine waste"
-"Mineral"
-"Mineral fertilizer"
-"Minimal tillage"
-"Misting"
-"Moderate N"
-"Moderately degraded"
-"Mold board plow tillage"
-"Moldboard ploughing"
-"Moldboard till"
-"Moose trampling"
-"Mound"
-"Mounded"
-"Mow"
-"Mow, till"
-"Mowed"
-"Mowing"
-"Mulch"
-"Mulching"
-"N addition, untrenched"
-"N addtion, conventional tilling"
-"N and P addition"
-"N and P fertilization"
-"N and water addition"
-"N fertiliztion and warming"
-"N&P addition"
-"N, P fertilization"
-"N, P, K fertilization"
-"N, P, K, manure fertilization"
-"N, P, K, straw return"
-"NaNO3 added"
-"Nitrogen"
-"Nitrogen addition"
-"Nitrogen addition, changes in precipitation"
-"Nitrogen, CO2"
-"Nitrogen, phosphorous"
-"NN"
-"No-till"
-"No-till and warm"
-"No-till CRP"
-"No-till, fallow"
-"No-till, fertilized"
-"No-till; fertilized"
-"No-tillage"
-"No-tillage with corn straw mulching"
-"No-tillage+residue retention"
-"No grazing"
-"No inputs"
-"No litter"
-"No litter, no roots"
-"No mulch"
-"No roots"
-"No roots, no mycorrhizae"
-"No thinning"
-"No till"
-"No till, straw"
-"No till, straw return"
-"No tillage"
-"No tillage+warming"
-"No vascular plants"
-"Non-oaks girdled"
-"None"
-"NPK fertilization"
-"NPK manure"
-"NPS fertilization"
-"NS"
-"NTB-P"
-"NTBN"
-"NTBO"
-"O-horizon removed"
-"O3"
-"OA-less"
-"Organic cropping"
-"Organic farm"
-"Organic management"
-"Organic matter"
-"Organic residues removed"
-"Other"
-"P addition"
-"P fertilization"
-"Partial cut"
-"Partial grazing exclosure"
-"Partial harvest"
-"Percipitation amount change"
-"Percipitation remove"
-"Pesticide additon"
-"Plant mix"
-"Plant Residue"
-"Plantation; Litter excluded"
-"Plantation; Litter, roots excluded"
-"Plantation; Roots excluded"
-"Planted"
-"Plastic film mulching"
-"Plough till"
-"Plough till, straw return"
-"Ploughed"
-"Ploughed, Harrowed"
-"Plowed, Fertilized, Insecticide and Herbicide applied,"
-"Plowing"
-"Post-flush burn"
-"Post-flush cut"
-"Pre-flush burn"
-"Pre-flush cut"
-"Precipitation addition"
-"Precipitation amount change"
-"Precipitation reduction, warmed"
-"Prescribed Fire"
-"Pruned"
-"Rainfall exclusion"
-"Re-wet"
-"Reclaimed mine soil"
-"Reduced Rainfall"
-"Reduced till"
-"Reduced tillage"
-"Ridge-furrow cultivation"
-"Ridge-furrow cultivation, Full plastic film mulching"
-"Ridge till"
-"Ridge tillage"
-"Ridge Tillage"
-"Ridge tillage + straw mulching, fertilized"
-"Ridge tillage, fertilized"
-"Ridge Tillage, Straw Mulching"
-"Ridge Tillage, Straw Mulching, Decomposing Inoculants"
-"Ridged"
-"Ridged, Irrigated, Fertilized, Herbicide applied"
-"Root trenching"
-"Roots excluded"
-"Rotary till"
-"Rotary till, straw return"
-"Rotary tillage"
-"Rotary tillage+ residue retention"
-"Rotation"
-"Rotation, no-till"
-"Rotational grazing"
-"Rotovated and ploughed"
-"Salvage logging"
-"Scalped"
-"Sediment removal"
-"Selection cutting"
-"Sesbania"
-"Sesbania + wheat straw"
-"Sewage sludge"
-"Sewage sludge compost"
-"sewage sludges"
-"Shaded"
-"Shading"
-"Shading & N addition"
-"Shading, Fertilized"
-"Shading, irrigation"
-"Shallow soil frost"
-"Short warming"
-"Slash-and-burn"
-"Sludge"
-"Slurry"
-"Slurry addition"
-"Slurry addition control"
-"Slurry, mineral"
-"Snow addition"
-"Snow fence"
-"Snow reducation"
-"Snow removal"
-"Soil compaction"
-"Soil frost prevented by underground heating wires, Weeding"
-"Soil translocation"
-"Soil warming"
-"Solid fertilisation"
-"Spaded"
-"Species added"
-"Species added; insecticide"
-"Stem-only harvest"
-"Stem wood harvest"
-"Straw"
-"Straw checkboard"
-"Straw return"
-"Straw return, plowed, tilled, fertilized, irrigated"
-"Strip tillage; cover crop"
-"Stubble cultivation"
-"Stump Harvesting"
-"Stump removal, bladed"
-"Stump removed, stumped"
-"Sweet clover intercrop"
-"Tear-out, Herbicide"
-"Termite mound"
-"Thinned"
-"Thinned, bedded, fertilized"
-"Thinned, burned"
-"Thinned, double litter"
-"Thinned, forest floor removed"
-"Thinned, irrigation, fertilized"
-"Thinned, litter removal"
-"Thinning"
-"Thinning from below"
-"Thinning, Stumps extrated from soil"
-"Throughfall exclusion"
-"Throughfall reduction"
-"Throughfall reduction; warmed"
-"Tillage"
-"Tilled"
-"Tilled, Fertilized"
-"Tilled, Grazed"
-"Topsoil removal"
-"Traditional fertilization"
-"Traditional Tillage"
-"Traditional tillage + straw mulching, fertilized"
-"Traditional tillage, fertilized"
-"Traditional Tillage, Straw Mulching"
-"Traditional Tillage, Straw Mulching, Decomposing Inoculants"
-"Tree-grass contour strips"
-"tree-length harvesting"
-"Tree-oriented silviculture"
-"Tree Girdling"
-"Trenching"
-"Turf soil"
-"Turf soil, grass clippings"
-"Ultraviolet radiation"
-"Ultraviolet radiation, straw"
-"Under-canopy"
-"Understory harvesting"
-"Understory harvesting + litter raking"
-"Understory removal"
-"Understory Removal"
-"Understory removal + fertilization"
-"Understory removal, C. alata addition"
-"Understory removal, fertilization"
-"Understory removed"
-"Understory thinned"
-"Undrained, planted"
-"Undrained, unplanted"
-"Ungrazed"
-"Untrenched"
-"Upper slope"
-"UV-B radiation"
-"UV-B, straw"
-"Vegetation control"
-"Vegetation replacement, fertilization"
-"Warm"
-"Warm and CO2 elevation"
-"Warm and N addition"
-"Warm plus increased precipitation at a high level"
-"Warm plus increased precipitation at a low level"
-"Warm season grazing"
-"Warmed"
-"Warmed  & Wetted"
-"Warmed and water added"
-"Warmed with International Tundra Experiment style Open-Top Passive Warming Chamber"
-"Warmed, clipped"
-"Warmed, fertilized"
-"Warmed, irrigation"
-"Warmed, Precipitation amount change"
-"Warming"
-"Warming and N fertilization"
-"Warming and rainfall exclusion"
-"Warming, clipped"
-"Warming, CO2"
-"Warming, drought"
-"Warming, drought, CO2"
-"Warming, Fertilized"
-"Warming+litter"
-"Water added"
-"Water addition"
-"Water addition, Fungicide application"
-"Watered+ Upper slope"
-"Weed control"
-"Weed control, irrigation"
-"Weed control, irrigation, fertilized"
-"Weed control, irrigation, fertilized, pest control"
-"Weed cover"
-"Weed removal"
-"Weeded"
-"Weeding"
-"Weeding, fertilization"
-"Weekly weeding"
-"Wet"
-"Wetted"
-"Wheat straw"
-"Wheat straw added"
-"Wheel ruts"
-"White mustard"
-"Wood ash"
-"Woody adelgid infestation"
-"Woody debris"
-"Zero tillage"
+"Manipulation","n"
+"Acidification",28
+"Agriculture manipulation",16
+"Ant mound",6
+"Burned",84
+"Burned, clearcut",5
+"Burned, drained",4
+"Burned, irrigated",1
+"Burned, slash",1
+"Burned, thinned",13
+"Chopped, burned",2
+"Chopped, burned, thinned",2
+"Clearcut",84
+"Clearcut, burned",6
+"Clearcut, fertilized",5
+"Clearcut, fertilized, grazed",2
+"Clearcut, grazed",3
+"Clearcut, lopping",2
+"Clearcut, slash burned",4
+"Clip",36
+"Clip, fertilized",1
+"Clip, locust carcass addition",2
+"Clip, shaded",1
+"Clip, warmed",5
+"CO2",119
+"CO2, fertilized",10
+"CO2, heated",8
+"CO2, irrigated",1
+"CO2, O3",9
+"Collar depth",12
+"Conservation management",6
+"Contaminant",21
+"Conventional tillage",71
+"Conventional tillage, fallow",3
+"Conventional tillage, fertilized",12
+"Conventional tillage, grazed",1
+"Conventional tillage, litter manipulation",3
+"Conventional tillage, litter manipulation, decomposing inoculants",1
+"Conventional tillage, litter manipulation, fertilized",1
+"Conventional tillage, residue return",1
+"Conventional tillage, warmed",3
+"Cover crop",16
+"Defoliation",3
+"Degradated",1
+"Diesel polluted soil",1
+"Direct drilling",2
+"Distanced from crop, fertilized",4
+"Disturbed",1
+"Diversity",3
+"Drained",60
+"Drained, burned",2
+"Drained, burned, clearcut",1
+"Drained, drought",2
+"Drained, fertilized",8
+"Drained, planted",2
+"Drained, re-dammed",1
+"Drained, warmed",6
+"Drip irrigation, chicken manure, NPK, stubble incorporated",1
+"Drip irrigation, chicken manure, NPK, stubble removed",1
+"Drip irrigation, chicken manure, stubble incorporated",1
+"Drip irrigation, chicken manure, stubble removed",1
+"Drip irrigation, no fertilization, stubble incorporated",1
+"Drip irrigation, no fertilization, stubble removed",1
+"Drip irrigation, NPK, stubble incorporated",1
+"Drip irrigation, NPK, stubble removed",1
+"Drought",119
+"Drought, CO2",3
+"Drought, irrigation",2
+"Drought, precipitation timing change",1
+"Drought, warmed",8
+"Drought, warmed, CO2",2
+"Dual tillage",2
+"Dung application",3
+"Dust",9
+"Elevated atmospheric humidity",2
+"Enclosed",4
+"FACE, plowed, fertilized, insecticide, herbicide applied",4
+"Fenced",13
+"Fenced, grazed",1
+"Fertilized",1094
+"Fertilized, burned",5
+"Fertilized, clipped",1
+"Fertilized, CO2",6
+"Fertilized, conventional tillage",6
+"Fertilized, cover crop",7
+"Fertilized, drained",7
+"Fertilized, filtered air",1
+"Fertilized, filtered air, CO2",1
+"Fertilized, grazing",1
+"Fertilized, irrigated",35
+"Fertilized, irrigated, harvest",3
+"Fertilized, leaf litter",1
+"Fertilized, litter manipulation",25
+"Fertilized, litter manipulation, fertilized",1
+"Fertilized, modern cultivation",1
+"Fertilized, mulch",3
+"Fertilized, no-till",12
+"Fertilized, nonfiltered air",1
+"Fertilized, nonfiltered air, CO2",1
+"Fertilized, plowed",4
+"Fertilized, precipitation amount change",1
+"Fertilized, reduced tillage",1
+"Fertilized, thinned",2
+"Fertilized, thinned, harvesting",2
+"Fertilized, tillage",1
+"Fertilized, traditional cultivation",1
+"Fertilized, warmed",7
+"Flood",5
+"Flood irrigation, chicken manure, NPK, stubble incorporated",1
+"Flood irrigation, chicken manure, NPK, stubble removed",1
+"Flood irrigation, chicken manure, stubble incorporated",1
+"Flood irrigation, chicken manure, stubble removed",1
+"Flood irrigation, no fertilization, stubble incorporated",1
+"Flood irrigation, no fertilization, stubble removed",1
+"Flood irrigation, NPK, stubble incorporated",1
+"Flood irrigation, NPK, stubble removed",1
+"Flood, burned, clearcut",2
+"Flood, dry intermittent Irrigation",1
+"Flood, Fertilized, weeded inconsistently",3
+"Flood, wet intermittent Irrigation",1
+"Frenched",8
+"Fungicide",1
+"Gap",17
+"Girdling",30
+"Girdling, fertilized",1
+"Girdling, litter removal",3
+"Girdling, litter removal, trenching",3
+"Girdling, thinned",1
+"Girdling, understory removal",2
+"Grazing",150
+"Grazing, fertilized",4
+"Grazing, warming",1
+"Harvest",52
+"Harvest, litter manipulation",1
+"Herbivore exclusion",6
+"High C/N",6
+"High N",1
+"High residue, fertilized",2
+"High soil N",2
+"High soil N, CO2",2
+"Intensive management",3
+"Intercropping",65
+"Irrigated",144
+"Irrigated, acidification",18
+"Irrigated, CO2",4
+"Irrigated, CO2, high N",2
+"Irrigated, fertilized",22
+"Irrigated, Fertilized",3
+"Irrigated, Fertilized, Herbicide applied",3
+"Irrigated, harvest",1
+"Irrigated, high N",2
+"Irrigated, litter manipulation",1
+"Irrigated, organic matter",4
+"Irrigated, trim",1
+"Irrigated, warmed",9
+"Liming",2
+"Liming, double litter",2
+"Liming, litter removal",2
+"Litter manipulation",200
+"Litter manipulation, burned",2
+"Litter manipulation, conventional tillage, fertilized, irrigated",2
+"Litter manipulation, fertilized",1
+"Locust carcass addition",2
+"Logging manipulation",6
+"Low C/N",6
+"Low snow",1
+"Low soil N",3
+"Low soil N, CO2",2
+"Managed",4
+"Moderate N",1
+"Moose trampling",3
+"Mounded",2
+"Mowed",17
+"Mowed, tillage",2
+"Mowing",4
+"No-till",60
+"No-till, fallow",3
+"No-till, fertilized",9
+"No-till, litter manipulation",5
+"No-till, residue retention",1
+"No-till, warmed",4
+"None",6579
+"O3",11
+"Organic farm",10
+"Other",4
+"Percipitation amount change",2
+"Pesticide",2
+"Plant mix",4
+"Plant residue",2
+"Plantation, litter, roots excluded",1
+"Plantation, roots excluded",1
+"Planted",1
+"Ploughed",9
+"Ploughed, Harrowed",1
+"Plowed",1
+"Plowed, fertilized, insecticide, herbicide",4
+"Precipitation amount change",51
+"Precipitation amount change, fertilized",9
+"Precipitation amount change, warmed",7
+"Precipitation timing change",1
+"Pruned",2
+"Reclaimed mine soil",3
+"Reduced tillage",34
+"Reduced tillage, cover crop",2
+"Reduced tillage, litter manipulation",2
+"Ridged",7
+"Ridged, fertilized",1
+"Ridged, irrigated, fertilized, herbicide",3
+"Ridged, litter manipulation",2
+"Ridged, litter manipulation, decomposing Inoculants",1
+"Ridged, litter manipulation, fertilized",1
+"Root excluded",1
+"Rotary tillage",2
+"Rotation",18
+"Rotation, no-till",18
+"Rotovated, ploughed",2
+"Scalped",2
+"Scarified",1
+"Shading",13
+"Shading, fertilized",7
+"Shading, irrigated",4
+"Sludge",3
+"Snow addition",1
+"Snow fence",2
+"Snow reduction",2
+"Soil amendment",1
+"Soil disturbance",37
+"Spaded",1
+"Species added",1
+"Species added, insecticide",1
+"Stubble cultivation",2
+"Stump removal, bladed",1
+"Stump removed, stumped",1
+"Thinned",84
+"Thinned, bedded, fertilized",1
+"Thinned, burned",1
+"Thinned, fertilized",4
+"Thinned, irrigation, fertilized",1
+"Thinned, litter manipulation",4
+"Thinned, soil removal",1
+"Throughfall reduction",4
+"Throughfall reduction; warmed",2
+"Trench",4
+"Ultraviolet radiation",1
+"Understory removal",4
+"Understory removal, C. alata addition",1
+"Understory removal, fertilization",1
+"Understory removed",1
+"Undrained, planted",2
+"Undrained, unplanted",2
+"UVB",2
+"UVB, litter manipulation",3
+"Vegetation control",8
+"Vegetation replacement, fertilization",2
+"Warmed",193
+"Warmed, clipped",8
+"Warmed, CO2",7
+"Warmed, drought",4
+"Warmed, drought, CO2",1
+"Warmed, fertilized",7
+"Warmed, irrigation",3
+"Warmed, litter manipulation",1
+"Warmed, precipitation amount change",4
+"Warmed, Precipitation amount change",1
+"Warmed, wetted",3
+"Weed control",27
+"Weed control, fertilized",3
+"Weed control, irrigated",1
+"Weed control, irrigated, fertilized",1
+"Weed control, irrigated, fertilized, pest control",1
+"Weed control, litter manipulation",1
+"Weed control, no-till",1
+"Weed control, reduced tillage",1
+"Wetted",13
+"Wetted, fungicide",1
+"Wetted, substrate addition",9
+"Woody adelgid infestation",2
