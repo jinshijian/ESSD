@@ -31,6 +31,7 @@ library(maps)
 library(mapdata)
 library(leaflet)
 library(sp)
+library(drake)
 # Source all needed functions
 source('functions.R')
 
@@ -173,7 +174,7 @@ plot_grid(v1_plot, v2_plot, v3_plot, v4_plot, v5_plot
 ```
 
 ## Representative analysis - density plot
-```{r Figure 3 and 4 - representative density plot, fig.height=5, fig.width=8}
+```{r Figure 3 and 4 - representative density plot, fig.height=6, fig.width=8}
 
 # prepare data
 bind_rows(representative(srdbv1, IGBP, GlobalMATMAP) %>% mutate(vs = "SRDB-V1"),
@@ -183,6 +184,20 @@ bind_rows(representative(srdbv1, IGBP, GlobalMATMAP) %>% mutate(vs = "SRDB-V1"),
           representative(srdbv5, IGBP, GlobalMATMAP) %>% mutate(vs = "SRDB-V5")
           ) ->
   srdb_comb
+
+# plot MAT density comparison
+srdb_comb %>% 
+  filter(!is.na(Ecosystem) & !is.na(MAT)) %>% 
+  ggplot(aes(x = MAT, fill = factor(Source))) +
+    facet_grid(rows = vars(Ecosystem),
+               cols = vars(vs),
+               scales = "free") +
+  theme(legend.position = "none"
+        # , axis.title.x=element_blank()
+        , axis.text.x = element_text(angle = 25, hjust = 1)) +
+  # geom_violin(draw_quantiles = c(0.5))
+  geom_density(alpha = 0.5) +
+  labs(x=expression(MAT~"("~degree~C~")"), y=expression(Density))
   
 # plot MAT density comparison
 srdb_comb %>% 
@@ -199,25 +214,162 @@ srdb_comb %>%
   geom_density(alpha = 0.5) +
   labs(x=expression(MAT~"("~degree~C~")"), y=expression(Density))
 
-ggsave('outputs/Figure3.MAT.jpg', width = 8, height = 5)
+# ggsave('outputs/Figure3.MAT.jpg', width = 8, height = 5)
 
 # plot MAP density comparison
-srdb_comb %>% 
+plot_grid(
+  srdb_comb %>% 
   filter(!is.na(Ecosystem) & !is.na(MAP)) %>% 
-  filter(Ecosystem %in% c("Agriculture", "Desert", "Shrubland")) %>% 
+  filter(Ecosystem %in% c("Agriculture")) %>% 
   filter(MAP <= 4000) %>% 
   ggplot(aes(x = MAP, fill = factor(Source))) +
     facet_grid(rows = vars(Ecosystem),
                cols = vars(vs),
-               scales = "free") +
+               scales = "free"
+               ) +
   theme(legend.position = "none"
         # , axis.title.x=element_blank()
-        , axis.text.x = element_text(angle = 25, hjust = 1)) +
+        , axis.text.x = element_text(angle = 30, hjust = 1)) +
   # geom_violin(draw_quantiles = c(0.5))
   geom_density(alpha = 0.5) +
-  labs(x=expression(MAP~"(mm)"), y=expression(Density))
+  labs(x=expression(""), y=expression(Density)),
+  
+  srdb_comb %>% 
+  filter(!is.na(Ecosystem) & !is.na(MAP)) %>% 
+  filter(Ecosystem %in% c("Desert", "Shrubland")) %>% 
+  filter(MAP <= 1250) %>% 
+  ggplot(aes(x = MAP, fill = factor(Source))) +
+    facet_grid(rows = vars(Ecosystem),
+               cols = vars(vs),
+               scales = "free"
+               ) +
+  theme(legend.position = "none"
+        # , axis.title.x=element_blank()
+        , axis.text.x = element_text(angle = 30, hjust = 1)) +
+  # geom_violin(draw_quantiles = c(0.5))
+  geom_density(alpha = 0.5) +
+  labs(x=expression(MAP~"(mm)"), y=expression(Density)),
+  
+  ncol = 1,
+  rel_heights = c(1.1, 2)
+)
 
-ggsave('outputs/Figure4.MAP.jpg', width = 8, height = 5)
+# ggsave('outputs/Figure4.MAP.jpg', width = 8, height = 6)
+```
+
+
+## Test whether add Rs_annual data significantly change the density distribution
+```{r, fig.height=6, fig.width=8}
+
+plot_grid(
+  # plot annual and growing season Rs
+  bind_rows(
+  srdbv4 %>% 
+    select(Rs_annual, Rs_growingseason) %>%
+    rename("(a) Annual" = Rs_annual,
+           "(b) Growing season" = Rs_growingseason) %>% 
+    tidyr::gather(key = "Season", value = "Rs") %>% 
+    filter(Rs < 5000 & Rs > 0 & !is.na(Rs)) %>% 
+    mutate(Version = "SRDB-V4"),
+  srdbv5 %>% 
+    select(Rs_annual, Rs_growingseason) %>%
+    rename("(a) Annual" = Rs_annual,
+           "(b) Growing season" = Rs_growingseason) %>%
+    tidyr::gather(key = "Season", value = "Rs") %>% 
+    filter(Rs < 5000 & Rs > 0  & !is.na(Rs)) %>% 
+    mutate(Version = "SRDB-V5")) %>% 
+  ggplot(aes(x=Version, y=Rs, group = Version, col = Version)) +
+  geom_jitter(shape = 16, position = position_jitter(0.2), col = "gray") +
+  geom_violin(draw_quantiles = c(0.25, 0.5, 0.75), alpha = 0.25) +
+  facet_grid(rows = vars(Season),
+             scales = "free") +
+  # geom_density(alpha = 0.35) +
+  theme(legend.title = element_blank(), legend.position = "none") +
+  labs(y = expression(R[S]~"("~g~C~m^{2}~day^{-1}~"),     "~"("~g~C~m^{2}~yr^{-1}~")"),
+       x = element_blank()),
+  
+  # plot dry and wet season Rs
+  bind_rows(
+  srdbv4 %>% 
+    select(Rs_dry, Rs_wet) %>%
+    rename("(c) Dry season" = Rs_dry,
+           "(d) Wet season" = Rs_wet) %>% 
+    tidyr::gather(key = "Season", value = "Rs") %>% 
+    filter(Rs < 5000 & Rs > 0 & !is.na(Rs)) %>% 
+    mutate(Version = "SRDB-V4"),
+  srdbv5 %>% 
+    select(Rs_dry, Rs_wet) %>%
+    rename("(c) Dry season" = Rs_dry,
+           "(d) Wet season" = Rs_wet) %>% 
+    tidyr::gather(key = "Season", value = "Rs") %>% 
+    filter(Rs < 5000 & Rs > 0  & !is.na(Rs)) %>% 
+    mutate(Version = "SRDB-V5")) %>% 
+  ggplot(aes(x=Version, y=Rs, group = Version, col = Version)) +
+  geom_jitter(shape = 16, position = position_jitter(0.2), col = "gray") +
+  geom_violin(draw_quantiles = c(0.25, 0.5, 0.75), alpha = 0.25) +
+  facet_grid(rows = vars(Season),
+             scales = "free") +
+  # geom_density(alpha = 0.35) +
+  theme(legend.title = element_blank(), legend.position = "none") +
+  labs(y = expression(R[S]~"("~g~C~m^{2}~day^{-1}~")"),
+       x = element_blank()),
+  
+  # plot spring and summer season Rs
+  bind_rows(
+  srdbv4 %>% 
+    select(Rs_spring, Rs_summer) %>%
+    rename("(e) Spring" = Rs_spring,
+           "(f) Summer" = Rs_summer) %>% 
+    tidyr::gather(key = "Season", value = "Rs") %>% 
+    filter(Rs < 5000 & Rs > 0 & !is.na(Rs)) %>% 
+    mutate(Version = "SRDB-V4"),
+  srdbv5 %>% 
+    select(Rs_spring, Rs_summer) %>%
+    rename("(e) Spring" = Rs_spring,
+           "(f) Summer" = Rs_summer) %>%
+    tidyr::gather(key = "Season", value = "Rs") %>% 
+    filter(Rs < 5000 & Rs > 0  & !is.na(Rs)) %>% 
+    mutate(Version = "SRDB-V5")) %>% 
+  ggplot(aes(x=Version, y=Rs, group = Version, col = Version)) +
+  geom_jitter(shape = 16, position = position_jitter(0.2), col = "gray") +
+  geom_violin(draw_quantiles = c(0.25, 0.5, 0.75), alpha = 0.25) +
+  facet_grid(rows = vars(Season),
+             scales = "free") +
+  # geom_density(alpha = 0.35) +
+  theme(legend.title = element_blank(), legend.position = "none") +
+  labs(y = expression(R[S]~"("~g~C~m^{2}~day^{-1}~")"),
+       x = element_blank()),
+  
+  # plot autumn and winter season Rs
+  bind_rows(
+  srdbv4 %>% 
+    select(Rs_autumn, Rs_winter) %>%
+    rename("(g) Autumn" = Rs_autumn,
+           "(h) Winter" = Rs_winter) %>% 
+    tidyr::gather(key = "Season", value = "Rs") %>% 
+    filter(Rs < 5000 & Rs > 0 & !is.na(Rs)) %>% 
+    mutate(Version = "SRDB-V4"),
+  srdbv5 %>% 
+    select(Rs_autumn, Rs_winter) %>%
+    rename("(g) Autumn" = Rs_autumn,
+           "(h) Winter" = Rs_winter) %>% 
+    tidyr::gather(key = "Season", value = "Rs") %>% 
+    filter(Rs < 5000 & Rs > 0  & !is.na(Rs)) %>% 
+    mutate(Version = "SRDB-V5")) %>% 
+  ggplot(aes(x=Version, y=Rs, group = Version, col = Version)) +
+  geom_jitter(shape = 16, position = position_jitter(0.2), col = "gray") +
+  geom_violin(draw_quantiles = c(0.25, 0.5, 0.75), alpha = 0.25) +
+  facet_grid(rows = vars(Season),
+             scales = "free") +
+  # geom_density(alpha = 0.35) +
+  theme(legend.title = element_blank(), legend.position = "none") +
+  labs(y = expression(R[S]~"("~g~C~m^{2}~day^{-1}~")"),
+       x = element_blank()),
+  
+  ncol = 2
+)
+
+# ggsave('outputs/Figure5-Rs.jpg', width = 8, height = 6)
 ```
 
 
@@ -231,6 +383,20 @@ srdb_study %>%
 srdbv5 %>% 
   select(Study_number) %>% 
   unique()
+
+srdbv5 %>% 
+  select(Record_number, Study_number) %>% 
+  filter(Record_number > 6631) %>% 
+  select(Study_number) %>% 
+  unique()
+
+srdbv4 %>% 
+  select(Rs_growingseason) %>% 
+  na.omit()
+
+srdbv5 %>% 
+  select(Rs_growingseason) %>% 
+  na.omit()
 
 ```
 
