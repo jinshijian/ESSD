@@ -141,7 +141,7 @@ sitemap <- sitemap +
              , shape = c(1, 16, 16, 1)
              , color = c("black", "red", "orange", "blue"), alpha = 1) +
   annotate("text", x = -160, y = c(-10, -25, -40, -55)
-           , label = c("SRDB-V4", "SRDB-V5 (Chinse)", "SRDB-V5 (Russian)", "SRDB-V5 (other)")
+           , label = c("SRDB-V4", "SRDB-V5 (Chinese)", "SRDB-V5 (Russian)", "SRDB-V5 (other)")
            , size = 3.5, hjust = 0) 
   
 
@@ -203,6 +203,7 @@ srdb_comb %>%
 srdb_comb %>% 
   filter(!is.na(Ecosystem) & !is.na(MAT)) %>% 
   filter(Ecosystem %in% c("Agriculture", "Desert", "Shrubland")) %>% 
+  filter(MAT>-20) %>% 
   ggplot(aes(x = MAT, fill = factor(Source))) +
     facet_grid(rows = vars(Ecosystem),
                cols = vars(vs),
@@ -214,7 +215,7 @@ srdb_comb %>%
   geom_density(alpha = 0.5) +
   labs(x=expression(MAT~"("~degree~C~")"), y=expression(Density))
 
-# ggsave('outputs/Figure3.MAT.jpg', width = 8, height = 5)
+ggsave('outputs/Figure3.MAT.jpg', width = 8, height = 6)
 
 # plot MAP density comparison
 plot_grid(

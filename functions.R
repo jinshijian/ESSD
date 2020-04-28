@@ -227,5 +227,73 @@ get_subsrdbv5 <- function(sdata) {
 #*****************************************************************************************************************
 # Collar depth and measure time test functions
 #*****************************************************************************************************************
-# 
+# pass column name to a function
+# test_function <- function(sdata, colName, value){
+#   # another way is using
+#   # myenc <- enquo(colName)
+#   sdata %>%
+#     select(Rs_annual, {{colName}}) %>%
+#     filter(Rs_annual < 5000 & {{colName}} < value) %>%
+#     group_by({{colName}}) %>%
+#     summarise(Rs_annual = mean(Rs_annual),
+#               obs = n()) %>%
+#     mutate(obs2 = ifelse(obs <= 100, obs, 110)) ->
+#     sdata2
+#   # return(sdata2)
+#   return(colnames(sdata2))
+# }
+# test_function(srdbv5, Collar_height, 50)
+
+time_depth_test <- function(sdata, colName, threshold){
+  x_axis_id <- c("Collar_height", "Chamber_area", "Meas_interval")
+  # prepare data
+  sdata %>% 
+    select(Rs_annual, {{colName}}) %>% 
+    filter(Rs_annual < 5000 & {{colName}} < threshold) %>% 
+    group_by({{colName}}) %>% 
+    summarise(Rs_annual = mean(Rs_annual),
+              obs = n()) %>% 
+    mutate(obs2 = ifelse(obs <= 100, obs, 110)) ->
+    sdata2
+  # density 1 panel
+  sdata2 %>% 
+    ggplot(aes({{colName}})) +
+    geom_histogram(bins = 30, fill = "white", col = "black") +
+    theme_void() -> 
+    dens1
+  # density 2 panel
+  sdata2 %>% 
+    ggplot(aes(Rs_annual)) +
+    geom_histogram(bins = 30, fill = "white", col = "black") +
+    theme_void() +
+    coord_flip() -> 
+    dens2
+  # main plot
+  sdata2 %>%
+    ggplot(aes({{colName}}, Rs_annual)) +
+    geom_point(aes(size  = obs2), shape = 16, alpha = 0.5) +
+    geom_smooth(method = "lm",
+                fill = "skyblue") +
+    labs(x = if(colnames(sdata2)[1]==x_axis_id[1]) {
+      expression(Collar~length~(cm)) } 
+      else if (colnames(sdata2)[1]==x_axis_id[2]) {
+        expression(Chamber~area~(cm^{-2})) }
+      else if (colnames(sdata2)[1]==x_axis_id[3]) {
+        expression(Measure~interval~(day)) }, 
+      
+         y = expression(R[S]~(g~C~m^{-2}~yr^{-1}))) +
+    labs(size="obs (n)") +
+    theme(legend.position = c(0.7, 0.75),
+          legend.background = element_rect(colour = NA, fill = NA)) ->
+    plot1
+  # output
+  dens1 + plot_spacer() + plot1 + dens2 + 
+    plot_layout(
+      ncol = 2, 
+      nrow = 2, 
+      widths = c(4, 1),
+      heights = c(1, 4) ) ->
+    final_plot
+  print(final_plot)
+}
 

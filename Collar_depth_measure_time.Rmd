@@ -5,6 +5,7 @@ output: html_document
 
 # loading necessary packages
 ```{r preliminaries, message=FALSE, echo=FALSE}
+library(drake)  # 6.1.0
 library(readxl)
 library(styler)
 library(ggplot2)
@@ -24,7 +25,8 @@ library(mapdata)
 library(leaflet)
 library(sp)
 library(RColorBrewer)
-library(drake)  # 6.1.0
+# install.packages("patchwork")
+library(patchwork)
 # Source all needed functions
 source('functions.R')
 # set data and outputs file direction
@@ -39,46 +41,55 @@ knitr::opts_chunk$set(results = 'hide', message = TRUE, include = TRUE,
 # Prepare data
 ## get MGRhD
 ```{r get MGRhD}
+srdbv4 <- readd(srdbv4)
 srdbv5 <- readd(srdbv5)
 ``` 
 
 # Data analysis
 ## test whether collar depth affect Rs_annual
 ```{r test collar insert depth}
-srdbv5 %>% 
-  select(Rs_annual, Collar_height, Collar_depth, Chamber_area, Time_of_day, Meas_interval, Annual_coverage) %>% 
-  filter(Rs_annual < 5000 & Collar_height < 50) %>% 
-  ggplot(aes(Collar_height, Rs_annual)) +
-  geom_point(shape = 1, alpha = 0.25) +
-  geom_smooth(method = "lm")
-summary(lm(srdbv5$Rs_annual ~ srdbv5$Collar_height))
+time_depth_test (srdbv5, Collar_height, 50)
 ```
 
 
-```{r test collar insert depth}
+
+```{r test collar insert depth, fig.width=6, fig.height=6}
+# aggregate Rs_annual by every 5
 srdbv5 %>% 
-  select(Rs_annual, Collar_height, Collar_depth, Chamber_area, Time_of_day, Meas_interval, Annual_coverage) %>% 
-  filter(Rs_annual < 5000 & Collar_depth < 50) %>% 
+  select(Rs_annual, Collar_depth, Ecosystem_type) %>% 
+  filter(Rs_annual < 5000 & Collar_depth < 20 & Ecosystem_type != "") %>% 
+  mutate(Ecosystem_group = case_when(
+    Ecosystem_type %in% c("Agriculture", "Orchard") ~ "Agriculture",
+    Ecosystem_type == "Desert" ~ "Desert",
+    Ecosystem_type %in% c("Forest", "Plantation") ~ "Forest",
+    Ecosystem_type %in% c("Grassland", "Turfgrass", "Urban", "Urban lawn") ~ "Grassland",
+    Ecosystem_type %in% c("Savanna", "Shrubland", "Steppe") ~ "Shrubland",
+    Ecosystem_type %in% c("Tundra", "Wetland") ~ "Wetland",
+    Ecosystem_type %in% c("Savanna", "Shrubland", "Steppe") ~ "Shrubland",
+    TRUE ~ "None"
+  )) %>% 
+  group_by(Ecosystem_group, Collar_depth) %>% 
+  summarise(Rs_annual = mean(Rs_annual),
+            obs = n()) %>% 
+  mutate(obs2 = ifelse(obs <= 100, obs, 110)) %>% 
   ggplot(aes(Collar_depth, Rs_annual)) +
-  geom_point(shape = 1, alpha = 0.25) +
-  geom_smooth(method = "lm")
-summary(lm(srdbv5$Rs_annual ~ srdbv5$Collar_depth))
+  geom_point(aes(size  = obs2), shape = 16, alpha = 0.5) +
+  facet_grid(rows = vars(Ecosystem_group), scales = "free") +
+  geom_smooth(method = "lm", fill = "skyblue") +
+  theme_set(theme_bw()) +
+  labs(x="Collar depth (cm)", y = expression(R[S]~(g~C~m^{-2}~yr^{-1}))) +
+  labs(size="obs (n)")
+
 ```
 
 ```{r test chamber area}
-srdbv5 %>% 
-  select(Rs_annual, Collar_height, Collar_depth, Chamber_area, Time_of_day, Meas_interval, Annual_coverage) %>% 
-  filter(Rs_annual < 5000 & Chamber_area < 4000) %>% 
-  ggplot(aes(Chamber_area, Rs_annual)) +
-  geom_point(shape = 1, alpha = 0.25) +
-  geom_smooth(method = "lm")
-
-srdbv5 %>% 
-  filter(Rs_annual < 5000 & Chamber_area < 4000) ->
-  sub_srdbv5
-summary(lm(sub_srdbv5$Rs_annual ~ sub_srdbv5$Chamber_area))
+time_depth_test (srdbv5, Chamber_area, 4000)
 ```
 
+
+```{r test measure interval}
+time_depth_test (srdbv5, Meas_interval, 150)
+```
 
 ```{r test time of day}
 srdbv5 %>% 
@@ -103,41 +114,9 @@ srdbv5 %>%
   xlab(expression(Measure~time~group)) +
   ylab(expression(Annual~R[S])) +
   theme(axis.text.x = element_text(angle = 0, hjust = 0.5))
-```
-
-```{r test chamber area}
-srdbv5 %>% 
-  select(Rs_annual, Collar_height, Collar_depth, Chamber_area, Time_of_day, Meas_interval, Annual_coverage) %>% 
-  filter(Rs_annual < 5000 & Meas_interval < 100) %>% 
-  ggplot(aes(Meas_interval, Rs_annual)) +
-  geom_point(shape = 1, alpha = 0.25) +
-  geom_smooth(method = "lm")
-summary(lm(srdbv5$Rs_annual ~ srdbv5$Meas_interval))
-```
-
-
-```{r, fig.height=8, fig.width=6}
-bind_rows(
-  srdbv4 %>% 
-    select(Rs_annual, Rs_spring, Rs_summer, Rs_autumn, Rs_winter, Rs_growingseason) %>%
-    tidyr::gather(key = "Season", value = "Rs") %>% 
-    filter(Rs < 5000 & Rs > 0 & !is.na(Rs)) %>% 
-    mutate(Version = "SRDB-V4"),
-  srdbv5 %>% 
-    select(Rs_annual, Rs_spring, Rs_summer, Rs_autumn, Rs_winter, Rs_growingseason) %>%
-    tidyr::gather(key = "Season", value = "Rs") %>% 
-    filter(Rs < 5000 & Rs > 0  & !is.na(Rs)) %>% 
-    mutate(Version = "SRDB-V5")) %>% 
-  ggplot(aes(x=Version, y=Rs, group = Version, col = Version)) +
-  geom_jitter(shape = 16, position = position_jitter(0.2), col = "gray") +
-  geom_violin(draw_quantiles = c(0.25, 0.5, 0.75), alpha = 0.25) +
-  facet_grid(rows = vars(Season),
-             scales = "free") +
-  # geom_density(alpha = 0.35) +
-  theme(legend.title = element_blank(), legend.position = "none") +
-  labs(y = expression(Annual~R[S]~"("~g~C~m^{2}~yr^{-1}~")"),
-       x = element_blank())
 
 ```
+
+
 
 
