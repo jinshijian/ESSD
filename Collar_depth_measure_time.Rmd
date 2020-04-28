@@ -39,11 +39,30 @@ knitr::opts_chunk$set(results = 'hide', message = TRUE, include = TRUE,
 ```
 
 # Prepare data
-## get MGRhD
+## get data
 ```{r get MGRhD}
 srdbv4 <- readd(srdbv4)
 srdbv5 <- readd(srdbv5)
+meas_time_mapping <- readd(meas_time_mapping)
 ``` 
+
+## date process
+```{r}
+srdbv5 %>% 
+  select(Rs_annual, Collar_height, Collar_depth, Chamber_area, Time_of_day, Meas_interval, Annual_coverage) %>% 
+  filter(Time_of_day!="") %>% 
+  count(Time_of_day) %>% 
+  arrange(n) -> meas_time_mapping
+# writ_file(meas_time_mapping, 'meas_time_mapping.csv')
+
+left_join(
+  srdbv5,
+  meas_time_mapping %>% 
+    select(Time_of_day, start1, end1, hour_cover),
+  by = "Time_of_day") -> 
+  srdbv5
+```
+
 
 # Data analysis
 ## test whether collar depth affect Rs_annual
@@ -53,32 +72,53 @@ time_depth_test (srdbv5, Collar_height, 50)
 
 
 
-```{r test collar insert depth, fig.width=6, fig.height=6}
-# aggregate Rs_annual by every 5
-srdbv5 %>% 
-  select(Rs_annual, Collar_depth, Ecosystem_type) %>% 
-  filter(Rs_annual < 5000 & Collar_depth < 20 & Ecosystem_type != "") %>% 
-  mutate(Ecosystem_group = case_when(
-    Ecosystem_type %in% c("Agriculture", "Orchard") ~ "Agriculture",
-    Ecosystem_type == "Desert" ~ "Desert",
-    Ecosystem_type %in% c("Forest", "Plantation") ~ "Forest",
-    Ecosystem_type %in% c("Grassland", "Turfgrass", "Urban", "Urban lawn") ~ "Grassland",
-    Ecosystem_type %in% c("Savanna", "Shrubland", "Steppe") ~ "Shrubland",
-    Ecosystem_type %in% c("Tundra", "Wetland") ~ "Wetland",
-    Ecosystem_type %in% c("Savanna", "Shrubland", "Steppe") ~ "Shrubland",
-    TRUE ~ "None"
-  )) %>% 
-  group_by(Ecosystem_group, Collar_depth) %>% 
-  summarise(Rs_annual = mean(Rs_annual),
-            obs = n()) %>% 
-  mutate(obs2 = ifelse(obs <= 100, obs, 110)) %>% 
-  ggplot(aes(Collar_depth, Rs_annual)) +
-  geom_point(aes(size  = obs2), shape = 16, alpha = 0.5) +
-  facet_grid(rows = vars(Ecosystem_group), scales = "free") +
-  geom_smooth(method = "lm", fill = "skyblue") +
-  theme_set(theme_bw()) +
-  labs(x="Collar depth (cm)", y = expression(R[S]~(g~C~m^{-2}~yr^{-1}))) +
-  labs(size="obs (n)")
+```{r test collar insert depth, fig.width=8, fig.height=7}
+plot_grid(
+  # facet by ecosystem type
+  srdbv5 %>% 
+    select(Rs_annual, Collar_depth, Ecosystem_type) %>% 
+    filter(Rs_annual < 5000 & Collar_depth < 20 & Ecosystem_type != "") %>% 
+    mutate(Ecosystem_group = case_when(
+      Ecosystem_type %in% c("Agriculture", "Orchard") ~ "Agriculture",
+      Ecosystem_type == "Desert" ~ "Desert",
+      Ecosystem_type %in% c("Forest", "Plantation") ~ "Forest",
+      Ecosystem_type %in% c("Grassland", "Turfgrass", "Urban", "Urban lawn") ~ "Grassland",
+      Ecosystem_type %in% c("Savanna", "Shrubland", "Steppe") ~ "Shrubland",
+      Ecosystem_type %in% c("Tundra", "Wetland") ~ "Wetland",
+      Ecosystem_type %in% c("Savanna", "Shrubland", "Steppe") ~ "Shrubland",
+      TRUE ~ "None"
+    )) %>% 
+    group_by(Ecosystem_group, Collar_depth) %>% 
+    summarise(Rs_annual = mean(Rs_annual),
+              obs = n()) %>% 
+    mutate(obs2 = ifelse(obs <= 100, obs, 110)) %>% 
+    ggplot(aes(Collar_depth, Rs_annual)) +
+    geom_point(aes(size  = obs2), shape = 16, alpha = 0.5) +
+    facet_grid(rows = vars(Ecosystem_group), scales = "free") +
+    geom_smooth(method = "lm", fill = "skyblue") +
+    theme_set(theme_bw()) +
+    labs(x="Collar depth (cm)", y = expression(R[S]~(g~C~m^{-2}~yr^{-1}))) +
+    labs(size="obs (n)") +
+    theme(legend.position = 'top'),
+
+  # facet by RC
+  srdbv5 %>% 
+    select(Rs_annual, Collar_depth, RC_annual) %>% 
+    filter(Rs_annual < 5000 & Collar_depth < 20 & !is.na(RC_annual) & RC_annual > 0) %>% 
+    mutate(RC_group = cut(RC_annual, 6)) %>% 
+    group_by(RC_group, Collar_depth) %>% 
+    summarise(Rs_annual = mean(Rs_annual),
+              obs = n()) %>% 
+    mutate(obs2 = ifelse(obs <= 100, obs, 110)) %>% 
+    ggplot(aes(Collar_depth, Rs_annual)) +
+    geom_point(aes(size  = obs2), shape = 16, alpha = 0.5) +
+    facet_grid(rows = vars(RC_group), scales = "free") +
+    geom_smooth(method = "lm", fill = "skyblue") +
+    theme_set(theme_bw()) +
+    labs(x=expression(Collar~depth~(cm)), y = expression(R[S]~(g~C~m^{-2}~yr^{-1}))) +
+    labs(size="obs (n)") +
+    theme(legend.position = 'top')
+)
 
 ```
 
@@ -91,32 +131,49 @@ time_depth_test (srdbv5, Chamber_area, 4000)
 time_depth_test (srdbv5, Meas_interval, 150)
 ```
 
-```{r test time of day}
+```{r test measure interval - facet by biome, fig.height=6, fig.width=6}
+# facet by biome
 srdbv5 %>% 
-  select(Rs_annual, Collar_height, Collar_depth, Chamber_area, Time_of_day, Meas_interval, Annual_coverage) %>% 
-  filter(Time_of_day!="") %>% 
-  count(Time_of_day) %>% 
-  arrange(n)
-
-srdbv5 %>% 
-  select(Rs_annual, Collar_height, Collar_depth, Chamber_area, Time_of_day, Meas_interval, Annual_coverage) %>% 
-  filter(Time_of_day!="" & !is.na(Rs_annual)) %>% 
-  mutate(Time_day_group = case_when(
-    Time_of_day == "0to24" ~ "Full day",
-    TRUE ~ "Not full day")
-    ) %>% 
-  ggplot(aes(Time_day_group, Rs_annual, fill = as.factor(Time_day_group))) +
-  geom_violin(draw_quantiles = c(0.25, 0.5, 0.75)) +
-  # geom_jitter(shape = 16, position = position_jitter(0.2), col = "gray") +
-  # geom_boxplot(width = 0.1) +
-  theme(legend.title = element_blank()) +
-  scale_fill_brewer(palette="Set2") +
-  xlab(expression(Measure~time~group)) +
-  ylab(expression(Annual~R[S])) +
-  theme(axis.text.x = element_text(angle = 0, hjust = 0.5))
-
+  select(Rs_annual, Biome, Meas_interval) %>% 
+  filter(Rs_annual < 4000 & Meas_interval < 150 ) %>% 
+  filter(Biome %!in% c("", "Alpine")) %>% 
+  group_by(Biome, Meas_interval) %>% 
+  summarise(Rs_annual = mean(Rs_annual),
+            obs = n()) %>% 
+  mutate(obs2 = ifelse(obs <= 100, obs, 110)) %>% 
+  ggplot(aes(Meas_interval, Rs_annual)) +
+  geom_point(aes(size  = obs2), shape = 16, alpha = 0.5) +
+  facet_grid(rows = vars(Biome), scales = "free") +
+  geom_smooth(method = "lm", fill = "skyblue") +
+  theme_set(theme_bw()) +
+  labs(x="Measure interval (day)", y = expression(R[S]~(g~C~m^{-2}~yr^{-1}))) +
+  labs(size="obs (n)")
 ```
 
+
+```{r test time of day}
+srdbv5 %>% 
+    select(Rs_annual, Collar_height, Collar_depth, Chamber_area, Time_of_day, Meas_interval, Annual_coverage) %>% 
+    filter(!is.na(Rs_annual) & Rs_annual < 5000 & Rs_annual > 0) %>% 
+    mutate(Time_day_group = case_when(
+      Time_of_day == "0to24" ~ "Full day",
+      Time_of_day =="" ~ "Not reported",
+      TRUE ~ "Not full day")
+      ) %>% 
+    ggplot(aes(Time_day_group, Rs_annual, fill = as.factor(Time_day_group))) +
+    geom_violin(draw_quantiles = c(0.25, 0.5, 0.75)) +
+    # geom_jitter(shape = 16, position = position_jitter(0.2), col = "gray") +
+    # geom_boxplot(width = 0.1) +
+    theme(legend.title = element_blank()) +
+    scale_fill_brewer(palette="Set2") +
+    xlab(expression(Measurement~coverage)) +
+    ylab(expression(Annual~R[S]~(g~C~m^{-2}~yr^{-1}))) +
+    theme(axis.text.x = element_text(angle = 0, hjust = 0.5))
+```
+
+```{r test cover hour}
+hour_cover_test (srdbv5, hour_cover)
+```
 
 
 
