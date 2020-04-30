@@ -275,9 +275,9 @@ time_depth_test <- function(sdata, colName, threshold){
     geom_smooth(method = "lm",
                 fill = "skyblue") +
     labs(x = if(colnames(sdata2)[1]==x_axis_id[1]) {
-      expression(Collar~length~(cm)) } 
+      expression(Collar~height~(cm)) } 
       else if (colnames(sdata2)[1]==x_axis_id[2]) {
-        expression(Chamber~area~(cm^{-2})) }
+        expression(Collar~area~(cm^{-2})) }
       else if (colnames(sdata2)[1]==x_axis_id[3]) {
         expression(Measure~interval~(day)) }
       else {
