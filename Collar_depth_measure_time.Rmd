@@ -48,11 +48,11 @@ meas_time_mapping <- readd(meas_time_mapping)
 
 ## date process
 ```{r}
-srdbv5 %>% 
-  select(Rs_annual, Collar_height, Collar_depth, Chamber_area, Time_of_day, Meas_interval, Annual_coverage) %>% 
-  filter(Time_of_day!="") %>% 
-  count(Time_of_day) %>% 
-  arrange(n) -> meas_time_mapping
+# srdbv5 %>% 
+#   select(Rs_annual, Collar_height, Collar_depth, Chamber_area, Time_of_day, Meas_interval, Annual_coverage) %>% 
+#   filter(Time_of_day!="") %>% 
+#   count(Time_of_day) %>% 
+#   arrange(n) -> meas_time_mapping
 # writ_file(meas_time_mapping, 'meas_time_mapping.csv')
 
 left_join(
@@ -68,6 +68,7 @@ left_join(
 ## test whether collar depth affect Rs_annual
 ```{r test collar insert depth}
 time_depth_test (srdbv5, Collar_height, 50)
+ggsave('outputs_collar/Figure1.TestCollarHeight.jpg', width = 6, height = 4)
 ```
 
 
@@ -120,15 +121,18 @@ plot_grid(
     theme(legend.position = 'top')
 )
 
+ggsave('outputs_collar/Figure2.TestCollarDepth.jpg', width = 8, height = 7)
 ```
 
 ```{r test chamber area}
 time_depth_test (srdbv5, Chamber_area, 4000)
+ggsave('outputs_collar/Figure3.TestChamberArea.jpg', width = 6, height = 4)
 ```
 
 
 ```{r test measure interval}
 time_depth_test (srdbv5, Meas_interval, 150)
+# ggsave('outputs_collar/Figure4.TestMeasureInterval.jpg', width = 6, height = 4)
 ```
 
 ```{r test measure interval - facet by biome, fig.height=6, fig.width=6}
@@ -148,6 +152,7 @@ srdbv5 %>%
   theme_set(theme_bw()) +
   labs(x="Measure interval (day)", y = expression(R[S]~(g~C~m^{-2}~yr^{-1}))) +
   labs(size="obs (n)")
+ggsave('outputs_collar/Figure4.TestMeasureInterval.jpg', width = 6, height = 7)
 ```
 
 
@@ -173,7 +178,11 @@ srdbv5 %>%
 
 ```{r test cover hour}
 hour_cover_test (srdbv5, hour_cover)
+ggsave('outputs_collar/Figure5.TestHoursCovered.jpg', width = 6, height = 4)
 ```
 
+```{r supplemental figures}
+# Reported frequency of collar size and sample timing
+```
 
 
