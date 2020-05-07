@@ -17,6 +17,8 @@ writ_file <- function(input, output) write.csv(input, file.path(OUT_DIR, output)
 #*****************************************************************************************************************
 # not in function
 '%!in%' <- function(x,y)!('%in%'(x,y))
+# two axises
+scaleFUN <- function(x) sprintf("%.0f", x)
 
 # find out studies in MGRsD but not in SRDB
 mgrsd_notin_srdb <- function (sdata = srdb, sdata2 = mgrsd) {
@@ -253,7 +255,7 @@ time_depth_test <- function(sdata, colName, threshold){
     group_by({{colName}}) %>% 
     summarise(Rs_annual = mean(Rs_annual),
               obs = n()) %>% 
-    mutate(obs2 = ifelse(obs <= 100, obs, 110)) ->
+    mutate(obs2 = ifelse(obs <= 250, obs, 250)) ->
     sdata2
   # density 1 panel
   sdata2 %>% 
@@ -285,7 +287,63 @@ time_depth_test <- function(sdata, colName, threshold){
       
          y = expression(R[S]~(g~C~m^{-2}~yr^{-1}))) +
     labs(size="obs (n)") +
-    theme(legend.position = c(0.7, 0.75),
+    theme(legend.position = c(0.7, 0.65),
+          legend.background = element_rect(colour = NA, fill = NA)) ->
+    plot1
+  # output
+  dens1 + plot_spacer() + plot1 + dens2 + 
+    plot_layout(
+      ncol = 2, 
+      nrow = 2, 
+      widths = c(4, 1),
+      heights = c(1, 4) ) ->
+    final_plot
+  print(final_plot)
+}
+
+# function for meas_interval_test plot
+meas_interval_test <- function(sdata, colName, threshold){
+  x_axis_id <- c("Collar_height", "Chamber_area", "Meas_interval", "hour_cover")
+  # prepare data
+  sdata %>% 
+    select(Rs_annual, {{colName}}) %>% 
+    filter(Rs_annual < 5000 & {{colName}} < threshold) %>% 
+    group_by({{colName}}) %>% 
+    summarise(Rs_annual = mean(Rs_annual),
+              obs = n()) %>% 
+    mutate(obs2 = ifelse(obs <= 250, obs, 250)) ->
+    sdata2
+  # density 1 panel
+  sdata2 %>% 
+    ggplot(aes({{colName}})) +
+    geom_histogram(bins = 50, fill = "white", col = "black") +
+    theme_void() -> 
+    dens1
+  # density 2 panel
+  sdata2 %>% 
+    ggplot(aes(Rs_annual)) +
+    geom_histogram(bins = 30, fill = "white", col = "black") +
+    theme_void() +
+    coord_flip() -> 
+    dens2
+  # main plot
+  sdata2 %>%
+    ggplot(aes({{colName}}, Rs_annual)) +
+    geom_point(aes(size  = obs2), shape = 16, alpha = 0.5) +
+    # geom_smooth(method = "lm",
+    #             fill = "skyblue") +
+    labs(x = if(colnames(sdata2)[1]==x_axis_id[1]) {
+      expression(Collar~height~(cm)) } 
+      else if (colnames(sdata2)[1]==x_axis_id[2]) {
+        expression(Collar~area~(cm^{-2})) }
+      else if (colnames(sdata2)[1]==x_axis_id[3]) {
+        expression(Measure~interval~(day)) }
+      else {
+        expression(Hours~covered~(h)) }, 
+      
+      y = expression(R[S]~(g~C~m^{-2}~yr^{-1}))) +
+    labs(size="obs (n)") +
+    theme(legend.position = c(0.7, 0.65),
           legend.background = element_rect(colour = NA, fill = NA)) ->
     plot1
   # output
@@ -308,7 +366,7 @@ hour_cover_test <- function(sdata, colName){
     group_by({{colName}}) %>% 
     summarise(Rs_annual = mean(Rs_annual),
               obs = n()) %>% 
-    mutate(obs2 = ifelse(obs <= 100, obs, 110)) ->
+    mutate(obs2 = ifelse(obs <= 250, obs, 250)) ->
     sdata2
   # density 1 panel
   sdata %>% 
@@ -328,8 +386,8 @@ hour_cover_test <- function(sdata, colName){
   sdata2 %>%
     ggplot(aes({{colName}}, Rs_annual)) +
     geom_point(aes(size  = obs2), shape = 16, alpha = 0.5) +
-    geom_smooth(method = "lm",
-                fill = "skyblue") +
+    # geom_smooth(method = "lm",
+    #             fill = "skyblue") +
     labs(x = if(colnames(sdata2)[1]==x_axis_id[1]) {
       expression(Collar~length~(cm)) } 
       else if (colnames(sdata2)[1]==x_axis_id[2]) {
@@ -337,11 +395,11 @@ hour_cover_test <- function(sdata, colName){
       else if (colnames(sdata2)[1]==x_axis_id[3]) {
         expression(Measure~interval~(day)) }
       else {
-        expression(Hours~covered~(h)) }, 
+        expression(Diurnal~coverage~(h)) }, 
       
       y = expression(R[S]~(g~C~m^{-2}~yr^{-1}))) +
     labs(size="obs (n)") +
-    theme(legend.position = c(0.7, 0.75),
+    theme(legend.position = c(0.7, 0.65),
           legend.background = element_rect(colour = NA, fill = NA)) ->
     plot1
   # output
@@ -354,4 +412,106 @@ hour_cover_test <- function(sdata, colName){
     final_plot
   print(final_plot)
 }
+
+#*****************************************************************************************************************
+# SLR test for collar and measure time
+SLR_sum <- function(sdata){
+  sdata %>% 
+    select(Rs_annual, Collar_height) %>%
+    filter(Rs_annual < 5000 & Collar_height < 50) %>% 
+    group_by(Collar_height) %>% 
+    summarise(Rs_annual = mean(Rs_annual), obs = n()) ->
+    agg_srdb
+  
+  lm(agg_srdb$Rs_annual ~ agg_srdb$Collar_height, weights = agg_srdb$obs) ->
+    lm_height
+  
+  tibble(Model = "Collar_height",
+         Intercept = summary(lm_height)$coefficients[1,1],
+         Slope = summary(lm_height)$coefficients[2,1],
+         p_slope = summary(lm_height)$coefficients[2,4]) ->
+    model_height_out
+  
+  # test collar area
+  sdata %>% 
+    select(Rs_annual, Chamber_area) %>%
+    filter(Rs_annual < 5000 & Chamber_area < 4000) %>% 
+    group_by(Chamber_area) %>% 
+    summarise(Rs_annual = mean(Rs_annual),  obs = n()) ->
+    agg_srdb
+  
+  lm(agg_srdb$Rs_annual ~ agg_srdb$Chamber_area, weights = agg_srdb$obs) ->
+    lm_area
+  
+  tibble(Model = "Collar_area",
+         Intercept = summary(lm_area)$coefficients[1,1],
+         Slope = summary(lm_area)$coefficients[2,1],
+         p_slope = summary(lm_area)$coefficients[2,4]) ->
+    model_area_out
+  
+  # test collar depth
+  sdata %>% 
+    select(Rs_annual, Collar_depth) %>%
+    filter(Rs_annual < 5000 & Collar_depth < 20) %>% 
+    group_by(Collar_depth) %>% 
+    summarise(Rs_annual = mean(Rs_annual), obs = n()) ->
+    agg_srdb
+  
+  lm(agg_srdb$Rs_annual ~ agg_srdb$Collar_depth, weights = agg_srdb$obs) ->
+    lm_depth
+  
+  tibble(Model = "Collar_depth",
+         Intercept = summary(lm_depth)$coefficients[1,1],
+         Slope = summary(lm_depth)$coefficients[2,1],
+         p_slope = summary(lm_depth)$coefficients[2,4]) ->
+    model_depth_out
+  
+  # test hours covered
+  sdata %>% 
+    select(Rs_annual, hour_cover) %>%
+    filter(Rs_annual < 5000 & !is.na(hour_cover)) %>% 
+    group_by(hour_cover) %>% 
+    summarise(Rs_annual = mean(Rs_annual), obs = n()) ->
+    agg_srdb
+  
+  lm(agg_srdb$Rs_annual ~ agg_srdb$hour_cover, weights = agg_srdb$obs) ->
+    lm_hour
+  
+  tibble(Model = "Hours_coverage",
+         Intercept = summary(lm_hour)$coefficients[1,1],
+         Slope = summary(lm_hour)$coefficients[2,1],
+         p_slope = summary(lm_hour)$coefficients[2,4]) ->
+    model_hour_out
+  
+  # test measure interval
+  sdata %>% 
+    select(Rs_annual, Meas_interval) %>%
+    filter(Rs_annual < 5000 & Meas_interval < 150) %>% 
+    group_by(Meas_interval) %>% 
+    summarise(Rs_annual = mean(Rs_annual), obs = n()) ->
+    agg_srdb
+  
+  lm(agg_srdb$Rs_annual ~ agg_srdb$Meas_interval, weights = agg_srdb$obs) ->
+    lm_interval
+  
+  tibble(Model = "Meas_interval",
+         Intercept = summary(lm_interval)$coefficients[1,1],
+         Slope = summary(lm_interval)$coefficients[2,1],
+         p_slope = summary(lm_interval)$coefficients[2,4]) ->
+    model_interval_out
+  
+  # combine all results and prepare table 1
+  bind_rows(
+    model_height_out,
+    model_area_out,
+    model_depth_out,
+    model_hour_out,
+    model_interval_out) ->
+    slr_summary
+  
+  return(slr_summary)
+}
+
+
+
 
