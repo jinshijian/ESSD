@@ -64,7 +64,7 @@ representative <- function (srdb_data, igbp_data, mat_map_data) {
     sub_srdb
   # Change Latitude and Longitude to 0.5 resolution for IGBP
   igbp_data %>% mutate(Latitude = round(Latitude*4)/4, Longitude = round(Longitude*4)/4) %>% 
-    select(Latitude, Longitude, Ecosystem) ->
+    select(Latitude, Longitude, Ecosystem, Ecosystem2) ->
     sub_IGBP
   # Get Ecosystem class, MAT and MAP for srdb data
   left_join(sub_srdb, sub_IGBP, by=c("Latitude", "Longitude")) -> sub_srdb
@@ -173,57 +173,6 @@ mgrhd_site <- function(sdata){
              , size = 3.5, hjust = 0)
   # print map
   print(rhmap)
-}
-
-#*****************************************************************************************************************
-# data processing functions
-#*****************************************************************************************************************
-## Filter MGRsD and get MRGhD
-get_mgrhd <- function(sdata) {
-  sdata %>% 
-    select(1:22) %>% 
-    select(-Rs_Paper, -Rh_Paper, -Ra_Paper, -Rs_units, -Converter) %>% 
-    filter(!is.na(Rh_Norm) | !is.na(Ra_Norm)) ->
-    MGRhD
-  # MGRhD %>% filter(is.na(Rh_Norm)) %>% nrow()
-  MGRhD$Rh_Norm <- ifelse(is.na(MGRhD$Rh_Norm), MGRhD$Rs_Norm - MGRhD$Ra_Norm, MGRhD$Rh_Norm)
-  # MGRhD %>% filter(is.na(Ra_Norm)) %>% nrow()
-  MGRhD$Ra_Norm <- ifelse(is.na(MGRhD$Ra_Norm), MGRhD$Rs_Norm - MGRhD$Rh_Norm, MGRhD$Ra_Norm)
-  MGRhD$Site_ID <- as.character(MGRhD$Site_ID)
-  # get Meas_Month based on DOY
-  MGRhD %>% 
-    mutate(
-      Meas_Month2 = case_when(
-        Meas_DOY %in% (0:31) ~ 1,
-        Meas_DOY %in% (32:59) ~ 2,
-        Meas_DOY %in% (60:90) ~ 3,
-        Meas_DOY %in% (91:120) ~ 4,
-        Meas_DOY %in% (121:151) ~ 5,
-        Meas_DOY %in% (152:181) ~ 6,
-        Meas_DOY %in% (182:212) ~ 7,
-        Meas_DOY %in% (213:243) ~ 8,
-        Meas_DOY %in% (244:273) ~ 9,
-        Meas_DOY %in% (274:304) ~ 10,
-        Meas_DOY %in% (305:334) ~ 11,
-        Meas_DOY %in% (335:365) ~ 12
-      )
-    ) ->
-    MGRhD
-  return(MGRhD)
-}
-
-## Filter srdbv5 and get sub_srdbv5
-# colnames(srdbv5)
-get_subsrdbv5 <- function(sdata) {
-  sdata %>% 
-    select(Study_number, Site_ID, Study_midyear, Latitude, Longitude, Elevation, Manipulation, Biome, Ecosystem_type,Leaf_habit,
-           Soil_type, Soil_BD, Soil_CN, Soil_sand, Soil_silt, Soil_clay, MAT, MAP, PET, Study_temp, Study_precip, Meas_method,
-           Collar_height, Collar_depth, Chamber_area, Time_of_day, Meas_interval, Annual_coverage, Partition_method, Rs_annual, Ra_annual,
-           Rh_annual, RC_annual,C_soilmineral ) %>% 
-    mutate(Meas_Year = floor(Study_midyear)) -> sub_srdbv5
-  # change site_ID to character
-  sub_srdbv5$Site_ID <- as.character(sub_srdbv5$Site_ID)
-  return(sub_srdbv5)
 }
 
 #*****************************************************************************************************************
@@ -512,6 +461,9 @@ SLR_sum <- function(sdata){
   return(slr_summary)
 }
 
+#*****************************************************************************************************************
+# data processing functions
+#*****************************************************************************************************************
 
 
 

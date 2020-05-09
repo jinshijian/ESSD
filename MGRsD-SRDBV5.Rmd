@@ -60,6 +60,13 @@ GlobalMATMAP <- readd(GlobalMATMAP)
 ```
 
 
+```{r get barren and koppen}
+IGBP %>% count(barren_yn)
+IGBP %>% count(ClimateTypes)
+IGBP %>% count(Ecosystem)
+IGBP %>% count(Ecosystem2)
+```
+
 # ESSD-SRDB-V5 manuscript plots
 ## srdb citation analysis
 ```{r Figure 1 - citation}
@@ -143,7 +150,6 @@ sitemap <- sitemap +
   annotate("text", x = -160, y = c(-10, -25, -40, -55)
            , label = c("SRDB-V4", "SRDB-V5 (Chinese)", "SRDB-V5 (Russian)", "SRDB-V5 (other)")
            , size = 3.5, hjust = 0) 
-  
 
 print(sitemap)
 ggsave('outputs/Figure2.srdb_sites.jpg', width = 8, height = 5)
@@ -174,7 +180,10 @@ plot_grid(v1_plot, v2_plot, v3_plot, v4_plot, v5_plot
 ```
 
 ## Representative analysis - density plot
-```{r Figure 3 and 4 - representative density plot, fig.height=6, fig.width=8}
+```{r Figure 3 and 4 - representative density plot, fig.height=8, fig.width=6}
+IGBP %>% 
+  filter(barren_yn == 0) ->
+  IGBP
 
 # prepare data
 bind_rows(representative(srdbv1, IGBP, GlobalMATMAP) %>% mutate(vs = "SRDB-V1"),
@@ -187,76 +196,100 @@ bind_rows(representative(srdbv1, IGBP, GlobalMATMAP) %>% mutate(vs = "SRDB-V1"),
 
 # plot MAT density comparison
 srdb_comb %>% 
+  filter(vs %in% c('SRDB-V1', 'SRDB-V5')) %>%
   filter(!is.na(Ecosystem) & !is.na(MAT)) %>% 
+  filter(Ecosystem2 %!in% c("Arctic", "Desert", "Savanna", "Wetland", "Urban")) %>% 
   ggplot(aes(x = MAT, fill = factor(Source))) +
-    facet_grid(rows = vars(Ecosystem),
+    facet_grid(rows = vars(Ecosystem2),
                cols = vars(vs),
                scales = "free") +
-  theme(legend.position = "none"
-        # , axis.title.x=element_blank()
-        , axis.text.x = element_text(angle = 25, hjust = 1)) +
+  theme(legend.position = "none") +
   # geom_violin(draw_quantiles = c(0.5))
   geom_density(alpha = 0.5) +
-  labs(x=expression(MAT~"("~degree~C~")"), y=expression(Density))
-  
-# plot MAT density comparison
+  labs(x=expression(MAT~"("~degree~C~")"), y=expression(Density)) ->
+  MAT_rep1
+
 srdb_comb %>% 
+  filter(vs %in% c('SRDB-V1', 'SRDB-V5')) %>%
   filter(!is.na(Ecosystem) & !is.na(MAT)) %>% 
-  filter(Ecosystem %in% c("Agriculture", "Desert", "Shrubland")) %>% 
-  filter(MAT>-20) %>% 
+  filter(MAT >= -20) %>% 
+  filter(Ecosystem2 %in% c("Arctic", "Desert", "Savanna", "Wetland", "Urban")) %>% 
   ggplot(aes(x = MAT, fill = factor(Source))) +
-    facet_grid(rows = vars(Ecosystem),
+    facet_grid(rows = vars(Ecosystem2),
                cols = vars(vs),
                scales = "free") +
   theme(legend.position = "none"
-        # , axis.title.x=element_blank()
-        , axis.text.x = element_text(angle = 25, hjust = 1)) +
+        , axis.title.y=element_blank()) +
   # geom_violin(draw_quantiles = c(0.5))
   geom_density(alpha = 0.5) +
-  labs(x=expression(MAT~"("~degree~C~")"), y=expression(Density))
+  labs(x=expression(MAT~"("~degree~C~")"), y=expression(Density)) ->
+  MAT_rep2
+
+plot_grid(MAT_rep1, MAT_rep2,
+          ncol = 2,
+          rel_widths = c(1.03, 1))
 
 ggsave('outputs/Figure3.MAT.jpg', width = 8, height = 6)
 
-# plot MAP density comparison
-plot_grid(
-  srdb_comb %>% 
-  filter(!is.na(Ecosystem) & !is.na(MAP)) %>% 
-  filter(Ecosystem %in% c("Agriculture")) %>% 
-  filter(MAP <= 4000) %>% 
-  ggplot(aes(x = MAP, fill = factor(Source))) +
+# plot MAT density comparison
+srdb_comb %>% 
+  filter(!is.na(Ecosystem) & !is.na(MAT)) %>% 
+  ggplot(aes(x = MAT, fill = factor(Source))) +
     facet_grid(rows = vars(Ecosystem),
                cols = vars(vs),
-               scales = "free"
-               ) +
+               scales = "free") +
   theme(legend.position = "none"
         # , axis.title.x=element_blank()
-        , axis.text.x = element_text(angle = 30, hjust = 1)) +
+        , axis.text.x = element_text(angle = 25, hjust = 1)) +
   # geom_violin(draw_quantiles = c(0.5))
   geom_density(alpha = 0.5) +
-  labs(x=expression(""), y=expression(Density)),
-  
-  srdb_comb %>% 
-  filter(!is.na(Ecosystem) & !is.na(MAP)) %>% 
-  filter(Ecosystem %in% c("Desert", "Shrubland")) %>% 
-  filter(MAP <= 1250) %>% 
-  ggplot(aes(x = MAP, fill = factor(Source))) +
-    facet_grid(rows = vars(Ecosystem),
-               cols = vars(vs),
-               scales = "free"
-               ) +
-  theme(legend.position = "none"
-        # , axis.title.x=element_blank()
-        , axis.text.x = element_text(angle = 30, hjust = 1)) +
-  # geom_violin(draw_quantiles = c(0.5))
-  geom_density(alpha = 0.5) +
-  labs(x=expression(MAP~"(mm)"), y=expression(Density)),
-  
-  ncol = 1,
-  rel_heights = c(1.1, 2)
-)
+  labs(x=expression(MAT~"("~degree~C~")"), y=expression(Density))
 
-# ggsave('outputs/Figure4.MAP.jpg', width = 8, height = 6)
+ggsave('outputs/FigureS1.MAT.jpg', width = 8, height = 8)
 ```
+
+```{r MAP representation analysis}
+# plot MAP density comparison
+srdb_comb %>% 
+  filter(vs %in% c('SRDB-V1', 'SRDB-V5')) %>%
+  filter(!is.na(Ecosystem) & !is.na(MAP)) %>% 
+  filter(Ecosystem2 %!in% c("Arctic", "Desert", "Shrubland", "Wetland", "Grassland")) %>% 
+  filter(MAP <= 5000) %>% 
+  ggplot(aes(x = MAP, fill = factor(Source))) +
+    facet_grid(rows = vars(Ecosystem2),
+               cols = vars(vs),
+               scales = "free") +
+  theme(legend.position = "none",
+        axis.text.x = element_text(angle = 30, hjust = 1)) +
+  # geom_violin(draw_quantiles = c(0.5))
+  geom_density(alpha = 0.5) +
+  labs(x=expression(MAP~"(mm)"), y=expression(Density)) ->
+  MAP_rep1
+
+srdb_comb %>% 
+  filter(vs %in% c('SRDB-V1', 'SRDB-V5')) %>%
+  filter(!is.na(Ecosystem) & !is.na(MAP)) %>% 
+  filter(Ecosystem2 %in% c("Arctic", "Desert", "Shrubland", "Wetland", "Grassland")) %>% 
+  filter(MAP <= 1000) %>% 
+  ggplot(aes(x = MAP, fill = factor(Source))) +
+    facet_grid(rows = vars(Ecosystem2),
+               cols = vars(vs),
+               scales = "free") +
+  theme(legend.position = "none",
+        axis.title.y=element_blank(),
+        axis.text.x = element_text(angle = 30, hjust = 1)) +
+  # geom_violin(draw_quantiles = c(0.5))
+  geom_density(alpha = 0.5) +
+  labs(x=expression(MAP~"(mm)"), y=expression(Density)) ->
+  MAP_rep2
+
+plot_grid(MAP_rep1, MAP_rep2,
+          ncol = 2,
+          rel_widths = c(1.03, 1))
+
+ggsave('outputs/Figure4.MAP.jpg', width = 8, height = 6)
+```
+
 
 
 ## Test whether add Rs_annual data significantly change the density distribution
