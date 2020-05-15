@@ -31,7 +31,7 @@ library(drake)  # 6.1.0
 source('functions.R')
 # set data and outputs file direction
 DATA_DIR <- 'data'
-OUT_DIR <- 'outputs'
+OUT_DIR <- 'outputs_collar'
 # Set chunks defaults; these options will be applied to all subsequent chunks
 knitr::opts_chunk$set(results = 'hide', message = TRUE, include = TRUE, 
                       echo = FALSE, warning = FALSE,
