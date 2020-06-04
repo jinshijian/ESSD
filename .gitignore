@@ -12,6 +12,7 @@ MGRsD_cache/
 MGRsD_files/
 Old/
 References/
+Manuscript/
 
 # ignore all .ini
 *.ini

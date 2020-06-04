@@ -206,6 +206,10 @@ time_depth_test <- function(sdata, colName, threshold){
               obs = n()) %>% 
     mutate(obs2 = ifelse(obs <= 250, obs, 250)) ->
     sdata2
+  
+  # slr <- lm(Rs_annual ~ {{colName}}, data = sdata2)
+  # print(summary(slr))
+  
   # density 1 panel
   sdata2 %>% 
     ggplot(aes({{colName}})) +
@@ -286,7 +290,7 @@ meas_interval_test <- function(sdata, colName, threshold){
       else if (colnames(sdata2)[1]==x_axis_id[2]) {
         expression(Collar~area~(cm^{-2})) }
       else if (colnames(sdata2)[1]==x_axis_id[3]) {
-        expression(Measure~interval~(day)) }
+        expression(Measurement~interval~(day)) }
       else {
         expression(Hours~covered~(h)) }, 
       
@@ -344,7 +348,7 @@ hour_cover_test <- function(sdata, colName){
       else if (colnames(sdata2)[1]==x_axis_id[3]) {
         expression(Measure~interval~(day)) }
       else {
-        expression(Diurnal~coverage~(h)) }, 
+        expression(Measurement~time~(h)) }, 
       
       y = expression(R[S]~(g~C~m^{-2}~yr^{-1}))) +
     labs(size="obs (n)") +
