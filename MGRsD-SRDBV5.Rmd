@@ -152,7 +152,7 @@ sitemap <- sitemap +
            , size = 3.5, hjust = 0) 
 
 print(sitemap)
-ggsave('outputs/Figure2.srdb_sites.jpg', width = 8, height = 5)
+# ggsave('outputs/Figure2.srdb_sites.jpg', width = 8, height = 5)
 ```
 
 ## Representative analysis
@@ -305,7 +305,7 @@ srdb_comb %>%
   geom_density(alpha = 0.5) +
   labs(x=expression(MAP~"(mm)"), y=expression(Density))
 
-ggsave('outputs/FigureS2.MAP.jpg', width = 8, height = 8)
+# ggsave('outputs/FigureS2.MAP.jpg', width = 8, height = 8)
 ```
 
 
