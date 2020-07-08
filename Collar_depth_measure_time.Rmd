@@ -1,0 +1,918 @@
+---
+title: "Collar_depth_measure_time"
+output: html_document
+---
+
+# loading necessary packages
+```{r preliminaries, message=FALSE, echo=FALSE}
+library(readxl)
+library(styler)
+library(ggplot2)
+theme_set(theme_bw())
+library(cowplot)
+library(tidyr)
+library(dplyr)
+library(cowplot)
+library(data.table)
+library(lubridate)
+library(kableExtra)
+library(knitr)
+library(ggpubr)
+library(ggmap)
+library(maps)
+library(mapdata)
+library(leaflet)
+library(sp)
+library(RColorBrewer)
+# install.packages("patchwork")
+library(patchwork)
+# Source all needed functions
+source('functions.R')
+# set data and outputs file direction
+DATA_DIR <- 'data'
+OUT_DIR <- 'outputs'
+# Set chunks defaults; these options will be applied to all subsequent chunks
+knitr::opts_chunk$set(results = 'hide', message = TRUE, include = TRUE, 
+                      echo = FALSE, warning = FALSE,
+                      fig.height = 4, fig.width = 8, cache = FALSE)
+```
+
+# Prepare data
+## get data
+```{r get MGRhD}
+srdbv5 <- drake::readd(srdbv5)
+meas_time_mapping <- drake::readd(meas_time_mapping)
+``` 
+
+## date process
+```{r}
+left_join(
+  srdbv5,
+  meas_time_mapping %>% 
+    select(Time_of_day, start1, end1, hour_cover),
+  by = "Time_of_day") -> 
+  srdbv5
+```
+
+## Table 1 - summary of SLR
+```{r SLR test}
+# SLR test collar height, collar depth, collar area, measure tume, and measure interval
+SLR_sum(srdbv5)
+```
+
+# Data analysis
+## test whether collar depth affect Rs_annual
+```{r test collar insert depth}
+time_depth_test (srdbv5, Collar_height, 50)
+# ggsave('outputs_collar/Figure.TestCollarHeight.jpg', width = 6, height = 4)
+```
+
+```{r test chamber area}
+srdbv5 %>% 
+  count(Chamber_area) %>% 
+  arrange(Chamber_area)
+
+time_depth_test (srdbv5, Chamber_area, 4000)
+# ggsave('outputs_collar/Figure.TestChamberArea.jpg', width = 6, height = 4)
+```
+
+```{r collar test, fig.width=6, fig.height=8}
+srdbv5 %>% 
+  select(Rs_annual, Collar_height) %>% 
+  filter(Rs_annual < 5000 & Collar_height < 50) %>% 
+  group_by(Collar_height) %>% 
+  summarise(Rs_annual = mean(Rs_annual),
+            obs = n()) %>% 
+  mutate(obs2 = ifelse(obs <= 250, obs, 250)) ->
+  sdata1
+
+# density 1 panel
+sdata1 %>% 
+  ggplot(aes(Collar_height)) +
+  geom_histogram(bins = 50, fill = "white", col = "black") +
+  theme_void() -> 
+  dens1
+
+# density 2 panel
+sdata1 %>% 
+  ggplot(aes(Rs_annual)) +
+  geom_histogram(bins = 30, fill = "white", col = "black") +
+  theme_void() +
+  coord_flip() -> 
+  dens2
+
+# main plot 1
+sdata1 %>%
+  ggplot(aes(Collar_height, Rs_annual)) +
+  geom_point(aes(size  = obs2), shape = 16, alpha = 0.5) +
+  geom_smooth(method = "lm",
+              fill = "skyblue") +
+  labs(x = expression(Collar~height~(cm)), 
+       y = expression(R[S]~(g~C~m^{-2}~yr^{-1}))) +
+  labs(size="obs (n)") +
+  annotate("text", x = 5, y = 2500, label = "( a )", hjust = 0) +
+  theme(legend.position = c(0.7, 0.65),
+        legend.background = element_rect(colour = NA, fill = NA)) ->
+  plot1
+
+srdbv5 %>% 
+  select(Rs_annual, Chamber_area) %>% 
+  filter(Rs_annual < 5000 & Chamber_area < 4000) %>% 
+  group_by(Chamber_area) %>% 
+  summarise(Rs_annual = mean(Rs_annual),
+            obs = n()) %>% 
+  mutate(obs2 = ifelse(obs <= 250, obs, 250)) ->
+  sdata2
+
+# density 1 panel (b)
+sdata2 %>% 
+  ggplot(aes(Chamber_area)) +
+  geom_histogram(bins = 50, fill = "white", col = "black") +
+  theme_void() -> 
+  dens3
+
+# density 2 panel (b)
+sdata2 %>% 
+  ggplot(aes(Rs_annual)) +
+  geom_histogram(bins = 30, fill = "white", col = "black") +
+  theme_void() +
+  coord_flip() -> 
+  dens4
+
+# main plot (b)
+sdata2 %>%
+  ggplot(aes(Chamber_area, Rs_annual)) +
+  geom_point(aes(size  = obs2), shape = 16, alpha = 0.5) +
+  geom_smooth(method = "lm",
+              fill = "skyblue") +
+  labs(x = expression(Collar~area~(cm^{-2})), 
+    
+       y = expression(R[S]~(g~C~m^{-2}~yr^{-1}))) +
+  labs(size="obs (n)") +
+  annotate("text", x = 225, y = 4500, label = "( b )", hjust = 0) +
+  theme(legend.position = c(0.7, 0.65),
+        legend.background = element_rect(colour = NA, fill = NA)) ->
+  plot2
+
+dens1 + plot_spacer() + plot1 + dens2 +
+  dens3 + plot_spacer() + plot2 + dens4 + 
+  plot_layout(
+    ncol = 2, 
+    nrow = 4, 
+    widths = c(4, 1),
+    heights = c(1, 4) ) ->
+  figure_test_collar
+print(figure_test_collar)  
+
+# ggsave('outputs_collar/Figure.TestCollar.jpg', width = 6, height = 8)
+```
+
+
+```{r test collar insert depth, fig.width=6, fig.height=7}
+srdbv5 %>% 
+  select(Rs_annual, Collar_depth, Ecosystem_type) %>% 
+  filter(Rs_annual < 5000 & Collar_depth < 20 & Ecosystem_type != "") %>% 
+  mutate(Ecosystem_group = case_when(
+    Ecosystem_type %in% c("Agriculture", "Orchard") ~ "Agriculture",
+    Ecosystem_type == "Desert" ~ "Desert",
+    Ecosystem_type %in% c("Forest", "Plantation") ~ "Forest",
+    Ecosystem_type %in% c("Grassland", "Turfgrass", "Urban", "Urban lawn") ~ "Grassland",
+    Ecosystem_type %in% c("Savanna", "Shrubland", "Steppe") ~ "Shrubland",
+    Ecosystem_type %in% c("Tundra", "Wetland") ~ "Wetland",
+    Ecosystem_type %in% c("Savanna", "Shrubland", "Steppe") ~ "Shrubland",
+    TRUE ~ "None")) %>% 
+  group_by(Ecosystem_group, Collar_depth) %>% 
+  summarise(Rs_annual = mean(Rs_annual),
+            obs = n()) %>% 
+  mutate(obs2 = ifelse(obs <= 250, obs, 250)) ->
+  sub_depth
+
+# with all data
+sub_depth %>% 
+  filter(Ecosystem_group != "Shrubland" & Collar_depth != 10) %>% 
+  ggplot(aes(Collar_depth, Rs_annual)) +
+  geom_point(aes(size  = obs2), shape = 16, alpha = 0.5) +
+  geom_smooth(data = sub_depth %>% filter(Ecosystem_group == "Desert"), method = "lm", fill = "skyblue") +
+  facet_grid(rows = vars(Ecosystem_group), scales = "free") +
+  theme_set(theme_bw()) +
+  labs(x="Collar depth (cm)", y = expression(R[S]~(g~C~m^{-2}~yr^{-1}))) +
+  labs(size="obs (n)")
+
+# with outlier (depth = 10 in shrubland) removed
+sub_depth %>% 
+  ggplot(aes(Collar_depth, Rs_annual)) +
+  geom_point(aes(size  = obs2), shape = 16, alpha = 0.5) +
+  geom_smooth(data = sub_depth %>% filter(Ecosystem_group %in% c("Desert", "Shrubland")), method = "lm", fill = "skyblue") +
+  facet_grid(rows = vars(Ecosystem_group), scales = "free") +
+  theme_set(theme_bw()) +
+  labs(x="Collar insertion depth (cm)", y = expression(R[S]~(g~C~m^{-2}~yr^{-1}))) +
+  labs(size="obs (n)")  
+  
+# ggsave('outputs_collar/Figure.TestCollarDepth.jpg', width = 5, height = 7)
+
+# facet by RC
+srdbv5 %>% 
+  select(Rs_annual, Collar_depth, RC_annual) %>% 
+  filter(Rs_annual < 5000 & Collar_depth < 20 & !is.na(RC_annual) & RC_annual > 0) %>% 
+  mutate(RC_group = cut(RC_annual, 6)) %>% 
+  group_by(RC_group, Collar_depth) %>% 
+  summarise(Rs_annual = mean(Rs_annual),
+            obs = n()) %>% 
+  mutate(obs2 = ifelse(obs <= 250, obs, 250)) %>% 
+  ggplot(aes(Collar_depth, Rs_annual)) +
+  geom_point(aes(size  = obs2), shape = 16, alpha = 0.5) +
+  facet_grid(rows = vars(RC_group), scales = "free") +
+  # geom_smooth(method = "lm", fill = "skyblue") +
+  theme_set(theme_bw()) +
+  labs(x=expression(Collar~insertion~depth~(cm)), y = expression(R[S]~(g~C~m^{-2}~yr^{-1}))) +
+  labs(size="obs (n)") 
+
+# ggsave('outputs_collar/FigureS.TestCollarDepth_by_RC.jpg', width = 5, height = 7)
+```
+
+```{r, fig.height=6, fig.width=4}
+# test collar depth, with MAT and MAP considered
+srdbv5 %>% 
+  select(Rs_annual, Collar_depth, MAP, MAT, RC_annual) %>% 
+  filter(Collar_depth < 20 & !is.na(MAT) & !is.na(MAP) & !is.na(Rs_annual)) -> 
+  # na.omit() ->
+  # group_by(Collar_depth) %>% 
+  # summarise_each(funs(mean)) -> 
+  sub_srdb
+
+slr <- lm(Rs_annual ~ Collar_depth, data = sub_srdb)
+summary(slr)
+
+sub_srdb$Predicted_Rs <- slr$fitted.values
+sub_srdb$Student_residual <- rstandard( slr )
+
+lm(MAP ~ Collar_depth, data = sub_srdb) %>% 
+  summary()
+lm(MAT ~ Collar_depth, data = sub_srdb) %>% 
+  summary()
+
+sub_srdb %>% 
+  ggplot(aes(Collar_depth, MAP)) +
+  geom_point() +
+  geom_smooth(method = "lm")
+
+plot_grid(
+  sub_srdb %>% 
+    ggplot(aes(MAT, Student_residual)) +
+    geom_hex(col = "gray", bins = 20) +
+    scale_fill_distiller(palette = "YlGnBu", name = "Count") +
+    geom_hline(yintercept = 0, linetype = "dashed", col = "red", size = 1) +
+    # geom_smooth(method = "lm", col = "orange") +
+    labs(x = expression(MAT~(degree~C)),
+         y = expression(Standardized~residual)),
+  
+  sub_srdb %>% 
+    ggplot(aes(MAP, Student_residual)) +
+    geom_hex(col = "gray", bins = 20) +
+    scale_fill_distiller(palette = "YlGnBu", name = "Count") +
+    geom_hline(yintercept = 0, linetype = "dashed", col = "red", size = 1) +
+    # geom_smooth(method = "lm", col = "orange") +
+    labs(x = expression(MAP~(mm)),
+         y = expression(Standardized~residual)),
+  
+  sub_srdb %>% 
+    ggplot(aes(RC_annual, Student_residual)) +
+    geom_hex(col = "gray", bins = 30) +
+    scale_fill_distiller(palette = "YlGnBu", name = "Count   ") +
+    geom_hline(yintercept = 0, linetype = "dashed", col = "red", size = 1) +
+    # geom_smooth(method = "lm", col = "orange") +
+    labs(x = expression(R[root]~":"~R[S]~ratio),
+         y = expression(Standardized~residual)),
+  
+  ncol = 1
+)
+
+# ggsave('outputs_collar/FigureS.TestMATMAP.jpg', width = 4, height = 6)
+```
+
+
+
+```{r test time of day}
+srdbv5 %>% 
+  select(Rs_annual, Collar_height, Collar_depth, Chamber_area, Time_of_day, Meas_interval, Annual_coverage) %>% 
+  filter(!is.na(Rs_annual) & Rs_annual < 5000 & Rs_annual > 0) %>% 
+  mutate(Time_day_group = case_when(
+    Time_of_day == "0to24" ~ "Full day",
+    Time_of_day =="" ~ "Not reported",
+    TRUE ~ "Not full day")) ->
+  sub_time_grop
+
+sub_time_grop %>% 
+  ggplot(aes(Time_day_group, Rs_annual, fill = as.factor(Time_day_group))) +
+  geom_violin(draw_quantiles = c(0.25, 0.5, 0.75)) +
+  # geom_jitter(shape = 16, position = position_jitter(0.2), col = "gray") +
+  # geom_boxplot(width = 0.1) +
+  theme(legend.title = element_blank()) +
+  scale_fill_brewer(palette="Set2") +
+  xlab(expression(Measurement~coverage)) +
+  ylab(expression(Annual~R[S]~(g~C~m^{-2}~yr^{-1}))) +
+  theme(axis.text.x = element_text(angle = 0, hjust = 0.5))
+
+# ggsave('outputs_collar/FigureS.HourCoverage.jpg', width = 6, height = 4)
+
+sub_time_grop %>% filter(Time_day_group != "Not reported") ->
+  sub_time_grop
+wilcox.test(Rs_annual ~ Time_day_group, data = sub_time_grop, alternative = "less")
+
+```
+
+```{r test cover hour}
+hour_cover_test (srdbv5, hour_cover)
+# ggsave('outputs_collar/Figure.TestHoursCovered.jpg', width = 6, height = 4)
+```
+
+
+```{r test measure interval}
+meas_interval_test (srdbv5, Meas_interval, 150)
+# ggsave('outputs_collar/Figure.TestMeasureInterval.jpg', width = 6, height = 4)
+```
+
+```{r test time, fig.width=6, fig.height=8}
+# prepare data
+srdbv5 %>% 
+  select(Rs_annual, hour_cover) %>% 
+  filter(Rs_annual < 5000 & !is.na(hour_cover)) %>% 
+  group_by(hour_cover) %>% 
+  summarise(Rs_annual = mean(Rs_annual),
+            obs = n()) %>% 
+  mutate(obs2 = ifelse(obs <= 250, obs, 250)) ->
+  sdata3
+# density 1 panel
+srdbv5 %>% 
+  filter(!is.na(hour_cover)) %>%
+  ggplot(aes(hour_cover)) +
+  geom_histogram(bins = 50, fill = "white", col = "black") +
+  theme_void() -> 
+  time_dens1
+# density 2 panel
+sdata3 %>% 
+  ggplot(aes(Rs_annual)) +
+  geom_histogram(bins = 30, fill = "white", col = "black") +
+  theme_void() +
+  coord_flip() -> 
+  time_dens2
+# main plot
+sdata3 %>%
+  ggplot(aes(hour_cover, Rs_annual)) +
+  geom_point(aes(size  = obs2), shape = 16, alpha = 0.5) +
+  # geom_smooth(method = "lm",
+  #             fill = "skyblue") +
+  labs(x = expression(Measurement~time~(h)), 
+    y = expression(R[S]~(g~C~m^{-2}~yr^{-1}))) +
+  labs(size="obs (n)") +
+  annotate("text", x = 2.5, y = 1600, label = "( a )", hjust = 0) +
+  theme(legend.position = c(0.7, 0.65),
+        legend.background = element_rect(colour = NA, fill = NA)) ->
+  time_plot1
+
+# prepare data for measure interval test
+srdbv5 %>% 
+  select(Rs_annual, Meas_interval) %>% 
+  filter(Rs_annual < 5000 & Meas_interval < 150) %>% 
+  group_by(Meas_interval) %>% 
+  summarise(Rs_annual = mean(Rs_annual),
+            obs = n()) %>% 
+  mutate(obs2 = ifelse(obs <= 250, obs, 250)) ->
+  sdata4
+# density 1 panel
+sdata4 %>% 
+  ggplot(aes(Meas_interval)) +
+  geom_histogram(bins = 50, fill = "white", col = "black") +
+  theme_void() -> 
+  time_dens3
+# density 2 panel
+sdata4 %>% 
+  ggplot(aes(Rs_annual)) +
+  geom_histogram(bins = 30, fill = "white", col = "black") +
+  theme_void() +
+  coord_flip() -> 
+  time_dens4
+# main plot
+sdata4 %>%
+  ggplot(aes(Meas_interval, Rs_annual)) +
+  geom_point(aes(size  = obs2), shape = 16, alpha = 0.5) +
+  # geom_smooth(method = "lm",
+  #             fill = "skyblue") +
+  labs(x = expression(Measurement~frequency~(days~per~measurement)), 
+    y = expression(R[S]~(g~C~m^{-2}~yr^{-1}))) +
+  labs(size="obs (n)") +
+  annotate("text", x = 10, y = 3000, label = "( b )", hjust = 0) +
+  theme(legend.position = c(0.7, 0.65),
+        legend.background = element_rect(colour = NA, fill = NA)) ->
+  time_plot2
+
+time_dens1 + plot_spacer() + time_plot1 + time_dens2 +
+  time_dens3 + plot_spacer() + time_plot2 + time_dens4 + 
+  plot_layout(
+    ncol = 2, 
+    nrow = 4, 
+    widths = c(4, 1),
+    heights = c(1, 4) ) ->
+  figure_test_time
+
+print(figure_test_time)  
+
+# ggsave('outputs_collar/Figure.TestTime.jpg', width = 6, height = 8)
+
+```
+
+
+
+```{r test measure interval - facet by biome, fig.height=6, fig.width=6}
+# facet by biome
+srdbv5 %>% 
+  select(Rs_annual, Biome, Meas_interval) %>% 
+  filter(Rs_annual < 4000 & Meas_interval < 150 ) %>% 
+  filter(Biome %!in% c("", "Alpine")) %>% 
+  group_by(Biome, Meas_interval) %>% 
+  summarise(Rs_annual = mean(Rs_annual),
+            obs = n()) %>% 
+  mutate(obs2 = ifelse(obs <= 250, obs, 250)) %>% 
+  ggplot(aes(Meas_interval, Rs_annual)) +
+  geom_point(aes(size  = obs2), shape = 16, alpha = 0.5) +
+  facet_grid(rows = vars(Biome), scales = "free") +
+  # geom_smooth(method = "lm", fill = "skyblue") +
+  theme_set(theme_bw()) +
+  labs(x="Measurement frequency (day)", y = expression(R[S]~(g~C~m^{-2}~yr^{-1}))) +
+  labs(size="obs (n)")
+
+# ggsave('outputs_collar/FigureS.TestMeasureInterval.jpg', width = 6, height = 7)
+
+```
+
+```{r supplemental figures}
+# Reported frequency of collar size and sample timing
+srdbv5 %>% 
+  filter(!is.na(Rs_annual)) %>%
+  # Create groups
+  mutate(
+    Collar_height_group = case_when(
+      !is.na(Collar_height) ~ "Yes",
+      TRUE ~ "No"),
+    Collar_area_group = case_when(
+      !is.na(Chamber_area) ~ "Yes",
+      TRUE ~ "No"),
+    Collar_depth_group = case_when(
+      !is.na(Collar_depth) ~ "Yes",
+      TRUE ~ "No"),
+    Meas_time_group = case_when(
+      (Time_of_day != "") ~ "Yes",
+      TRUE ~ "No"),
+    Meas_interval_group = case_when(
+      !is.na(Meas_interval) ~ "Yes",
+      TRUE ~ "No")
+    ) %>% 
+  select(Collar_height_group, Collar_area_group, Collar_depth_group, Meas_time_group, Meas_interval_group) %>% 
+  # using gather to pivot table
+  tidyr::gather(key = "Group", value = "YN") %>% 
+  # group_by(Group, YN) %>% 
+  # summarise(obs = n()) %>% 
+  ggplot(aes(Group), stat = "identity") +
+  # scale_y_continuous(labels=scales::percent) +
+  scale_x_discrete(limits = c("Collar_height_group", "Collar_area_group", "Collar_depth_group", "Meas_time_group", "Meas_interval_group"),
+                   labels = c("Collar height", "Collar area", "Collar depth", "Measurement time", "Frequency")) +
+  geom_bar(aes(fill = (YN)), width = 0.75) +
+  theme(legend.title = element_blank(),
+        axis.text.x = element_text(size = 8),
+        axis.title.x = element_blank()) +
+  annotate("text", x = c(1:5), y = 500, 
+           label = c(expression('46.28'~'%'), expression('74.31'~'%'), 
+                     expression('63.32'~'%'), expression('14.18'~'%'), expression('89.37'~'%')),
+           parse = TRUE) +
+  annotate("text", x = c(1:5), y = 5500, 
+           label = c(expression('53.72'~'%'), expression('25.69'~'%'), 
+                     expression('36.68'~'%'), expression('85.82'~'%'), expression('10.63'~'%')),
+           parse = TRUE) ->
+  count_plot
+
+sub_time_grop %>% 
+  filter(Time_day_group %!in% "Not reported") %>% 
+  count(Time_day_group) %>% 
+  ungroup() %>% 
+  mutate(percent = round(n/sum(n), 4)) %>% 
+  mutate(label = scales::percent(percent)) %>% 
+  arrange(desc(Time_day_group)) %>% 
+  ggplot() +
+  geom_bar(aes(x="", y=percent, fill=Time_day_group), stat="identity", width = 1)+
+  coord_polar("y", start=0)+
+  theme_void() +
+  geom_text(aes(x=c(1, 1.1), y = cumsum(percent) - percent/2, label=label), size = 4) +
+  theme(legend.title = element_blank(),
+        legend.text=element_text(size=8),
+        legend.margin = margin(1, 1, 1, 1),
+        legend.box.margin = margin(1, 1, 1, 1)) ->
+  pie1
+
+
+srdbv5 %>% 
+  select(Meas_method) %>% 
+  filter(Meas_method %!in% "") %>% 
+  mutate(Meas_method_group = case_when(
+    Meas_method %in% "Alkali absorption" ~ "AA",
+    Meas_method %in% "EC" ~ "EC", 
+    Meas_method %in% "Gas chromatography" ~ "GC",
+    Meas_method %in% "Gradient" ~ "Gradient",
+    Meas_method %in% "IRGA" ~ "IRGA",
+    TRUE ~ "Other")) %>% 
+  count(Meas_method_group) %>% 
+  mutate(percent = round(n/sum(n), 4)) %>% 
+  mutate(label = paste0(Meas_method_group, "(", percent*100,"%", ")")) %>% 
+  ggplot() +
+  geom_bar(aes(x="", y=percent, fill=label), stat="identity", width = 1) +
+  coord_polar("y", start=0)+
+  theme_void() +
+  scale_fill_brewer(palette="Spectral") +
+  theme(legend.title = element_blank(),
+        legend.text=element_text(size=8),
+        legend.margin = margin(1, 1, 1, 1),
+        legend.box.margin = margin(1, 1, 1, 1)) ->
+  pie2
+
+plot_grid(
+  pie1, pie2, 
+  labels = c("b", "c")
+) ->
+  pie
+
+plot_grid(
+  count_plot, pie,
+  rel_heights = c(1.5, 1),
+  nrow = 2,
+  labels = c("a",""),
+  vjust = c(0.9, 0)
+)
+
+# ggsave('outputs_collar/Figure.MeasureCount.jpg', width = 6, height = 4)
+
+srdbv5 %>% 
+  # Create groups
+  filter(!is.na(Rs_annual)) %>% 
+  mutate(
+    Collar_height_group = case_when(
+      !is.na(Collar_height) ~ "Yes",
+      TRUE ~ "No"),
+    Collar_area_group = case_when(
+      !is.na(Chamber_area) ~ "Yes",
+      TRUE ~ "No"),
+    Collar_depth_group = case_when(
+      !is.na(Collar_depth) ~ "Yes",
+      TRUE ~ "No"),
+    Meas_time_group = case_when(
+      (Time_of_day != "") ~ "Yes",
+      TRUE ~ "No"),
+    Meas_interval_group = case_when(
+      !is.na(Meas_interval) ~ "Yes",
+      TRUE ~ "No")
+    ) %>% 
+  select(Collar_height_group, Collar_area_group, Collar_depth_group, Meas_time_group, Meas_interval_group) %>% 
+  # using gather to pivot table
+  tidyr::gather(key = "Group", value = "YN") %>% 
+  group_by(Group, YN) %>%
+  summarise(obs = n()) %>% 
+  mutate(percet = obs/5741*100)
+
+```
+
+
+## Compare annual Rs and Rrrot:Rs ratio (bootstrap)
+```{r}
+srdbv5 %>% 
+    select(Rs_annual, Meas_method) %>% 
+    na.omit() %>% 
+    filter(Rs_annual < 2000) %>% 
+    filter(Meas_method %!in% c("", "Unknown", "Isotope", "Other")) %>%
+    count(Meas_method)
+
+srdbv5 %>% 
+  select(RC_annual, Meas_method) %>% 
+  na.omit() %>% 
+  filter(RC_annual > 0 & RC_annual < 1) %>% 
+  filter(Meas_method %!in% c("", "Unknown", "Isotope", "Other")) %>%
+  count(Meas_method)
+  
+
+srdbv5 %>% 
+  select(Rs_annual, Meas_method) %>% 
+  na.omit() %>% 
+  filter(Rs_annual < 2000) %>% 
+  filter(Meas_method %!in% c("", "Unknown", "Isotope", "Other")) %>%
+  # count(Meas_method)
+  ggplot(aes(Meas_method, Rs_annual, fill = Meas_method)) +
+  geom_violin(draw_quantiles = c(0.5)) +
+  theme(legend.title = element_blank(),
+        axis.title.x = element_blank(),
+        axis.text.x = element_text(angle = 30, vjust = 0.5)) +
+  scale_x_discrete(labels = c("AA(614)", "EC(12)", "Equation(13)", "GC(642)", "Gradient(39)", "IRGA(4134)")) +
+  scale_fill_discrete(breaks=c("Alkali absorption", "EC", "Equation", "Gas chromatography", "Gradient", "IRGA"),
+                        labels=c("AA", "EC", "Equation", "GC", "Gradient", "IRGA")) +
+  labs(y = expression(Annual~R[S]~(g~C~m^{-2}~yr^{-1}))) ->
+  p1
+
+ 
+# ggsave('outputs_collar/FigureS6-EC by partition method.jpg', width = 6, height = 6)
+
+srdbv5 %>% 
+  select(Collar_depth) %>% 
+  na.omit()
+mean(srdbv5$Collar_depth, na.rm = T) 
+
+srdbv5 %>% 
+  select(Meas_interval) %>% 
+  na.omit()
+mean(srdbv5$Meas_interval, na.rm = T)
+
+srdbv5 %>% 
+  select(Collar_height) %>% 
+  na.omit()
+mean(srdbv5$Collar_height, na.rm = T)
+
+srdbv5 %>% 
+  select(Chamber_area) %>% 
+  na.omit()
+mean(srdbv5$Chamber_area, na.rm = T)
+```
+
+```{r boots Rs_annual}
+# Bootstrap Rs_annual and compare mean value
+set.seed(20200610)
+N_SAMPLES <- 2500
+sample_size <- 20
+
+RESAMPLE <- function(n, x) { # no errors/sd inputs
+  mean(sample(x, n, replace = TRUE))
+}
+
+srdbv5 %>% 
+    select(Rs_annual, Meas_method) %>% 
+    na.omit() %>% 
+    filter(Rs_annual < 2000) %>% 
+    filter(Meas_method %!in% c("", "Unknown", "Isotope", "Other")) %>% 
+  mutate(Meas_method_group = case_when(
+    Meas_method %in% c("Gradient", "GC", "Equation") ~ "No",
+    TRUE ~ "Yes")) ->
+  boot_annual_rs
+
+wilcox.test(Rs_annual ~ Meas_method_group, data = boot_annual_rs, alternative = "less")
+
+bootstrap_Rs_annual <- tibble(
+  Rs_wt_collar = sapply(rep(sample_size, N_SAMPLES), RESAMPLE, boot_annual_rs[boot_annual_rs$Meas_method_group == "Yes",]$Rs_annual),
+  Rs_no_collar = sapply(rep(sample_size, N_SAMPLES), RESAMPLE, boot_annual_rs[boot_annual_rs$Meas_method_group == "No",]$Rs_annual)
+)
+
+mean(bootstrap_Rs_annual$Rs_wt_collar)
+mean(bootstrap_Rs_annual$Rs_no_collar)
+
+bootstrap_Rs_annual %>%
+  gather(Rs_type) %>% 
+  ggplot(aes(value, fill = Rs_type)) +
+  # theme_cowplot() +
+  geom_density(stat = "density", alpha = 0.65) +
+  theme(legend.position = c(0.80, 0.75)) +
+  coord_cartesian(xlim = c(375, 1200)) +
+  scale_fill_manual("",
+    labels = c(expression(Without~collar), expression(With~collar)),
+    values=c("#E41A1C", "skyblue")) +
+  theme(
+    legend.title = element_blank(),
+    legend.text.align = 0) +
+  ylab("Density") +
+  xlab(expression(R[S] ~ (g~C~m^{-2}~yr^{-1}))) +
+  annotate("text", x = 930, y = 0.0021,
+           label = "W = 137328\n p = 0.39",
+           hjust = 0) ->
+  p2
+
+p2
+
+```
+
+
+```{r boots RC}
+set.seed(20200610)
+srdbv5 %>% 
+  select(RC_annual, Meas_method) %>% 
+  mutate(Rh_annual = 1-RC_annual) %>% 
+  na.omit() %>% 
+  filter(RC_annual > 0 & RC_annual < 1) %>% 
+  filter(Meas_method %!in% c("", "Unknown", "Isotope", "Other")) %>%
+  # count(Meas_method)
+  ggplot(aes(Meas_method, RC_annual, fill = Meas_method)) +
+  geom_violin(draw_quantiles = c(0.5)) +
+  theme(legend.title = element_blank(),
+        axis.title.x = element_blank(),
+        axis.text.x = element_text(angle = 30, vjust = 0.5)) +
+  scale_x_discrete(labels = c("AA(88)", "EC(7)", "Equation(15)", "GC(57)", "Gradient(6)", "IRGA(732)")) +
+  scale_fill_discrete(breaks=c("Alkali absorption", "EC", "Equation", "Gas chromatography", "Gradient", "IRGA"),
+                        labels=c("AA", "EC", "Equation", "GC", "Gradient", "IRGA")) +
+  labs(y = expression(R[root]*":"*R[S]~ratio)) ->
+  p3
+
+# Bootstrap Rs_annual and compare mean value
+srdbv5 %>%
+  select(RC_annual, Meas_method) %>%
+  mutate(Rh_annual = 1-RC_annual) %>% 
+  na.omit() %>%
+  filter(RC_annual > 0 & RC_annual < 1) %>%
+  filter(Meas_method %!in% c("", "Unknown", "Isotope", "Other")) %>%
+  mutate(Meas_method_group = case_when(
+    Meas_method %in% c("Gradient", "GC", "Equation") ~ "No",
+    TRUE ~ "Yes")) ->
+  boot_annual_rc
+
+wilcox.test(RC_annual ~ Meas_method_group, data = boot_annual_rc, alternative = "less")
+
+bootstrap_rc_annual <- tibble(
+  rc_wt_collar = sapply(rep(sample_size, N_SAMPLES), RESAMPLE, boot_annual_rc[boot_annual_rc$Meas_method_group == "Yes",]$RC_annual),
+  rc_no_collar = sapply(rep(sample_size, N_SAMPLES), RESAMPLE, boot_annual_rc[boot_annual_rc$Meas_method_group == "No",]$RC_annual)
+)
+
+mean(bootstrap_rc_annual$rc_wt_collar)
+mean(bootstrap_rc_annual$rc_no_collar)
+
+bootstrap_rc_annual %>%
+  gather(rc_type) %>%
+  ggplot(aes(value, fill = rc_type)) +
+  # theme_cowplot() +
+  geom_density(stat = "density", alpha = 0.65) +
+  theme(legend.position = c(0.80, 0.75)) +
+  coord_cartesian(xlim = c(0.25, 0.8)) +
+  scale_fill_manual("",
+    labels = c(expression(Without~collar), expression(With~collar)),
+    values=c("#E41A1C", "skyblue")) +
+  theme(
+    legend.title = element_blank(),
+    legend.text.align = 0) +
+  ylab("Density") +
+  xlab(expression(R[root]*":"*R[S]~ratio)) +
+  annotate("text", x = 0.6, y = 5,
+           label = "W = 9171\np = 0.46",
+           hjust = 0) ->
+  p4
+```
+
+
+```{r, fig.height=6, fig.width=8}
+# put p1-p4 together
+plot_grid(p1, p2, p3, p4,
+          ncol = 2,
+          rel_widths = c(1.1, 1))
+
+# ggsave('outputs_collar/Figure.Boots.jpg', width = 8, height = 6)
+```
+
+The end
+This document is run on `r getdata()`
+```{r}
+sessionInfo()
+```
+
+
+
+## some test codes
+```{r}
+srdbv5 %>% 
+  select(Rs_annual, Collar_height) %>% 
+  filter(Collar_height > 50) %>%
+  na.omit()
+
+srdbv5 %>% 
+  select(Rs_annual, Collar_depth) %>% 
+  # filter(Collar_depth > 20) %>%
+  na.omit()
+
+srdbv5 %>% 
+  select(Rs_annual, Chamber_area) %>% 
+  filter(Chamber_area > 4000) %>%
+  na.omit()
+
+srdbv5 %>% 
+  select(Rs_annual, Meas_interval) %>% 
+  # filter(Meas_interval > 150) %>%
+  na.omit()
+
+srdbv5 %>% 
+  select(Rs_annual, Meas_interval) %>% 
+  na.omit() %>% 
+  filter(Meas_interval <= 1)
+  
+```
+
+## test biome, ecosystems etc
+```{r lm measure interval}
+# by biome type
+srdbv5 %>% 
+  select(Rs_annual, Biome, Meas_interval) %>% 
+  filter(Rs_annual < 4000 & Meas_interval < 150 ) %>% 
+  filter(Biome %!in% c("", "Alpine")) %>% 
+  group_by(Biome, Meas_interval) %>% 
+  summarise(Rs_annual = mean(Rs_annual),
+            obs = n()) %>% 
+  mutate(obs2 = ifelse(obs <= 100, obs, 110)) ->
+  sub_interval
+
+lm(sub_interval$Rs_annual ~ sub_interval$Meas_interval * sub_interval$Biome,
+   weights = sub_interval$obs) ->
+  lm_interval2
+summary(lm_interval2)
+
+
+lm_bio_test <- function(dat, bio) {
+  dat %>% 
+    filter(Biome == bio) ->
+    sub_eco
+  # return(sub_eco)
+  lm(sub_eco$Rs_annual ~ sub_eco$Meas_interval, weights = sub_eco$obs) %>%
+  summary()
+}
+
+lm_bio_test(sub_interval, "Arctic")
+lm_bio_test(sub_interval, "Boreal")
+lm_bio_test(sub_interval, "Mediterranean")
+lm_bio_test(sub_interval, "Subtropical")
+lm_bio_test(sub_interval, "Temperate")
+lm_bio_test(sub_interval, "Tropical")
+```
+
+
+```{r MLR - collar depth}
+# by ecosystem type
+srdbv5 %>% 
+  select(Rs_annual, Collar_depth, Ecosystem_type) %>% 
+  filter(Rs_annual < 5000 & Collar_depth < 20 & Ecosystem_type != "") %>% 
+  mutate(Ecosystem_group = case_when(
+    Ecosystem_type %in% c("Agriculture", "Orchard") ~ "Agriculture",
+    Ecosystem_type == "Desert" ~ "Desert",
+    Ecosystem_type %in% c("Forest", "Plantation") ~ "Forest",
+    Ecosystem_type %in% c("Grassland", "Turfgrass", "Urban", "Urban lawn") ~ "Grassland",
+    Ecosystem_type %in% c("Savanna", "Shrubland", "Steppe") ~ "Shrubland",
+    Ecosystem_type %in% c("Tundra", "Wetland") ~ "Wetland",
+    Ecosystem_type %in% c("Savanna", "Shrubland", "Steppe") ~ "Shrubland",
+    TRUE ~ "None")) %>% 
+  group_by(Ecosystem_group, Collar_depth) %>% 
+  summarise(Rs_annual = mean(Rs_annual), obs = n()) ->
+  agg_srdb
+
+lm(agg_srdb$Rs_annual ~ agg_srdb$Collar_depth * agg_srdb$Ecosystem_group, weights = agg_srdb$obs) ->
+  lm_depth2
+summary(lm_depth2)
+
+# test by ecosystem_type
+lm_eco_test <- function(dat, eco) {
+  dat %>% 
+    filter(Ecosystem_group == eco) ->
+    sub_eco
+  # return(sub_eco)
+  lm(sub_eco$Rs_annual ~ sub_eco$Collar_depth, weights = sub_eco$obs) ->
+    lm_eco
+  print(summary(lm_eco))
+  
+  sub_eco$standardized_resids <- rstandard( lm_eco )
+  sub_eco$predicted_rs <- fitted(lm_eco)
+  sub_eco$cook_d <- cooks.distance( lm_eco )
+  
+  # plot predicted rs vs. student residue
+  sub_eco %>% 
+    ggplot( aes( predicted_rs, standardized_resids ))  +
+    ylab( expression( Standardized~residue )) +
+    xlab( expression( Fitted~R[S]~(g~C~m^{-2}~yr^{-1}))) +
+    geom_point( col=alpha('black', 0.5), size = 2 ) + geom_smooth( method='lm' ) ->
+    p1
+  print(p1)
+  
+  # plot predicted rs vs. cook distance
+  sub_eco %>% 
+    ggplot( aes( predicted_rs, cook_d ))  +
+    ylab( expression( Cook~distance )) +
+    xlab( expression( Fitted~R[S]~(g~C~m^{-2}~yr^{-1}))) +
+    geom_point( col=alpha('black', 0.5), size = 2 ) + geom_smooth( method='lm' ) ->
+    p2
+  print(p2)
+  
+  return(sub_eco)
+}
+
+lm_eco_test(agg_srdb, "Agriculture")
+lm_eco_test(agg_srdb, "Desert")
+lm_eco_test(agg_srdb, "Forest")
+lm_eco_test(agg_srdb, "Grassland")
+lm_eco_test(agg_srdb, "Shrubland")
+lm_eco_test(agg_srdb %>% filter(Collar_depth!=10), "Shrubland")
+lm_eco_test(agg_srdb, "Shrubland")
+lm_eco_test(agg_srdb, "Wetland")
+```
+
+
+
+```{r}
+srdbv5 %>% 
+  select(Chamber_area, Rs_annual) %>% 
+  na.omit() %>% 
+  group_by(Chamber_area) %>% 
+  summarise(obs = n(), percent = n()*100/4266) %>% 
+  arrange(desc(percent))
+```
