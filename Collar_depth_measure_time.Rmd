@@ -44,6 +44,16 @@ srdbv5 <- drake::readd(srdbv5)
 meas_time_mapping <- drake::readd(meas_time_mapping)
 ``` 
 
+## Create a table for measurement time analysis
+```{r}
+# srdbv5 %>% 
+#   select(Rs_annual, Collar_height, Collar_depth, Chamber_area, Time_of_day, Meas_interval, Annual_coverage) %>% 
+#   filter(Time_of_day!="") %>% 
+#   count(Time_of_day) %>% 
+#   arrange(n) -> meas_time_mapping
+# writ_file(meas_time_mapping, 'meas_time_mapping.csv')
+```
+
 ## date process
 ```{r}
 left_join(
