@@ -116,6 +116,7 @@ plan = drake_plan(
   srdb_citation = read_xlsx('SRDB_cited.xlsx'),
   MGRsD = read.csv(file_in(!!file.path(DATA_DIR,'MGRsD.csv'))),
   srdb_study = read_file('srdb-studies.csv'),
+  # some study_year_siteID not in srdb, which are included in sub_srdbv5_meas_year_na
   sub_srdbv5_meas_year_na = read_file ('sub_srdbv5_meas_year_na.csv'),
   rhchecked = read.csv('outputs/rhchecked.csv'),
   meas_time_mapping = read.csv('outputs/meas_time_mapping.csv'),
@@ -123,7 +124,8 @@ plan = drake_plan(
   # get MGRhD
   MGRhD_raw = get_mgrhd(MGRsD),
   sub_srdbv5_raw = get_subsrdbv5(srdbv5),
-  sub_srdbv5 = bind_rows(sub_srdbv5_raw, sub_srdbv5_meas_year_na),
+  # some study_year_siteID not in srdb, which are included in sub_srdbv5_meas_year_na
+  sub_srdbv5 = bind_rows(sub_srdbv5_raw, sub_srdbv5_meas_year_na), 
   ## Joint to SRDB-V5 and get meta data
   MGRhD = left_join(MGRhD_raw, sub_srdbv5, by = c("Study_number", "Site_ID", "Meas_Year")),
   

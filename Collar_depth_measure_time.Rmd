@@ -86,7 +86,7 @@ time_depth_test (srdbv5, Chamber_area, 4000)
 # ggsave('outputs_collar/Figure.TestChamberArea.jpg', width = 6, height = 4)
 ```
 
-```{r collar test, fig.width=6, fig.height=8}
+```{r collar test, fig.width=7, fig.height=8}
 srdbv5 %>% 
   select(Rs_annual, Collar_height) %>% 
   filter(Rs_annual < 5000 & Collar_height < 50) %>% 
@@ -120,9 +120,8 @@ sdata1 %>%
   labs(x = expression(Collar~height~(cm)), 
        y = expression(R[S]~(g~C~m^{-2}~yr^{-1}))) +
   labs(size="obs (n)") +
-  annotate("text", x = 5, y = 2500, label = "( a )", hjust = 0) +
-  theme(legend.position = c(0.7, 0.65),
-        legend.background = element_rect(colour = NA, fill = NA)) ->
+  annotate("text", x = 3.5, y = 2500, label = "( a )", hjust = 0) +
+  theme(legend.background = element_rect(colour = NA, fill = NA)) ->
   plot1
 
 srdbv5 %>% 
@@ -159,9 +158,8 @@ sdata2 %>%
     
        y = expression(R[S]~(g~C~m^{-2}~yr^{-1}))) +
   labs(size="obs (n)") +
-  annotate("text", x = 225, y = 4500, label = "( b )", hjust = 0) +
-  theme(legend.position = c(0.7, 0.65),
-        legend.background = element_rect(colour = NA, fill = NA)) ->
+  annotate("text", x = 125, y = 4500, label = "( b )", hjust = 0) +
+  theme(legend.background = element_rect(colour = NA, fill = NA)) ->
   plot2
 
 dens1 + plot_spacer() + plot1 + dens2 +
@@ -174,7 +172,7 @@ dens1 + plot_spacer() + plot1 + dens2 +
   figure_test_collar
 print(figure_test_collar)  
 
-# ggsave('outputs_collar/Figure.TestCollar.jpg', width = 6, height = 8)
+ggsave('outputs_collar/Figure.TestCollar.jpg', width = 7, height = 8)
 ```
 
 
@@ -342,7 +340,7 @@ meas_interval_test (srdbv5, Meas_interval, 150)
 # ggsave('outputs_collar/Figure.TestMeasureInterval.jpg', width = 6, height = 4)
 ```
 
-```{r test time, fig.width=6, fig.height=8}
+```{r test time, fig.width=7, fig.height=8}
 # prepare data
 srdbv5 %>% 
   select(Rs_annual, hour_cover) %>% 
@@ -375,9 +373,8 @@ sdata3 %>%
   labs(x = expression(Measurement~time~(h)), 
     y = expression(R[S]~(g~C~m^{-2}~yr^{-1}))) +
   labs(size="obs (n)") +
-  annotate("text", x = 2.5, y = 1600, label = "( a )", hjust = 0) +
-  theme(legend.position = c(0.7, 0.65),
-        legend.background = element_rect(colour = NA, fill = NA)) ->
+  annotate("text", x = 2, y = 1600, label = "( a )", hjust = 0) +
+  theme(legend.background = element_rect(colour = NA, fill = NA)) ->
   time_plot1
 
 # prepare data for measure interval test
@@ -411,9 +408,8 @@ sdata4 %>%
   labs(x = expression(Measurement~frequency~(days~per~measurement)), 
     y = expression(R[S]~(g~C~m^{-2}~yr^{-1}))) +
   labs(size="obs (n)") +
-  annotate("text", x = 10, y = 3000, label = "( b )", hjust = 0) +
-  theme(legend.position = c(0.7, 0.65),
-        legend.background = element_rect(colour = NA, fill = NA)) ->
+  annotate("text", x = 5, y = 3000, label = "( b )", hjust = 0) +
+  theme(legend.background = element_rect(colour = NA, fill = NA)) ->
   time_plot2
 
 time_dens1 + plot_spacer() + time_plot1 + time_dens2 +
@@ -427,7 +423,7 @@ time_dens1 + plot_spacer() + time_plot1 + time_dens2 +
 
 print(figure_test_time)  
 
-# ggsave('outputs_collar/Figure.TestTime.jpg', width = 6, height = 8)
+ggsave('outputs_collar/Figure.TestTime.jpg', width = 7, height = 8)
 
 ```
 
@@ -586,6 +582,12 @@ srdbv5 %>%
   summarise(obs = n()) %>% 
   mutate(percet = obs/5741*100)
 
+srdbv5 %>% 
+  select(Chamber_area) %>% 
+  na.omit() %>% 
+  filter(Chamber_area >= 50 & Chamber_area <= 500)
+
+
 ```
 
 
@@ -675,7 +677,9 @@ bootstrap_Rs_annual <- tibble(
 )
 
 mean(bootstrap_Rs_annual$Rs_wt_collar)
+sd(bootstrap_Rs_annual$Rs_wt_collar)
 mean(bootstrap_Rs_annual$Rs_no_collar)
+sd(bootstrap_Rs_annual$Rs_no_collar)
 
 bootstrap_Rs_annual %>%
   gather(Rs_type) %>% 
@@ -770,6 +774,8 @@ bootstrap_rc_annual %>%
 # put p1-p4 together
 plot_grid(p1, p2, p3, p4,
           ncol = 2,
+          labels = c("( a )", "( b )", "( c )","( d )"),
+          hjust = c(-2.75, -2.5, -2.7, -2.25), vjust = c(2),
           rel_widths = c(1.1, 1))
 
 # ggsave('outputs_collar/Figure.Boots.jpg', width = 8, height = 6)
@@ -926,3 +932,11 @@ srdbv5 %>%
   summarise(obs = n(), percent = n()*100/4266) %>% 
   arrange(desc(percent))
 ```
+
+```{r}
+srdbv5 %>% 
+  select(Manipulation, Rs_annual, Latitude, Longitude) %>% 
+  na.omit() %>% 
+  filter(stringr::str_detect(Manipulation, 'burn'))
+```
+
