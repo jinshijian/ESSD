@@ -348,7 +348,7 @@ hour_cover_test <- function(sdata, colName){
       else if (colnames(sdata2)[1]==x_axis_id[3]) {
         expression(Measure~interval~(day)) }
       else {
-        expression(Measurement~time~(h)) }, 
+        expression(Measurement~duration~(h)) }, 
       
       y = expression(R[S]~(g~C~m^{-2}~yr^{-1}))) +
     labs(size="obs (n)") +
