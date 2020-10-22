@@ -26,6 +26,8 @@ library(sp)
 library(RColorBrewer)
 # install.packages("patchwork")
 library(patchwork)
+# install.packages("segmented")
+library(segmented)
 # Source all needed functions
 source('functions.R')
 # set data and outputs file direction
@@ -43,6 +45,13 @@ knitr::opts_chunk$set(results = 'hide', message = TRUE, include = TRUE,
 srdbv5 <- drake::readd(srdbv5)
 meas_time_mapping <- drake::readd(meas_time_mapping)
 ``` 
+
+```{r}
+srdbv5 %>% 
+  select(Rs_annual, Collar_height, Collar_depth, Chamber_area, Time_of_day, Meas_interval, Annual_coverage) %>% 
+  filter(!is.na(Rs_annual)) %>% 
+  summarise(mean(Rs_annual))
+```
 
 ## Create a table for measurement time analysis
 ```{r}
@@ -112,6 +121,7 @@ sdata1 %>%
   dens2
 
 # main plot 1
+lm(Rs_annual ~ Collar_height, data = sdata1, weights = obs) %>% summary()
 sdata1 %>%
   ggplot(aes(Collar_height, Rs_annual)) +
   geom_point(aes(size  = obs2), shape = 16, alpha = 0.5) +
@@ -121,6 +131,7 @@ sdata1 %>%
        y = expression(R[S]~(g~C~m^{-2}~yr^{-1}))) +
   labs(size="obs (n)") +
   annotate("text", x = 3.5, y = 2500, label = "( a )", hjust = 0) +
+  annotate("text", x = 3.5, y = 2250, label = expression("y = 893.70 - 5.85x" ~ (R^2~" = 0.08")), hjust = 0) +
   theme(legend.background = element_rect(colour = NA, fill = NA)) ->
   plot1
 
@@ -149,6 +160,7 @@ sdata2 %>%
   dens4
 
 # main plot (b)
+lm(Rs_annual ~ Chamber_area, data = sdata2, weights = obs) %>% summary()
 sdata2 %>%
   ggplot(aes(Chamber_area, Rs_annual)) +
   geom_point(aes(size  = obs2), shape = 16, alpha = 0.5) +
@@ -159,6 +171,7 @@ sdata2 %>%
        y = expression(R[S]~(g~C~m^{-2}~yr^{-1}))) +
   labs(size="obs (n)") +
   annotate("text", x = 125, y = 4500, label = "( b )", hjust = 0) +
+  annotate("text", x = 125, y = 4000, label = expression("y = 891.89 - 0.10x" ~ (R^2~" = 0.04")), hjust = 0) +
   theme(legend.background = element_rect(colour = NA, fill = NA)) ->
   plot2
 
@@ -172,7 +185,7 @@ dens1 + plot_spacer() + plot1 + dens2 +
   figure_test_collar
 print(figure_test_collar)  
 
-ggsave('outputs_collar/Figure.TestCollar.jpg', width = 7, height = 8)
+# ggsave('outputs_collar/Figure.TestCollar.jpg', width = 7, height = 8)
 ```
 
 
@@ -238,6 +251,81 @@ srdbv5 %>%
 # ggsave('outputs_collar/FigureS.TestCollarDepth_by_RC.jpg', width = 5, height = 7)
 ```
 
+## Do not exclude insertion > 20
+```{r, fig.width=6, fig.height=7}
+srdbv5 %>% 
+  select(Rs_annual, Collar_depth, Ecosystem_type) %>% 
+  filter(Rs_annual < 5000 & Ecosystem_type != "" & !is.na(Collar_depth)) %>% 
+  mutate(Ecosystem_group = case_when(
+    Ecosystem_type %in% c("Agriculture", "Orchard") ~ "Agriculture",
+    Ecosystem_type == "Desert" ~ "Desert",
+    Ecosystem_type %in% c("Forest", "Plantation") ~ "Forest",
+    Ecosystem_type %in% c("Grassland", "Turfgrass", "Urban", "Urban lawn") ~ "Grassland",
+    Ecosystem_type %in% c("Savanna", "Shrubland", "Steppe") ~ "Shrubland",
+    Ecosystem_type %in% c("Tundra", "Wetland") ~ "Wetland",
+    Ecosystem_type %in% c("Savanna", "Shrubland", "Steppe") ~ "Shrubland",
+    TRUE ~ "None")) %>% 
+  group_by(Ecosystem_group, Collar_depth) %>% 
+  summarise(Rs_annual = mean(Rs_annual),
+            obs = n()) %>% 
+  mutate(obs2 = ifelse(obs <= 250, obs, 250)) %>% 
+  ggplot(aes(Collar_depth, Rs_annual)) +
+  geom_point(aes(size  = obs2), shape = 16, alpha = 0.5) +
+  geom_smooth(method = "lm", fill = "skyblue") +
+  facet_grid(rows = vars(Ecosystem_group), scales = "free") +
+  theme_set(theme_bw()) +
+  labs(x="Collar insertion depth (cm)", y = expression(R[S]~(g~C~m^{-2}~yr^{-1}))) +
+  labs(size="obs (n)")
+  
+```
+
+## test collar insertion depth
+```{r, fig.width=6, fig.height=7}
+# Forest
+sub_depth %>% 
+  filter(Ecosystem_group %in% c("Forest")) ->
+  sub_for
+# use pieacewise function and test breakpoint
+ag_seg_lm <- segmented(lm(Rs_annual ~ Collar_depth, data = sub_for), sig.z = ~ Collar_depth)
+summary(ag_seg_lm)
+
+# Grassland
+sub_depth %>% 
+  filter(Ecosystem_group %in% c("Grassland") & Collar_depth <= 10) ->
+  sub_gra
+lm(Rs_annual ~ Collar_depth, data = sub_gra) %>% summary()
+
+# wetland
+sub_depth %>% 
+  filter(Ecosystem_group %in% c("Wetland") & Collar_depth <= 15) ->
+  sub_wet
+lm(Rs_annual ~ Collar_depth, data = sub_wet) %>% summary()
+  
+# with outlier (depth = 10 in shrubland) removed
+sub_depth %>% 
+  ggplot(aes(Collar_depth, Rs_annual)) +
+  geom_point(aes(size  = obs2), shape = 16, alpha = 0.5) +
+  geom_smooth(data = sub_depth %>% filter(Ecosystem_group %in% c("Desert")), method = "lm", fill = "skyblue") +
+  geom_smooth(data = sub_depth %>% filter(Ecosystem_group %in% c("Shrubland") & Collar_depth < 10 ), method = "lm", fill = "skyblue") +
+  geom_smooth(data = sub_depth %>% filter(Ecosystem_group %in% c("Forest") & Collar_depth <= 2.5), method = "lm", fill = "skyblue") +
+  geom_smooth(data = sub_depth %>% filter(Ecosystem_group %in% c("Forest") & Collar_depth >= 2.5), method = "lm", fill = "skyblue") +
+  geom_smooth(data = sub_depth %>% filter(Ecosystem_group %in% c("Grassland")), method = "lm", fill = "gray", col = "black") +
+  geom_smooth(data = sub_depth %>% filter(Ecosystem_group %in% c("Wetland") & Collar_depth <= 15), method = "lm", fill = "skyblue") +
+  geom_point(aes(size  = obs2),
+             data = sub_depth %>% filter(Ecosystem_group %in% c("Wetland") & Collar_depth > 15),
+             shape = 16, alpha = 1.0, col = "red", show.legend = FALSE) +
+  geom_point(aes(size  = obs2),
+             data = sub_depth %>% filter(Ecosystem_group %in% c("Shrubland") & Collar_depth >= 10),
+             shape = 16, alpha = 1.0, col = "red", show.legend = FALSE) +
+  facet_grid(rows = vars(Ecosystem_group), scales = "free") +
+  theme_set(theme_bw()) +
+  labs(x="Collar insertion depth (cm)", y = expression(R[S]~(g~C~m^{-2}~yr^{-1}))) +
+  labs(size="obs (n)")  
+
+
+```
+
+
 ```{r, fig.height=6, fig.width=4}
 # test collar depth, with MAT and MAP considered
 srdbv5 %>% 
@@ -291,9 +379,7 @@ plot_grid(
     # geom_smooth(method = "lm", col = "orange") +
     labs(x = expression(R[root]~":"~R[S]~ratio),
          y = expression(Standardized~residual)),
-  
-  ncol = 1
-)
+  ncol = 1 )
 
 # ggsave('outputs_collar/FigureS.TestMATMAP.jpg', width = 4, height = 6)
 ```
@@ -370,7 +456,7 @@ sdata3 %>%
   geom_point(aes(size  = obs2), shape = 16, alpha = 0.5) +
   # geom_smooth(method = "lm",
   #             fill = "skyblue") +
-  labs(x = expression(Measurement~time~(h)), 
+  labs(x = expression(Measurement~duration~(h)), 
     y = expression(R[S]~(g~C~m^{-2}~yr^{-1}))) +
   labs(size="obs (n)") +
   annotate("text", x = 2, y = 1600, label = "( a )", hjust = 0) +
@@ -423,7 +509,7 @@ time_dens1 + plot_spacer() + time_plot1 + time_dens2 +
 
 print(figure_test_time)  
 
-ggsave('outputs_collar/Figure.TestTime.jpg', width = 7, height = 8)
+# ggsave('outputs_collar/Figure.TestTime.jpg', width = 7, height = 8)
 
 ```
 
@@ -481,7 +567,7 @@ srdbv5 %>%
   ggplot(aes(Group), stat = "identity") +
   # scale_y_continuous(labels=scales::percent) +
   scale_x_discrete(limits = c("Collar_height_group", "Collar_area_group", "Collar_depth_group", "Meas_time_group", "Meas_interval_group"),
-                   labels = c("Collar height", "Collar area", "Collar depth", "Measurement time", "Frequency")) +
+                   labels = c("Collar height", "Collar coverage area", "Insertion depth", "Measurement duration", "Frequency")) +
   geom_bar(aes(fill = (YN)), width = 0.75) +
   theme(legend.title = element_blank(),
         axis.text.x = element_text(size = 8),
@@ -669,7 +755,6 @@ srdbv5 %>%
     TRUE ~ "Yes")) ->
   boot_annual_rs
 
-wilcox.test(Rs_annual ~ Meas_method_group, data = boot_annual_rs, alternative = "less")
 
 bootstrap_Rs_annual <- tibble(
   Rs_wt_collar = sapply(rep(sample_size, N_SAMPLES), RESAMPLE, boot_annual_rs[boot_annual_rs$Meas_method_group == "Yes",]$Rs_annual),
@@ -680,6 +765,11 @@ mean(bootstrap_Rs_annual$Rs_wt_collar)
 sd(bootstrap_Rs_annual$Rs_wt_collar)
 mean(bootstrap_Rs_annual$Rs_no_collar)
 sd(bootstrap_Rs_annual$Rs_no_collar)
+
+# wilcox.test(Rs_annual ~ Meas_method_group, data = boot_annual_rs, alternative = "less")
+wilcox.test(bootstrap_Rs_annual$Rs_wt_collar,
+            bootstrap_Rs_annual$Rs_no_collar,
+            mu = 0, paired = TRUE, alternative = "two.sided", conf.level = 0.95)
 
 bootstrap_Rs_annual %>%
   gather(Rs_type) %>% 
@@ -695,10 +785,11 @@ bootstrap_Rs_annual %>%
     legend.title = element_blank(),
     legend.text.align = 0) +
   ylab("Density") +
-  xlab(expression(R[S] ~ (g~C~m^{-2}~yr^{-1}))) +
-  annotate("text", x = 930, y = 0.0021,
-           label = "W = 137328\n p = 0.39",
-           hjust = 0) ->
+  # annotate("text", x = 930, y = 0.0021,
+  #          label = "p > 0.05",
+  #          hjust = 0) +
+  xlab(expression(R[S] ~ (g~C~m^{-2}~yr^{-1}))) ->
+
   p2
 
 p2
@@ -738,15 +829,27 @@ srdbv5 %>%
     TRUE ~ "Yes")) ->
   boot_annual_rc
 
+# wilcox test the raw data
 wilcox.test(RC_annual ~ Meas_method_group, data = boot_annual_rc, alternative = "less")
 
 bootstrap_rc_annual <- tibble(
   rc_wt_collar = sapply(rep(sample_size, N_SAMPLES), RESAMPLE, boot_annual_rc[boot_annual_rc$Meas_method_group == "Yes",]$RC_annual),
-  rc_no_collar = sapply(rep(sample_size, N_SAMPLES), RESAMPLE, boot_annual_rc[boot_annual_rc$Meas_method_group == "No",]$RC_annual)
-)
+  rc_no_collar = sapply(rep(sample_size, N_SAMPLES), RESAMPLE, boot_annual_rc[boot_annual_rc$Meas_method_group == "No",]$RC_annual) )
+
+# paired t-test
+wilcox.test(bootstrap_rc_annual$rc_wt_collar,
+            bootstrap_rc_annual$rc_no_collar,
+            mu = 0, paired = TRUE, alternative = "two.sided", conf.level = 0.95)
+
+t.test(bootstrap_rc_annual$rc_wt_collar,
+       bootstrap_rc_annual$rc_no_collar,
+       mu = 0, paired = TRUE, alternative = "two.sided", conf.level = 0.99)
 
 mean(bootstrap_rc_annual$rc_wt_collar)
 mean(bootstrap_rc_annual$rc_no_collar)
+
+sd(bootstrap_rc_annual$rc_wt_collar)
+sd(bootstrap_rc_annual$rc_no_collar)
 
 bootstrap_rc_annual %>%
   gather(rc_type) %>%
@@ -762,10 +865,10 @@ bootstrap_rc_annual %>%
     legend.title = element_blank(),
     legend.text.align = 0) +
   ylab("Density") +
-  xlab(expression(R[root]*":"*R[S]~ratio)) +
-  annotate("text", x = 0.6, y = 5,
-           label = "W = 9171\np = 0.46",
-           hjust = 0) ->
+  # annotate("text", x = 0.6, y = 5,
+  #          label = "p < 0.05",
+  #          hjust = 0) +
+  xlab(expression(R[root]*":"*R[S]~ratio)) ->
   p4
 ```
 
@@ -938,5 +1041,23 @@ srdbv5 %>%
   select(Manipulation, Rs_annual, Latitude, Longitude) %>% 
   na.omit() %>% 
   filter(stringr::str_detect(Manipulation, 'burn'))
+```
+
+```{r}
+srdbv5 %>% 
+  filter(Rs_annual < 5000 & Collar_depth < 20 & Ecosystem_type != "") %>% 
+  mutate(Ecosystem_group = case_when(
+    Ecosystem_type %in% c("Agriculture", "Orchard") ~ "Agriculture",
+    Ecosystem_type == "Desert" ~ "Desert",
+    Ecosystem_type %in% c("Forest", "Plantation") ~ "Forest",
+    Ecosystem_type %in% c("Grassland", "Turfgrass", "Urban", "Urban lawn") ~ "Grassland",
+    Ecosystem_type %in% c("Savanna", "Shrubland", "Steppe") ~ "Shrubland",
+    Ecosystem_type %in% c("Tundra", "Wetland") ~ "Wetland",
+    Ecosystem_type %in% c("Savanna", "Shrubland", "Steppe") ~ "Shrubland",
+    TRUE ~ "None")) %>% 
+  select(Rs_annual, Collar_height, Collar_depth, Chamber_area, Time_of_day, Meas_interval, Annual_coverage, Ecosystem_group) %>% 
+  filter(!is.na(Collar_depth)) %>% 
+  group_by(Ecosystem_group) %>%
+  summarise(mean(Collar_depth))
 ```
 
