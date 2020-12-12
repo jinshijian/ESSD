@@ -185,7 +185,7 @@ dens1 + plot_spacer() + plot1 + dens2 +
   figure_test_collar
 print(figure_test_collar)  
 
-# ggsave('outputs_collar/Figure.TestCollar.jpg', width = 7, height = 8)
+# ggsave('outputs_collar/Figure3.TestCollar.jpg', width = 7, height = 8)
 ```
 
 
@@ -322,7 +322,7 @@ sub_depth %>%
   labs(x="Collar insertion depth (cm)", y = expression(R[S]~(g~C~m^{-2}~yr^{-1}))) +
   labs(size="obs (n)")  
 
-
+# ggsave('outputs_collar/Figure4.TestCollarDepth.jpg', width = 5, height = 7)
 ```
 
 
@@ -509,7 +509,7 @@ time_dens1 + plot_spacer() + time_plot1 + time_dens2 +
 
 print(figure_test_time)  
 
-# ggsave('outputs_collar/Figure.TestTime.jpg', width = 7, height = 8)
+# ggsave('outputs_collar/Figure5.TestTime.jpg', width = 7, height = 8)
 
 ```
 
@@ -639,7 +639,7 @@ plot_grid(
   vjust = c(0.9, 0)
 )
 
-# ggsave('outputs_collar/Figure.MeasureCount.jpg', width = 6, height = 4)
+# ggsave('outputs_collar/Figure1.MeasureCount.jpg', width = 8, height = 6)
 
 srdbv5 %>% 
   # Create groups
@@ -881,7 +881,7 @@ plot_grid(p1, p2, p3, p4,
           hjust = c(-2.75, -2.5, -2.7, -2.25), vjust = c(2),
           rel_widths = c(1.1, 1))
 
-# ggsave('outputs_collar/Figure.Boots.jpg', width = 8, height = 6)
+# ggsave('outputs_collar/Figure2.Boots.jpg', width = 8, height = 6)
 ```
 
 The end
